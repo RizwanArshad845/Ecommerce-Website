@@ -67,6 +67,31 @@ function vw_modern_ecommerce_register_block_patterns() {
 			'title'    => __( 'Primary Sidebar', 'vw-modern-ecommerce' ),
 			'categories' => array( 'vw-modern-ecommerce-sidebars' ),
 		),
+		'product-sidebar' => array(
+			'title'      => __( 'Product Sidebar', 'vw-modern-ecommerce' ),
+			'categories' => array( 'vw-modern-ecommerce-sidebars' ),
+			'blockTypes' => array( 'parts/product-sidebar' ),
+		),
+		'ng-page-header' => array(
+			'title'      => __( 'NG Page Header', 'vw-modern-ecommerce' ),
+			'categories' => array( 'vw-modern-ecommerce-banner-sections' ),
+		),
+		'ng-shop-header' => array(
+			'title'      => __( 'NG Shop Header', 'vw-modern-ecommerce' ),
+			'categories' => array( 'vw-modern-ecommerce-banner-sections' ),
+		),
+		'ng-search-header' => array(
+			'title'      => __( 'NG Search Header', 'vw-modern-ecommerce' ),
+			'categories' => array( 'vw-modern-ecommerce-banner-sections' ),
+		),
+		'collections-grid' => array(
+			'title'      => __( 'Collections Grid', 'vw-modern-ecommerce' ),
+			'categories' => array( 'vw-modern-ecommerce-pages' ),
+		),
+		'contact-section' => array(
+			'title'      => __( 'Contact Section', 'vw-modern-ecommerce' ),
+			'categories' => array( 'vw-modern-ecommerce-pages' ),
+		),
 		'hidden-404' => array(
 			'title'    => __( '404 content', 'vw-modern-ecommerce' ),
 			'categories' => array( 'vw-modern-ecommerce-pages' ),

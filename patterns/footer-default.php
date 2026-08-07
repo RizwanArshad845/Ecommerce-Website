@@ -4,135 +4,114 @@
  * Slug: vw-modern-ecommerce/footer-default
  * Categories: footer
  */
+$ng_shop_url = '#';
+if ( function_exists( 'wc_get_page_id' ) ) {
+    $ng_shop_page_id = wc_get_page_id( 'shop' );
+    if ( $ng_shop_page_id > 0 ) {
+        $ng_shop_url = get_permalink( $ng_shop_page_id );
+    }
+}
 ?>
-<!-- wp:group {"className":"footer-section","gradient":"section-background","layout":{"type":"constrained","contentSize":"95%"}} -->
-<div class="wp-block-group footer-section has-section-background-gradient-background has-background"><!-- wp:group {"style":{"border":{"radius":{"topLeft":"20px","topRight":"20px","bottomLeft":"20px","bottomRight":"20px"}}},"backgroundColor":"quaternary","layout":{"type":"constrained","contentSize":"85%"}} -->
-<div class="wp-block-group has-quaternary-background-color has-background" style="border-top-left-radius:20px;border-top-right-radius:20px;border-bottom-left-radius:20px;border-bottom-right-radius:20px"><!-- wp:columns -->
-<div class="wp-block-columns"><!-- wp:column {"verticalAlignment":"top","width":"30%","className":"footer-box wow zoomIn","style":{"spacing":{"padding":{"right":"var:preset|spacing|70"}}}} -->
-<div class="wp-block-column is-vertically-aligned-top footer-box wow zoomIn" style="padding-right:var(--wp--preset--spacing--70);flex-basis:30%"><!-- wp:site-title {"style":{"typography":{"fontSize":"25px"},"elements":{"link":{"color":{"text":"var:preset|color|heading-color"}}}},"textColor":"heading-color"} /-->
 
-<!-- wp:paragraph {"className":"footer-para","style":{"spacing":{"margin":{"top":"var:preset|spacing|60"}},"elements":{"link":{"color":{"text":"var:preset|color|foreground"}}}},"textColor":"foreground","fontSize":"extra-small"} -->
-<p class="footer-para has-foreground-color has-text-color has-link-color has-extra-small-font-size" style="margin-top:var(--wp--preset--spacing--60)"><?php echo esc_html__('Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque tristique justo et justo fringilla mattis. Quisque ullamcorper ligula ac justo faucibus, at pellentesque nunc tincidunt. Proin rutrum viverra mauris, id finibus metus vestibulum in. Etiam vel arcu nisi.', 'vw-modern-ecommerce'); ?></p>
-<!-- /wp:paragraph -->
+<footer class="ng-footer" id="ng-footer">
 
-<!-- wp:social-links {"iconColor":"section-bg","iconColorValue":"#ffffff","iconBackgroundColor":"heading-color","iconBackgroundColorValue":"#1F275D","openInNewTab":true,"style":{"spacing":{"margin":{"top":"var:preset|spacing|60"}}},"layout":{"type":"flex","justifyContent":"left"}} -->
-<ul class="wp-block-social-links has-icon-color has-icon-background-color" style="margin-top:var(--wp--preset--spacing--60)"><!-- wp:social-link {"url":"www.facebook.com","service":"facebook"} /-->
+  <!-- ── TRUST BADGES BAR ── -->
+  <div class="ng-footer__trust-bar">
+    <div class="ng-container ng-footer__trust-grid">
+      <div class="ng-trust-item">
+        <div class="ng-trust-item__icon"><?php echo ng_icon( 'truck' ); ?></div>
+        <div class="ng-trust-item__text">
+          <strong>Nationwide COD</strong>
+          <span>Deliveries across all Pakistan cities</span>
+        </div>
+      </div>
+      <div class="ng-trust-item">
+        <div class="ng-trust-item__icon"><?php echo ng_icon( 'shield-check' ); ?></div>
+        <div class="ng-trust-item__text">
+          <strong>100% Food-Grade</strong>
+          <span>BPA free & high temperature safe</span>
+        </div>
+      </div>
+      <div class="ng-trust-item">
+        <div class="ng-trust-item__icon"><?php echo ng_icon( 'gem' ); ?></div>
+        <div class="ng-trust-item__text">
+          <strong>Unbreakable Guarantee</strong>
+          <span>Restaurant grade premium melamine</span>
+        </div>
+      </div>
+      <div class="ng-trust-item">
+        <div class="ng-trust-item__icon"><?php echo ng_icon( 'headset' ); ?></div>
+        <div class="ng-trust-item__text">
+          <strong>Customer Care</strong>
+          <span>Call or WhatsApp: <?php echo esc_html( NG_PHONE_DISPLAY ); ?></span>
+        </div>
+      </div>
+    </div>
+  </div>
 
-<!-- wp:social-link {"url":"https://x.com/","service":"x"} /-->
+  <!-- ── MAIN FOOTER CONTENT ── -->
+  <div class="ng-footer__main">
+    <div class="ng-container ng-footer__grid">
 
-<!-- wp:social-link {"url":"www.instagram.com","service":"instagram"} /-->
+      <!-- Column 1: Brand Info -->
+      <div class="ng-footer__col ng-footer__col--brand">
+        <div class="ng-navbar__logo mb-3">
+          <span class="ng-navbar__logo-main">National Gold</span>
+          <span class="ng-navbar__logo-badge">MELAMINE</span>
+        </div>
+        <p class="ng-footer__desc">
+          Pakistan's premier manufacturer and retailer of high-grade melamine dinnerware, plates, platters, and catering sets. Crafting luxury dining experiences for home & commercial tables.
+        </p>
+        <div class="ng-footer__socials">
+          <a href="<?php echo esc_url( NG_FACEBOOK_URL ); ?>" class="ng-footer__social" aria-label="Facebook" target="_blank" rel="noopener noreferrer"><?php echo ng_icon( 'facebook' ); ?></a>
+          <a href="<?php echo esc_url( NG_INSTAGRAM_URL ); ?>" class="ng-footer__social" aria-label="Instagram" target="_blank" rel="noopener noreferrer"><?php echo ng_icon( 'instagram' ); ?></a>
+          <a href="<?php echo esc_url( NG_TIKTOK_URL ); ?>" class="ng-footer__social" aria-label="TikTok" target="_blank" rel="noopener noreferrer"><?php echo ng_icon( 'tiktok' ); ?></a>
+          <a href="<?php echo esc_url( ng_get_whatsapp_url() ); ?>" class="ng-footer__social" aria-label="WhatsApp" target="_blank" rel="noopener noreferrer">
+            <svg viewBox="0 0 32 32" class="ng-icon" fill="currentColor" aria-hidden="true" focusable="false"><path d="M16.004 3C9.376 3 4 8.373 4 15c0 2.34.658 4.522 1.8 6.383L4 29l7.82-1.75A11.94 11.94 0 0 0 16.004 27C22.63 27 28 21.627 28 15S22.63 3 16.004 3zm6.99 16.6c-.297.834-1.47 1.53-2.404 1.727-.638.132-1.47.238-4.276-.92-3.587-1.48-5.9-5.09-6.08-5.328-.178-.238-1.454-1.937-1.454-3.696 0-1.76.916-2.62 1.24-2.98.325-.36.71-.45.947-.45.238 0 .475.002.682.013.22.012.514-.083.804.614.297.712 1.01 2.472 1.098 2.652.09.18.15.39.03.63-.12.24-.18.39-.356.6-.178.21-.375.47-.535.63-.178.178-.363.372-.156.732.208.36.923 1.52 1.982 2.463 1.362 1.214 2.51 1.59 2.87 1.77.36.18.57.15.78-.09.208-.24.892-1.04 1.13-1.4.238-.36.475-.3.802-.18.327.12 2.08.98 2.437 1.157.356.18.594.27.682.42.09.15.09.87-.207 1.704z"/></svg>
+          </a>
+        </div>
+      </div>
 
-<!-- wp:social-link {"url":"www.youtube.com","service":"youtube"} /--></ul>
-<!-- /wp:social-links --></div>
-<!-- /wp:column -->
+      <!-- Column 2: Quick Links -->
+      <div class="ng-footer__col">
+        <h4 class="ng-footer__title">Quick Links</h4>
+        <ul class="ng-footer__list">
+          <li><a href="<?php echo esc_url( home_url( '/' ) ); ?>">Home</a></li>
+          <li><a href="<?php echo esc_url( home_url( '/collections/' ) ); ?>">Collections</a></li>
+          <li><a href="<?php echo esc_url( $ng_shop_url ); ?>">Shop All</a></li>
+          <li><a href="<?php echo esc_url( home_url( '/#ng-faq' ) ); ?>">FAQs</a></li>
+          <li><a href="<?php echo esc_url( home_url( '/contact/' ) ); ?>">Contact Us</a></li>
+        </ul>
+      </div>
 
-<!-- wp:column {"verticalAlignment":"top","width":"20%","className":"footer-box wow zoomIn","style":{"spacing":{"padding":{"top":"0","bottom":"0","left":"0","right":"0"}}}} -->
-<div class="wp-block-column is-vertically-aligned-top footer-box wow zoomIn" style="padding-top:0;padding-right:0;padding-bottom:0;padding-left:0;flex-basis:20%"><!-- wp:heading {"level":3,"style":{"typography":{"textTransform":"capitalize","fontSize":"26px","fontStyle":"normal","fontWeight":"600"},"elements":{"link":{"color":{"text":"var:preset|color|heading-color"}}}},"textColor":"heading-color"} -->
-<h3 class="wp-block-heading has-heading-color-color has-text-color has-link-color" style="font-size:26px;font-style:normal;font-weight:600;text-transform:capitalize"><?php echo esc_html__('useful links', 'vw-modern-ecommerce'); ?></h3>
-<!-- /wp:heading -->
+      <!-- Column 3: Contact Info -->
+      <div class="ng-footer__col">
+        <h4 class="ng-footer__title">Head Office & Factory</h4>
+        <?php echo ng_render_contact_details_list( 'ng-footer__contact' ); ?>
+      </div>
 
-<!-- wp:list {"style":{"spacing":{"margin":{"top":"var:preset|spacing|50"}},"elements":{"link":{"color":{"text":"var:preset|color|foreground"}}}},"textColor":"foreground"} -->
-<ul style="margin-top:var(--wp--preset--spacing--50)" class="wp-block-list has-foreground-color has-text-color has-link-color"><!-- wp:list-item {"style":{"typography":{"fontSize":"16px","fontStyle":"normal","fontWeight":"400","textTransform":"capitalize"}}} -->
-<li style="font-size:16px;font-style:normal;font-weight:400;text-transform:capitalize"><a href="#"><?php echo esc_html__('Home', 'vw-modern-ecommerce'); ?></a></li>
-<!-- /wp:list-item -->
+    </div>
+  </div>
 
-<!-- wp:list-item {"style":{"typography":{"fontSize":"16px","fontStyle":"normal","fontWeight":"400","textTransform":"capitalize"}}} -->
-<li style="font-size:16px;font-style:normal;font-weight:400;text-transform:capitalize"><a href="#"><?php echo esc_html__('services', 'vw-modern-ecommerce'); ?></a></li>
-<!-- /wp:list-item -->
+  <!-- ── COPYRIGHT BAR ── -->
+  <div class="ng-footer__bottom">
+    <div class="ng-container ng-footer__bottom-inner">
+      <p>© 2026 National Gold Melamine Pakistan. All Rights Reserved.</p>
+      <div class="ng-footer__payments">
+        <span>Accepted Payments: Cash on Delivery | Bank Transfer</span>
+      </div>
+    </div>
+  </div>
 
-<!-- wp:list-item {"style":{"typography":{"fontSize":"16px","fontStyle":"normal","fontWeight":"400","textTransform":"capitalize"}}} -->
-<li style="font-size:16px;font-style:normal;font-weight:400;text-transform:capitalize"><a href="#"><?php echo esc_html__('About us', 'vw-modern-ecommerce'); ?></a></li>
-<!-- /wp:list-item -->
+</footer>
 
-<!-- wp:list-item {"style":{"typography":{"fontSize":"16px","fontStyle":"normal","fontWeight":"400","textTransform":"capitalize"}}} -->
-<li style="font-size:16px;font-style:normal;font-weight:400;text-transform:capitalize"><a href="#"><?php echo esc_html__('Tools', 'vw-modern-ecommerce'); ?></a></li>
-<!-- /wp:list-item -->
-
-<!-- wp:list-item {"style":{"typography":{"fontSize":"16px","fontStyle":"normal","fontWeight":"400","textTransform":"capitalize"}}} -->
-<li style="font-size:16px;font-style:normal;font-weight:400;text-transform:capitalize"><a href="#"><?php echo esc_html__('Features', 'vw-modern-ecommerce'); ?></a></li>
-<!-- /wp:list-item -->
-
-<!-- wp:list-item {"style":{"typography":{"fontSize":"16px","fontStyle":"normal","fontWeight":"400","textTransform":"capitalize"}}} -->
-<li style="font-size:16px;font-style:normal;font-weight:400;text-transform:capitalize"><a href="#"><?php echo esc_html__('blog', 'vw-modern-ecommerce'); ?></a></li>
-<!-- /wp:list-item --></ul>
-<!-- /wp:list --></div>
-<!-- /wp:column -->
-
-<!-- wp:column {"verticalAlignment":"top","width":"20%","className":"footer-box wow zoomIn","style":{"spacing":{"padding":{"top":"0","bottom":"0","left":"0","right":"0"}}}} -->
-<div class="wp-block-column is-vertically-aligned-top footer-box wow zoomIn" style="padding-top:0;padding-right:0;padding-bottom:0;padding-left:0;flex-basis:20%"><!-- wp:heading {"level":3,"style":{"typography":{"textTransform":"capitalize","fontSize":"26px","fontStyle":"normal","fontWeight":"600"}},"textColor":"heading-color"} -->
-<h3 class="wp-block-heading has-heading-color-color has-text-color" style="font-size:26px;font-style:normal;font-weight:600;text-transform:capitalize"><?php echo esc_html__('customer support', 'vw-modern-ecommerce'); ?></h3>
-<!-- /wp:heading -->
-
-<!-- wp:list {"style":{"spacing":{"margin":{"top":"var:preset|spacing|50"}},"elements":{"link":{"color":{"text":"var:preset|color|foreground"}}}},"textColor":"foreground"} -->
-<ul style="margin-top:var(--wp--preset--spacing--50)" class="wp-block-list has-foreground-color has-text-color has-link-color"><!-- wp:list-item {"style":{"typography":{"fontSize":"16px","fontStyle":"normal","fontWeight":"400","textTransform":"capitalize"}}} -->
-<li style="font-size:16px;font-style:normal;font-weight:400;text-transform:capitalize"><a href="#"><?php echo esc_html__('Customer Support', 'vw-modern-ecommerce'); ?></a></li>
-<!-- /wp:list-item -->
-
-<!-- wp:list-item {"style":{"typography":{"fontSize":"16px","fontStyle":"normal","fontWeight":"400","textTransform":"capitalize"}}} -->
-<li style="font-size:16px;font-style:normal;font-weight:400;text-transform:capitalize"><a href="#"><?php echo esc_html__('Book a Service Appointment', 'vw-modern-ecommerce'); ?></a></li>
-<!-- /wp:list-item -->
-
-<!-- wp:list-item {"style":{"typography":{"fontSize":"16px","fontStyle":"normal","fontWeight":"400","textTransform":"capitalize"}}} -->
-<li style="font-size:16px;font-style:normal;font-weight:400;text-transform:capitalize"><a href="#"><?php echo esc_html__('Live Chat Assistance', 'vw-modern-ecommerce'); ?></a></li>
-<!-- /wp:list-item -->
-
-<!-- wp:list-item {"style":{"typography":{"fontSize":"16px","fontStyle":"normal","fontWeight":"400","textTransform":"capitalize"}}} -->
-<li style="font-size:16px;font-style:normal;font-weight:400;text-transform:capitalize"><a href="#"><?php echo esc_html__('Find a Service Location', 'vw-modern-ecommerce'); ?></a></li>
-<!-- /wp:list-item -->
-
-<!-- wp:list-item {"style":{"typography":{"fontSize":"16px","fontStyle":"normal","fontWeight":"400","textTransform":"capitalize"}}} -->
-<li style="font-size:16px;font-style:normal;font-weight:400;text-transform:capitalize"><a href="#"><?php echo esc_html__('FAQs &amp; Help Center', 'vw-modern-ecommerce'); ?></a></li>
-<!-- /wp:list-item --></ul>
-<!-- /wp:list --></div>
-<!-- /wp:column -->
-
-<!-- wp:column {"verticalAlignment":"top","width":"30%","className":"footer-box wow zoomIn"} -->
-<div class="wp-block-column is-vertically-aligned-top footer-box wow zoomIn" style="flex-basis:30%"><!-- wp:heading {"level":3,"style":{"typography":{"textTransform":"capitalize","fontSize":"26px","fontStyle":"normal","fontWeight":"600"}},"textColor":"heading-color"} -->
-<h3 class="wp-block-heading has-heading-color-color has-text-color" style="font-size:26px;font-style:normal;font-weight:600;text-transform:capitalize"><?php echo esc_html__('Need Help?', 'vw-modern-ecommerce'); ?></h3>
-<!-- /wp:heading -->
-
-<!-- wp:group {"className":"footer-phone-box","style":{"spacing":{"padding":{"top":"0rem","bottom":"0px"},"margin":{"top":"var:preset|spacing|40","bottom":"var:preset|spacing|30"}}},"layout":{"type":"flex","flexWrap":"nowrap"}} -->
-<div class="wp-block-group footer-phone-box" style="margin-top:var(--wp--preset--spacing--40);margin-bottom:var(--wp--preset--spacing--30);padding-top:0rem;padding-bottom:0px"><!-- wp:image {"id":148,"width":"20px","height":"20px","scale":"cover","sizeSlug":"full","linkDestination":"none"} -->
-<figure class="wp-block-image size-full is-resized"><img src="<?php echo esc_url(get_template_directory_uri()); ?>/images/phone.png" alt="" class="wp-image-148" style="object-fit:cover;width:20px;height:20px"/></figure>
-<!-- /wp:image -->
-
-<!-- wp:paragraph {"style":{"elements":{"link":{"color":{"text":"var:preset|color|foreground"}}},"typography":{"fontSize":"20px","fontStyle":"normal","fontWeight":"700"},"spacing":{"margin":{"top":"3px","bottom":"0rem"}}},"textColor":"foreground"} -->
-<p class="has-foreground-color has-text-color has-link-color" style="margin-top:3px;margin-bottom:0rem;font-size:20px;font-style:normal;font-weight:700"><a href="tel:123456789123"><?php echo esc_html__('+123456789123', 'vw-modern-ecommerce'); ?></a></p>
-<!-- /wp:paragraph --></div>
-<!-- /wp:group -->
-
-<!-- wp:paragraph {"style":{"elements":{"link":{"color":{"text":"var:preset|color|foreground"}}},"typography":{"fontSize":"14px"},"spacing":{"margin":{"top":"18px","bottom":"8px"}}},"textColor":"foreground"} -->
-<p class="has-foreground-color has-text-color has-link-color" style="margin-top:18px;margin-bottom:8px;font-size:14px"><?php echo esc_html__('Monday To Saturday : 09.00AM - 08.00PM', 'vw-modern-ecommerce'); ?></p>
-<!-- /wp:paragraph -->
-
-<!-- wp:paragraph {"style":{"typography":{"fontSize":"14px"},"elements":{"link":{"color":{"text":"var:preset|color|foreground"}}},"border":{"bottom":{"color":"var:preset|color|foreground","width":"1px"},"top":{},"right":{},"left":{}},"spacing":{"padding":{"bottom":"var:preset|spacing|50","top":"var:preset|spacing|20"},"margin":{"top":"0px","bottom":"0px"}}},"textColor":"foreground"} -->
-<p class="has-foreground-color has-text-color has-link-color" style="border-bottom-color:var(--wp--preset--color--foreground);border-bottom-width:1px;margin-top:0px;margin-bottom:0px;padding-top:var(--wp--preset--spacing--20);padding-bottom:var(--wp--preset--spacing--50);font-size:14px"><?php echo esc_html__('Sunday Closed', 'vw-modern-ecommerce'); ?></p>
-<!-- /wp:paragraph -->
-
-<!-- wp:group {"className":"footer-mail-box","style":{"spacing":{"padding":{"top":"var:preset|spacing|50","bottom":"0px"},"margin":{"top":"15px","bottom":"0px"}}},"layout":{"type":"flex","flexWrap":"nowrap"}} -->
-<div class="wp-block-group footer-mail-box" style="margin-top:15px;margin-bottom:0px;padding-top:var(--wp--preset--spacing--50);padding-bottom:0px"><!-- wp:image {"id":130,"width":"20px","height":"20px","scale":"cover","sizeSlug":"full","linkDestination":"none"} -->
-<figure class="wp-block-image size-full is-resized"><img src="<?php echo esc_url(get_template_directory_uri()); ?>/images/mail.png" alt="" class="wp-image-130" style="object-fit:cover;width:20px;height:20px"/></figure>
-<!-- /wp:image -->
-
-<!-- wp:paragraph {"className":"footer-mail","style":{"typography":{"fontSize":"14px"},"elements":{"link":{"color":{"text":"var:preset|color|foreground"}}},"spacing":{"margin":{"top":"2px","bottom":"0px"},"padding":{"top":"0rem","left":"0rem","bottom":"0rem","right":"0rem"}}},"textColor":"foreground"} -->
-<p class="footer-mail has-foreground-color has-text-color has-link-color" style="margin-top:2px;margin-bottom:0px;padding-top:0rem;padding-right:0rem;padding-bottom:0rem;padding-left:0rem;font-size:14px"><a href="mailto:xyz123@example.com"><?php echo esc_html__('xyz123@example.com', 'vw-modern-ecommerce'); ?></a></p>
-<!-- /wp:paragraph --></div>
-<!-- /wp:group --></div>
-<!-- /wp:column --></div>
-<!-- /wp:columns -->
-
-<!-- wp:columns {"className":"copyright-section","style":{"border":{"top":{"color":"var:preset|color|foreground","width":"1px"},"right":{},"left":{},"bottom":{}}}} -->
-<div class="wp-block-columns copyright-section" style="border-top-color:var(--wp--preset--color--foreground);border-top-width:1px"><!-- wp:column {"verticalAlignment":"center","width":"100%"} -->
-<div class="wp-block-column is-vertically-aligned-center" style="flex-basis:100%"><!-- wp:paragraph {"className":"has-white-color has-text-color has-section-bg-color has-link-color","style":{"elements":{"link":{"color":{"text":"var:preset|color|foreground"}}},"typography":{"fontSize":"16px","textAlign":"center"}},"textColor":"foreground"} -->
-<p class="has-text-align-center has-white-color has-text-color has-section-bg-color has-link-color has-foreground-color" style="font-size:16px"><?php echo esc_html__('VW Modern Ecommerce Theme By VWThemes', 'vw-modern-ecommerce'); ?></p>
-<!-- /wp:paragraph --></div>
-<!-- /wp:column --></div>
-<!-- /wp:columns --></div>
-<!-- /wp:group --></div>
-<!-- /wp:group -->
-
-<!-- wp:buttons {"layout":{"type":"flex","justifyContent":"right"}} -->
-<div class="wp-block-buttons"><!-- wp:button {"className":"scroll-top-box","style":{"spacing":{"padding":{"left":"0","right":"0","top":"0","bottom":"0"}}}} -->
-<div class="wp-block-button scroll-top-box"><a class="wp-block-button__link wp-element-button" style="padding-top:0;padding-right:0;padding-bottom:0;padding-left:0"><img class="wp-image-6" style="width: 20px;" src="<?php echo esc_url(get_template_directory_uri()); ?>/images/scroll-top.png" alt=""></a></div>
-<!-- /wp:button --></div>
-<!-- /wp:buttons -->
+<!-- ── SITEWIDE FLOATING WHATSAPP BUTTON ── -->
+<a href="<?php echo esc_url( ng_get_whatsapp_url() ); ?>"
+   class="ng-whatsapp-float"
+   target="_blank"
+   rel="noopener noreferrer"
+   aria-label="<?php esc_attr_e( 'Chat with us on WhatsApp', 'vw-modern-ecommerce' ); ?>">
+  <svg viewBox="0 0 32 32" width="28" height="28" fill="currentColor" aria-hidden="true" focusable="false">
+    <path d="M16.004 3C9.376 3 4 8.373 4 15c0 2.34.658 4.522 1.8 6.383L4 29l7.82-1.75A11.94 11.94 0 0 0 16.004 27C22.63 27 28 21.627 28 15S22.63 3 16.004 3zm6.99 16.6c-.297.834-1.47 1.53-2.404 1.727-.638.132-1.47.238-4.276-.92-3.587-1.48-5.9-5.09-6.08-5.328-.178-.238-1.454-1.937-1.454-3.696 0-1.76.916-2.62 1.24-2.98.325-.36.71-.45.947-.45.238 0 .475.002.682.013.22.012.514-.083.804.614.297.712 1.01 2.472 1.098 2.652.09.18.15.39.03.63-.12.24-.18.39-.356.6-.178.21-.375.47-.535.63-.178.178-.363.372-.156.732.208.36.923 1.52 1.982 2.463 1.362 1.214 2.51 1.59 2.87 1.77.36.18.57.15.78-.09.208-.24.892-1.04 1.13-1.4.238-.36.475-.3.802-.18.327.12 2.08.98 2.437 1.157.356.18.594.27.682.42.09.15.09.87-.207 1.704z"/>
+  </svg>
+</a>

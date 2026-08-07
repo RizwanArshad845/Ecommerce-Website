@@ -1,0 +1,12 @@
+{
+    "name": "vw-modern-ecommerce/national-gold-melamine",
+    "description": "National Gold Melamine WordPress Theme",
+    "type": "wordpress-theme",
+    "require": {
+        "php": ">=7.4"
+    },
+    "require-dev": {
+        "php-stubs/wordpress-stubs": "^6.5",
+        "php-stubs/woocommerce-stubs": "^8.8"
+    }
+}

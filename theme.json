@@ -271,6 +271,36 @@
           "color": "#ffffff",
           "name": "Background",
           "slug": "background"
+        },
+        {
+          "slug": "ng-gold",
+          "color": "#B8862E",
+          "name": "NG Gold"
+        },
+        {
+          "slug": "ng-gold-light",
+          "color": "#E8C874",
+          "name": "NG Gold Light"
+        },
+        {
+          "slug": "ng-dark",
+          "color": "#FCFAF4",
+          "name": "NG Page Background"
+        },
+        {
+          "slug": "ng-dark-surface",
+          "color": "#FFFFFF",
+          "name": "NG Surface"
+        },
+        {
+          "slug": "ng-cream",
+          "color": "#241C0B",
+          "name": "NG Ink"
+        },
+        {
+          "slug": "ng-muted",
+          "color": "#6E6250",
+          "name": "NG Muted"
         }
       ]
     },
@@ -603,6 +633,16 @@
           "fontFamily": "Raleway, serif",
           "name": "Raleway",
           "slug": "raleway"
+        },
+        {
+          "fontFamily": "Inter, sans-serif",
+          "name": "Inter",
+          "slug": "inter"
+        },
+        {
+          "fontFamily": "Outfit, sans-serif",
+          "name": "Outfit",
+          "slug": "outfit"
         }
       ],
       "fontSizes": [
@@ -680,7 +720,7 @@
       },
       "core/heading": {
         "typography": {
-          "fontFamily": "var:preset|font-family|plus-jakarta-sans",
+          "fontFamily": "var:preset|font-family|outfit",
           "fontStyle": "normal",
           "fontWeight": "600"
         }
@@ -953,7 +993,7 @@
       }
     },
     "typography": {
-      "fontFamily": "var(--wp--preset--font-family--plus-jakarta-sans)",
+      "fontFamily": "var(--wp--preset--font-family--inter)",
       "fontSize": "var(--wp--preset--font-size--normal)",
       "lineHeight": "var(--wp--custom--typography--line-height--paragraph)",
       "fontWeight": "var(--wp--custom--typography--font-weight--normal)"

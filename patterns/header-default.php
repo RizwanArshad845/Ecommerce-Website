@@ -4,43 +4,95 @@
  * Slug: vw-modern-ecommerce/header-default
  * Categories: header
  */
+$ng_shop_url = '#';
+if ( function_exists( 'wc_get_page_id' ) ) {
+    $ng_shop_page_id = wc_get_page_id( 'shop' );
+    if ( $ng_shop_page_id > 0 ) {
+        $ng_shop_url = get_permalink( $ng_shop_page_id );
+    }
+}
+$ng_theme_uri = esc_url( get_template_directory_uri() );
+
+$ng_nav_categories = function_exists( 'ng_get_shop_categories' )
+  ? ng_get_shop_categories(
+    array(
+      'orderby' => 'name',
+      'order'   => 'ASC',
+    )
+  )
+  : array();
 ?>
-<!-- wp:group {"metadata":{"patternName":"vw-modern-ecommerce/header-default","name":"Default header","categories":["vw-modern-ecommerce-headers"]},"className":"main-header-section","style":{"spacing":{"padding":{"top":"12px","bottom":"12px","left":"0px","right":"0px"}}},"layout":{"type":"constrained","contentSize":"80%"}} -->
-<div class="wp-block-group main-header-section" style="padding-top:12px;padding-right:0px;padding-bottom:12px;padding-left:0px"><!-- wp:columns {"verticalAlignment":"center","className":"header-inner-section","style":{"border":{"radius":"6px"},"spacing":{"padding":{"top":"0px","bottom":"0px","right":"0px","left":"0px"},"blockGap":{"top":"15px","left":"15px"}}}} -->
-<div class="wp-block-columns are-vertically-aligned-center header-inner-section" style="border-radius:6px;padding-top:0px;padding-right:0px;padding-bottom:0px;padding-left:0px"><!-- wp:column {"verticalAlignment":"center","width":"20%","className":"header-logo"} -->
-<div class="wp-block-column is-vertically-aligned-center header-logo" style="flex-basis:20%"><!-- wp:site-title {"textAlign":"left","className":"header-title","style":{"elements":{"link":{"color":{"text":"var:preset|color|foreground"}}},"typography":{"textTransform":"capitalize","fontSize":"28px","fontStyle":"normal","fontWeight":"600","lineHeight":"1.2"},"border":{"radius":"100px"}},"textColor":"foreground"} /--></div>
-<!-- /wp:column -->
 
-<!-- wp:column {"verticalAlignment":"center","width":"55%","className":"header-left-menu-box"} -->
-<div class="wp-block-column is-vertically-aligned-center header-left-menu-box" style="flex-basis:55%"><!-- wp:navigation {"textColor":"heading-color","overlayBackgroundColor":"primary","overlayTextColor":"section-bg","metadata":{"ignoredHookedBlocks":["woocommerce/customer-account","woocommerce/mini-cart"]},"className":"top-menus","style":{"typography":{"lineHeight":"1.5","textTransform":"capitalize","fontSize":"15px","fontStyle":"normal","fontWeight":"600"},"spacing":{"blockGap":"40px"}},"layout":{"type":"flex","orientation":"horizontal","justifyContent":"center"}} -->
-<!-- wp:navigation-link {"label":"Home","url":"#","kind":"custom","isTopLevelLink":true} /-->
+<!-- ============================================================
+     NATIONAL GOLD MELAMINE — SITE NAVBAR
+     ============================================================ -->
+<header class="ng-navbar-wrap">
+  <div class="ng-navbar">
 
-<!-- wp:navigation-link {"label":"Shop","url":"#","kind":"custom","isTopLevelLink":true} /-->
+    <!-- ── BRAND LOGO ── -->
+    <a href="<?php echo esc_url( home_url( '/' ) ); ?>" class="ng-navbar__logo" aria-label="National Gold Melamine Home">
+      <span class="ng-navbar__logo-main">National Gold</span>
+      <span class="ng-navbar__logo-badge">MELAMINE</span>
+    </a>
 
-<!-- wp:navigation-link {"label":"Categories","url":"#","kind":"custom","isTopLevelLink":true} /-->
+    <!-- ── NAV LINKS ── -->
+    <nav class="ng-navbar__nav" id="ng-navbar-nav" aria-label="Main Navigation">
+      <ul class="ng-navbar__menu">
+        <li><a href="<?php echo esc_url( home_url( '/' ) ); ?>" class="ng-navbar__link is-active"><?php esc_html_e( 'Home', 'vw-modern-ecommerce' ); ?></a></li>
 
-<!-- wp:navigation-link {"label":"New Arrivals","url":"#","kind":"custom","isTopLevelLink":true} /-->
+        <?php if ( ! empty( $ng_nav_categories ) ) : ?>
+        <li class="ng-navbar__item ng-navbar__item--dropdown">
+          <button type="button" class="ng-navbar__link ng-navbar__dropdown-toggle" id="ng-categories-dropdown-toggle" aria-expanded="false" aria-controls="ng-categories-dropdown-menu" aria-haspopup="true">
+            <?php esc_html_e( 'Categories', 'vw-modern-ecommerce' ); ?>
+            <?php echo ng_icon( 'chevron-down' ); ?>
+          </button>
+          <ul class="ng-navbar__dropdown" id="ng-categories-dropdown-menu">
+            <?php foreach ( $ng_nav_categories as $ng_nav_cat ) :
+              $ng_nav_cat_link = get_term_link( $ng_nav_cat );
+              if ( is_wp_error( $ng_nav_cat_link ) ) {
+                continue;
+              }
+            ?>
+            <li><a href="<?php echo esc_url( $ng_nav_cat_link ); ?>"><?php echo esc_html( $ng_nav_cat->name ); ?></a></li>
+            <?php endforeach; ?>
+          </ul>
+        </li>
+        <?php endif; ?>
 
-<!-- wp:navigation-link {"label":"Deals","url":"#","kind":"custom","isTopLevelLink":true} /-->
-<!-- /wp:navigation --></div>
-<!-- /wp:column -->
+        <li><a href="<?php echo esc_url( $ng_shop_url ); ?>" class="ng-navbar__link"><?php esc_html_e( 'Shop All', 'vw-modern-ecommerce' ); ?></a></li>
+        <li><a href="<?php echo esc_url( home_url( '/contact/' ) ); ?>" class="ng-navbar__link"><?php esc_html_e( 'Contact', 'vw-modern-ecommerce' ); ?></a></li>
+      </ul>
+    </nav>
 
-<!-- wp:column {"verticalAlignment":"center","width":"25%","className":"header-right-box"} -->
-<div class="wp-block-column is-vertically-aligned-center header-right-box" style="flex-basis:25%"><!-- wp:group {"className":"header-right-in-box","style":{"spacing":{"blockGap":"6px"}},"layout":{"type":"flex","flexWrap":"nowrap","justifyContent":"space-between"}} -->
-<div class="wp-block-group header-right-in-box"><!-- wp:search {"label":"Search","showLabel":false,"placeholder":"Search for products...","width":260,"buttonText":"Search","buttonPosition":"button-inside","buttonUseIcon":true,"align":"right","className":"header-search","style":{"color":{"background":"#00000000"},"elements":{"link":{"color":{"text":"var:preset|color|heading-color"}}},"typography":{"fontSize":"15px"},"border":{"width":"0px","style":"none"}},"textColor":"heading-color"} /-->
+    <!-- ── SEARCH + CTA + MOBILE TOGGLE ── -->
+    <div class="ng-navbar__action">
+      <button type="button" class="ng-navbar__search-toggle" id="ng-search-toggle" aria-expanded="false" aria-controls="ng-navbar-search" aria-label="<?php esc_attr_e( 'Search products', 'vw-modern-ecommerce' ); ?>">
+        <?php echo ng_icon( 'search' ); ?>
+      </button>
 
-<!-- wp:group {"className":"header-right-btns","style":{"spacing":{"blockGap":"10px"}},"layout":{"type":"flex","flexWrap":"nowrap"}} -->
-<div class="wp-block-group header-right-btns"><!-- wp:woocommerce/customer-account {"displayStyle":"icon_only","iconClass":"wc-block-customer-account__account-icon","textColor":"heading-color","className":"header-account-btn","style":{"spacing":{"padding":{"top":"0px","bottom":"0px","left":"0px","right":"0px"}},"elements":{"link":{"color":{"text":"var:preset|color|heading-color"}}}}} /-->
+      <?php $ng_cart_has_items = ( function_exists( 'WC' ) && WC()->cart && WC()->cart->get_cart_contents_count() > 0 ); ?>
+      <a href="<?php echo esc_url( function_exists( 'wc_get_cart_url' ) ? wc_get_cart_url() : '#' ); ?>" class="ng-navbar__cart <?php echo $ng_cart_has_items ? 'has-items' : ''; ?>" aria-label="<?php esc_attr_e( 'View cart', 'vw-modern-ecommerce' ); ?>">
+        <?php echo ng_icon( 'bag' ); ?>
+        <span class="ng-navbar__cart-dot" aria-hidden="true"></span>
+      </a>
 
-<!-- wp:buttons {"className":"header-wishlist-btn"} -->
-<div class="wp-block-buttons header-wishlist-btn"><!-- wp:button {"style":{"color":{"background":"#00000000"},"spacing":{"padding":{"left":"0px","right":"0px","top":"0px","bottom":"0px"}},"border":{"width":"0px","style":"none"}}} -->
-<div class="wp-block-button"><a class="wp-block-button__link has-background wp-element-button" href="#" style="border-style:none;border-width:0px;background-color:#00000000;padding-top:0px;padding-right:0px;padding-bottom:0px;padding-left:0px"><img class="wp-image-66" style="width: 64px;" src="<?php echo esc_url(get_template_directory_uri()); ?>/images/heart-btn.png" alt=""></a></div>
-<!-- /wp:button --></div>
-<!-- /wp:buttons -->
+      <a href="<?php echo esc_url( $ng_shop_url ); ?>" class="ng-btn ng-btn--primary ng-navbar__cta">
+        <?php esc_html_e( 'Explore Products', 'vw-modern-ecommerce' ); ?>
+      </a>
 
-<!-- wp:woocommerce/cart-link {"cartIcon":"bag-alt","content":"","className":"header-cart-btn","style":{"typography":{"fontSize":"17px"},"elements":{"link":{"color":{"text":"var:preset|color|heading-color"}}}}} /--></div>
-<!-- /wp:group --></div>
-<!-- /wp:group --></div>
-<!-- /wp:column --></div>
-<!-- /wp:columns --></div>
-<!-- /wp:group -->
+      <button type="button" class="ng-navbar__mobile-toggle" id="ng-mobile-nav-toggle" aria-expanded="false" aria-controls="ng-navbar-nav" aria-label="<?php esc_attr_e( 'Toggle menu', 'vw-modern-ecommerce' ); ?>">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+
+  </div>
+
+  <!-- ── PRODUCT SEARCH OVERLAY (WooCommerce native search) ── -->
+  <div class="ng-navbar__search" id="ng-navbar-search">
+    <form role="search" method="get" class="ng-navbar__search-form" action="<?php echo esc_url( home_url( '/' ) ); ?>">
+      <input type="search" class="ng-navbar__search-input" name="s" placeholder="<?php esc_attr_e( 'Search products…', 'vw-modern-ecommerce' ); ?>" value="<?php echo esc_attr( get_search_query() ); ?>" aria-label="<?php esc_attr_e( 'Search products', 'vw-modern-ecommerce' ); ?>">
+      <input type="hidden" name="post_type" value="product">
+      <button type="submit" class="ng-navbar__search-submit" aria-label="<?php esc_attr_e( 'Submit search', 'vw-modern-ecommerce' ); ?>"><?php echo ng_icon( 'search' ); ?></button>
+    </form>
+  </div>
+</header>

@@ -1,0 +1,105 @@
+/* =============================================================================
+   NATIONAL GOLD MELAMINE — INITIAL PAGE LOAD LOADER
+   css/page-loader.css
+   Full-screen loader overlay with logo and linear progress bar.
+   ============================================================================= */
+
+.ng-loader {
+  position: fixed;
+  inset: 0;
+  z-index: 999999 !important;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background: #FFFFFF !important;
+  opacity: 1;
+  visibility: visible;
+  transition: opacity 0.4s cubic-bezier(0.4, 0, 0.2, 1), visibility 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.ng-loader--hidden {
+  opacity: 0 !important;
+  visibility: hidden !important;
+  pointer-events: none !important;
+}
+
+.ng-loader__content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 1.5rem;
+  padding: 2rem;
+  text-align: center;
+}
+
+.ng-loader__logo-wrap {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.ng-loader__logo-img {
+  width: 72px;
+  height: 72px;
+  object-fit: contain;
+  border-radius: 50%;
+  filter: drop-shadow(0 8px 18px rgba(166, 124, 46, 0.25));
+  animation: ng-pulse-scale 2s ease-in-out infinite;
+}
+
+@keyframes ng-pulse-scale {
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.05); }
+}
+
+.ng-loader__brand {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.2rem;
+}
+
+.ng-loader__brand-title {
+  font-family: 'Outfit', sans-serif;
+  font-size: 1.4rem;
+  font-weight: 900;
+  color: #1A1A1A;
+  letter-spacing: 0.08em;
+}
+
+.ng-loader__brand-sub {
+  font-size: 0.68rem;
+  font-weight: 700;
+  color: #A67C2E;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+}
+
+/* ── LINEAR PROGRESS BAR ── */
+.ng-loader__progress-track {
+  width: 240px;
+  height: 4px;
+  background: rgba(166, 124, 46, 0.15);
+  border-radius: 99px;
+  overflow: hidden;
+  position: relative;
+}
+
+.ng-loader__progress-bar {
+  height: 100%;
+  width: 0%;
+  background: linear-gradient(90deg, #A67C2E 0%, #D4AF37 50%, #A67C2E 100%);
+  border-radius: 99px;
+  transition: width 0.2s linear;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .ng-loader,
+  .ng-loader__logo-img {
+    transition: none;
+    animation: none;
+  }
+}

@@ -4,83 +4,87 @@
  * Slug: vw-modern-ecommerce/faq-section
  * Categories: template
  */
+$ng_faq_phone = defined( 'NG_PHONE_DISPLAY' ) ? NG_PHONE_DISPLAY : '+92 300 1234567';
 ?>
-<!-- wp:group {"className":"faq-section","style":{"spacing":{"padding":{"top":"0","bottom":"0","left":"0px","right":"0px"},"margin":{"top":"0px","bottom":"0px"}}},"layout":{"type":"constrained","contentSize":"80%","justifyContent":"center"}} -->
-<div class="wp-block-group faq-section" style="margin-top:0px;margin-bottom:0px;padding-top:0;padding-right:0px;padding-bottom:0;padding-left:0px"><!-- wp:columns {"className":"faq-heading-box wow fadeInDown"} -->
-<div class="wp-block-columns faq-heading-box wow fadeInDown"><!-- wp:column {"width":"25%"} -->
-<div class="wp-block-column" style="flex-basis:25%"></div>
-<!-- /wp:column -->
 
-<!-- wp:column {"width":"50%","className":"faq-inner-head-box"} -->
-<div class="wp-block-column faq-inner-head-box" style="flex-basis:50%"><!-- wp:heading {"level":4,"style":{"typography":{"textTransform":"capitalize","fontSize":"30px","fontStyle":"normal","fontWeight":"700","textAlign":"center"},"spacing":{"margin":{"top":"0","bottom":"0"}},"elements":{"link":{"color":{"text":"var:preset|color|heading-color"}}}},"textColor":"heading-color"} -->
-<h4 class="wp-block-heading has-text-align-center has-heading-color-color has-text-color has-link-color" style="margin-top:0;margin-bottom:0;font-size:30px;font-style:normal;font-weight:700;text-transform:capitalize"><?php echo esc_html__('have any questions for us?', 'vw-modern-ecommerce'); ?></h4>
-<!-- /wp:heading -->
+<section class="ng-faq-sec" id="ng-faq">
+  <div class="ng-container">
 
-<!-- wp:paragraph {"className":"has-heading-color-color has-text-color has-link-color","style":{"typography":{"fontSize":"15px","lineHeight":1.4,"textAlign":"center"},"spacing":{"margin":{"top":"12px"}},"elements":{"link":{"color":{"text":"var:preset|color|heading-color"}}}},"textColor":"heading-color"} -->
-<p class="has-text-align-center has-heading-color-color has-text-color has-link-color" style="margin-top:12px;font-size:15px;line-height:1.4"><?php echo esc_html__('Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin nisi elit, consequat pharetra elementum nec, eleifend non turpis.', 'vw-modern-ecommerce'); ?></p>
-<!-- /wp:paragraph --></div>
-<!-- /wp:column -->
+    <div class="ng-sec-header">
+      <span class="ng-sec-subtitle">Frequently Asked Questions</span>
+      <h2 class="ng-sec-title">Crockery & Shopping Guidance</h2>
+      <p class="ng-sec-desc">Everything you need to know about National Gold Melamine products, delivery, and microwave safety in Pakistan.</p>
+    </div>
 
-<!-- wp:column {"width":"25%"} -->
-<div class="wp-block-column" style="flex-basis:25%"></div>
-<!-- /wp:column --></div>
-<!-- /wp:columns -->
+    <div class="ng-faq-grid">
 
-<!-- wp:columns {"className":"faq-detail-section wow fadeInUp"} -->
-<div class="wp-block-columns faq-detail-section wow fadeInUp"><!-- wp:column {"width":"100%"} -->
-<div class="wp-block-column" style="flex-basis:100%"><!-- wp:details {"className":"faq-btm-title","style":{"typography":{"fontSize":"16px","fontStyle":"normal","fontWeight":"500","textTransform":"capitalize"},"layout":{"selfStretch":"fill","flexSize":null},"spacing":{"margin":{"top":"var:preset|spacing|40"}},"elements":{"link":{"color":{"text":"var:preset|color|heading-color"}}}},"textColor":"heading-color"} -->
-<details class="wp-block-details faq-btm-title has-heading-color-color has-text-color has-link-color" style="margin-top:var(--wp--preset--spacing--40);font-size:16px;font-style:normal;font-weight:500;text-transform:capitalize"><summary><?php echo esc_html__('How do I place an order on your website?', 'vw-modern-ecommerce'); ?></summary><!-- wp:paragraph {"placeholder":"Type / to add a hidden block","className":"faq-btm-content","style":{"typography":{"fontSize":"14px","fontStyle":"normal","fontWeight":"400","textTransform":"lowercase"},"spacing":{"margin":{"top":"var:preset|spacing|30"}}}} -->
-<p class="faq-btm-content" style="margin-top:var(--wp--preset--spacing--30);font-size:14px;font-style:normal;font-weight:400;text-transform:lowercase"><?php echo esc_html__('Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industrys standard dummy text ever since.', 'vw-modern-ecommerce'); ?></p>
-<!-- /wp:paragraph --></details>
-<!-- /wp:details -->
+      <!-- FAQ 1 -->
+      <details class="ng-faq-card" open>
+        <summary class="ng-faq-card__question">
+          <span>Is National Gold melamine crockery 100% break-resistant and safe?</span>
+          <span class="ng-faq-card__icon">+</span>
+        </summary>
+        <div class="ng-faq-card__answer">
+          <p>Yes! National Gold melamine is manufactured using 100% virgin food-grade melamine resin. It is engineered to withstand heavy drops, scratches, and chips, making it virtually break-resistant for everyday family dining and high-volume catering.</p>
+        </div>
+      </details>
 
-<!-- wp:details {"className":"faq-btm-title","style":{"typography":{"fontSize":"16px","fontStyle":"normal","fontWeight":"500","textTransform":"capitalize"},"layout":{"selfStretch":"fill","flexSize":null},"spacing":{"margin":{"top":"var:preset|spacing|40"}},"elements":{"link":{"color":{"text":"var:preset|color|heading-color"}}}},"textColor":"heading-color"} -->
-<details class="wp-block-details faq-btm-title has-heading-color-color has-text-color has-link-color" style="margin-top:var(--wp--preset--spacing--40);font-size:16px;font-style:normal;font-weight:500;text-transform:capitalize"><summary><?php echo esc_html__('How long does shipping take?', 'vw-modern-ecommerce'); ?></summary><!-- wp:paragraph {"placeholder":"Type / to add a hidden block","className":"faq-btm-content","style":{"typography":{"fontSize":"14px","fontStyle":"normal","fontWeight":"400","textTransform":"lowercase"},"spacing":{"margin":{"top":"var:preset|spacing|30"}}}} -->
-<p class="faq-btm-content" style="margin-top:var(--wp--preset--spacing--30);font-size:14px;font-style:normal;font-weight:400;text-transform:lowercase"><?php echo esc_html__('Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industrys standard dummy text ever since.', 'vw-modern-ecommerce'); ?></p>
-<!-- /wp:paragraph --></details>
-<!-- /wp:details -->
+      <!-- FAQ 2 -->
+      <details class="ng-faq-card">
+        <summary class="ng-faq-card__question">
+          <span>Can National Gold melamine plates be used in the microwave & dishwasher?</span>
+          <span class="ng-faq-card__icon">+</span>
+        </summary>
+        <div class="ng-faq-card__answer">
+          <p>Our melamine items are heat-resistant up to 120°C (248°F) and completely dishwasher-safe. For microwave use, we recommend re-heating foods for up to 2-3 minutes. Avoid oven or direct flame exposure.</p>
+        </div>
+      </details>
 
-<!-- wp:details {"className":"faq-btm-title","style":{"typography":{"fontSize":"16px","fontStyle":"normal","fontWeight":"500","textTransform":"capitalize"},"layout":{"selfStretch":"fill","flexSize":null},"spacing":{"margin":{"top":"var:preset|spacing|40"}},"elements":{"link":{"color":{"text":"var:preset|color|heading-color"}}}},"textColor":"heading-color"} -->
-<details class="wp-block-details faq-btm-title has-heading-color-color has-text-color has-link-color" style="margin-top:var(--wp--preset--spacing--40);font-size:16px;font-style:normal;font-weight:500;text-transform:capitalize"><summary><?php echo esc_html__('Do you offer free shipping on orders?', 'vw-modern-ecommerce'); ?></summary><!-- wp:paragraph {"placeholder":"Type / to add a hidden block","className":"faq-btm-content","style":{"typography":{"fontSize":"14px","fontStyle":"normal","fontWeight":"400","textTransform":"lowercase"},"spacing":{"margin":{"top":"var:preset|spacing|30"}}}} -->
-<p class="faq-btm-content" style="margin-top:var(--wp--preset--spacing--30);font-size:14px;font-style:normal;font-weight:400;text-transform:lowercase"><?php echo esc_html__('Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industrys standard dummy text ever since.', 'vw-modern-ecommerce'); ?></p>
-<!-- /wp:paragraph --></details>
-<!-- /wp:details -->
+      <!-- FAQ 3 -->
+      <details class="ng-faq-card">
+        <summary class="ng-faq-card__question">
+          <span>Do you offer Cash on Delivery (COD) across Pakistan?</span>
+          <span class="ng-faq-card__icon">+</span>
+        </summary>
+        <div class="ng-faq-card__answer">
+          <p>Yes, we provide Cash on Delivery (COD) to all major cities and towns across Pakistan (Lahore, Karachi, Islamabad, Rawalpindi, Peshawar, Multan, Faisalabad, Quetta, and more). Delivery usually takes 2 to 4 working days.</p>
+        </div>
+      </details>
 
-<!-- wp:details {"className":"faq-btm-title","style":{"typography":{"fontSize":"16px","fontStyle":"normal","fontWeight":"500","textTransform":"capitalize"},"layout":{"selfStretch":"fill","flexSize":null},"spacing":{"margin":{"top":"var:preset|spacing|40"}},"elements":{"link":{"color":{"text":"var:preset|color|heading-color"}}}},"textColor":"heading-color"} -->
-<details class="wp-block-details faq-btm-title has-heading-color-color has-text-color has-link-color" style="margin-top:var(--wp--preset--spacing--40);font-size:16px;font-style:normal;font-weight:500;text-transform:capitalize"><summary><?php echo esc_html__('Can I track my order after it has been shipped?', 'vw-modern-ecommerce'); ?></summary><!-- wp:paragraph {"placeholder":"Type / to add a hidden block","className":"faq-btm-content","style":{"typography":{"fontSize":"14px","fontStyle":"normal","fontWeight":"400","textTransform":"lowercase"},"spacing":{"margin":{"top":"var:preset|spacing|30"}}}} -->
-<p class="faq-btm-content" style="margin-top:var(--wp--preset--spacing--30);font-size:14px;font-style:normal;font-weight:400;text-transform:lowercase"><?php echo esc_html__('Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industrys standard dummy text ever since.', 'vw-modern-ecommerce'); ?></p>
-<!-- /wp:paragraph --></details>
-<!-- /wp:details --></div>
-<!-- /wp:column -->
+      <!-- FAQ 4 -->
+      <details class="ng-faq-card">
+        <summary class="ng-faq-card__question">
+          <span>What items are included in a full 52-Piece or 72-Piece Melamine Dinner Set?</span>
+          <span class="ng-faq-card__icon">+</span>
+        </summary>
+        <div class="ng-faq-card__answer">
+          <p>A standard 52-Piece Dinner Set includes: 8 Full Dinner Plates, 8 Quarter Plates, 8 Soup Bowls, 8 Sweet Dishes, 2 Large Serving Rice Platters, 2 Covered Curry Dishes with Lids, 2 Serving Spoons, and 8 Water Tumbler Glasses. 72-Piece sets also include tea mug cups & saucers.</p>
+        </div>
+      </details>
 
-<!-- wp:column {"width":"100%"} -->
-<div class="wp-block-column" style="flex-basis:100%"><!-- wp:details {"className":"faq-btm-title","style":{"typography":{"fontSize":"16px","fontStyle":"normal","fontWeight":"500","textTransform":"capitalize"},"layout":{"selfStretch":"fill","flexSize":null},"spacing":{"margin":{"top":"var:preset|spacing|40"}},"elements":{"link":{"color":{"text":"var:preset|color|heading-color"}}}},"textColor":"heading-color"} -->
-<details class="wp-block-details faq-btm-title has-heading-color-color has-text-color has-link-color" style="margin-top:var(--wp--preset--spacing--40);font-size:16px;font-style:normal;font-weight:500;text-transform:capitalize"><summary><?php echo esc_html__('What is your return and refund policy?', 'vw-modern-ecommerce'); ?></summary><!-- wp:paragraph {"placeholder":"Type / to add a hidden block","className":"faq-btm-content","style":{"typography":{"fontSize":"14px","fontStyle":"normal","fontWeight":"400","textTransform":"lowercase"},"spacing":{"margin":{"top":"var:preset|spacing|30"}}}} -->
-<p class="faq-btm-content" style="margin-top:var(--wp--preset--spacing--30);font-size:14px;font-style:normal;font-weight:400;text-transform:lowercase"><?php echo esc_html__('Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industrys standard dummy text ever since.', 'vw-modern-ecommerce'); ?></p>
-<!-- /wp:paragraph --></details>
-<!-- /wp:details -->
+      <!-- FAQ 5 -->
+      <details class="ng-faq-card">
+        <summary class="ng-faq-card__question">
+          <span>How are the items packed to prevent damage during shipping?</span>
+          <span class="ng-faq-card__icon">+</span>
+        </summary>
+        <div class="ng-faq-card__answer">
+          <p>Every single plate, bowl, and platter is individually wrapped in protective foam sheets and high-density bubble wrap inside heavy corrugated master cartons. We guarantee 100% safe arrival or free replacement!</p>
+        </div>
+      </details>
 
-<!-- wp:details {"className":"faq-btm-title","style":{"typography":{"fontSize":"16px","fontStyle":"normal","fontWeight":"500","textTransform":"capitalize"},"layout":{"selfStretch":"fill","flexSize":null},"spacing":{"margin":{"top":"var:preset|spacing|40"}},"elements":{"link":{"color":{"text":"var:preset|color|heading-color"}}}},"textColor":"heading-color"} -->
-<details class="wp-block-details faq-btm-title has-heading-color-color has-text-color has-link-color" style="margin-top:var(--wp--preset--spacing--40);font-size:16px;font-style:normal;font-weight:500;text-transform:capitalize"><summary><?php echo esc_html__('Do you offer discounts or seasonal promotions?', 'vw-modern-ecommerce'); ?></summary><!-- wp:paragraph {"placeholder":"Type / to add a hidden block","className":"faq-btm-content","style":{"typography":{"fontSize":"14px","fontStyle":"normal","fontWeight":"400","textTransform":"lowercase"},"spacing":{"margin":{"top":"var:preset|spacing|30"}}}} -->
-<p class="faq-btm-content" style="margin-top:var(--wp--preset--spacing--30);font-size:14px;font-style:normal;font-weight:400;text-transform:lowercase"><?php echo esc_html__('Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industrys standard dummy text ever since.', 'vw-modern-ecommerce'); ?></p>
-<!-- /wp:paragraph --></details>
-<!-- /wp:details -->
+      <!-- FAQ 6 -->
+      <details class="ng-faq-card">
+        <summary class="ng-faq-card__question">
+          <span>How can I place bulk orders for restaurants, marriage halls, or catering?</span>
+          <span class="ng-faq-card__icon">+</span>
+        </summary>
+        <div class="ng-faq-card__answer">
+          <p>For commercial wholesale or custom logo printing for restaurants, please call or WhatsApp our B2B hotline directly at <strong><?php echo esc_html( $ng_faq_phone ); ?></strong> for special wholesale price quotes.</p>
+        </div>
+      </details>
 
-<!-- wp:details {"className":"faq-btm-title","style":{"typography":{"fontSize":"16px","fontStyle":"normal","fontWeight":"500","textTransform":"capitalize"},"layout":{"selfStretch":"fill","flexSize":null},"spacing":{"margin":{"top":"var:preset|spacing|40"}},"elements":{"link":{"color":{"text":"var:preset|color|heading-color"}}}},"textColor":"heading-color"} -->
-<details class="wp-block-details faq-btm-title has-heading-color-color has-text-color has-link-color" style="margin-top:var(--wp--preset--spacing--40);font-size:16px;font-style:normal;font-weight:500;text-transform:capitalize"><summary><?php echo esc_html__('Do you ship internationally?', 'vw-modern-ecommerce'); ?></summary><!-- wp:paragraph {"placeholder":"Type / to add a hidden block","className":"faq-btm-content","style":{"typography":{"fontSize":"14px","fontStyle":"normal","fontWeight":"400","textTransform":"lowercase"},"spacing":{"margin":{"top":"var:preset|spacing|30"}}}} -->
-<p class="faq-btm-content" style="margin-top:var(--wp--preset--spacing--30);font-size:14px;font-style:normal;font-weight:400;text-transform:lowercase"><?php echo esc_html__('Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industrys standard dummy text ever since.', 'vw-modern-ecommerce'); ?></p>
-<!-- /wp:paragraph --></details>
-<!-- /wp:details -->
+    </div>
 
-<!-- wp:details {"className":"faq-btm-title","style":{"typography":{"fontSize":"16px","fontStyle":"normal","fontWeight":"500","textTransform":"capitalize"},"layout":{"selfStretch":"fill","flexSize":null},"spacing":{"margin":{"top":"var:preset|spacing|40"}},"elements":{"link":{"color":{"text":"var:preset|color|heading-color"}}}},"textColor":"heading-color"} -->
-<details class="wp-block-details faq-btm-title has-heading-color-color has-text-color has-link-color" style="margin-top:var(--wp--preset--spacing--40);font-size:16px;font-style:normal;font-weight:500;text-transform:capitalize"><summary><?php echo esc_html__('Are gift cards or gift-wrapping services available?', 'vw-modern-ecommerce'); ?></summary><!-- wp:paragraph {"placeholder":"Type / to add a hidden block","className":"faq-btm-content","style":{"typography":{"fontSize":"14px","fontStyle":"normal","fontWeight":"400","textTransform":"lowercase"},"spacing":{"margin":{"top":"var:preset|spacing|30"}}}} -->
-<p class="faq-btm-content" style="margin-top:var(--wp--preset--spacing--30);font-size:14px;font-style:normal;font-weight:400;text-transform:lowercase"><?php echo esc_html__('Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industrys standard dummy text ever since.', 'vw-modern-ecommerce'); ?></p>
-<!-- /wp:paragraph --></details>
-<!-- /wp:details --></div>
-<!-- /wp:column --></div>
-<!-- /wp:columns -->
-
-<!-- wp:spacer {"height":"50px"} -->
-<div style="height:50px" aria-hidden="true" class="wp-block-spacer"></div>
-<!-- /wp:spacer --></div>
-<!-- /wp:group -->
+  </div>
+</section>

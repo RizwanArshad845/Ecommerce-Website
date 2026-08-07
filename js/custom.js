@@ -1,59 +1,7 @@
-// Testimonial Section
-jQuery(document).ready(function() {
-  jQuery('.testimonial-section .owl-carousel').owlCarousel({
-    loop: true,
-    margin: 15,
-    nav: true,
-    navText: ["<span class='left-btn p-3'></span>", "<span class='right-btn p-3'></span>"], 
-    dots: false,
-    rtl: false,
-    responsive: {
-    0: { 
-      items: 1 
-    },
-    768: { 
-      items: 2 
-    },
-    992: { 
-      items: 2 
-    },
-    1200: { 
-      items: 3 
-    }
-  },
-  autoplay: true,
-  });
-});
-
-// News Section
-jQuery(document).ready(function() {
-  jQuery('.news-section .owl-carousel').owlCarousel({
-    loop: true,
-    margin: 15,
-    nav: false, 
-    dots: false,
-    rtl: false,
-    responsive: {
-    0: { 
-      items: 1 
-    },
-    768: { 
-      items: 2 
-    },
-    992: { 
-      items: 2 
-    },
-    1200: { 
-      items: 3 
-    }
-  },
-  autoplay: true,
-  });
-});
-
 // Scroll to Top
 window.onscroll = function() {
   const vw_modern_ecommerce_button = document.querySelector('.scroll-top-box');
+  if (!vw_modern_ecommerce_button) return;
   if (document.body.scrollTop > 100 || document.documentElement.scrollTop > 100) {
     vw_modern_ecommerce_button.style.display = "block";
   } else {
@@ -61,10 +9,13 @@ window.onscroll = function() {
   }
 };
 
-document.querySelector('.scroll-top-box a').onclick = function(event) {
-  event.preventDefault();
-  window.scrollTo({top: 0, behavior: 'smooth'});
-};
+const vw_modern_ecommerce_scrollTopLink = document.querySelector('.scroll-top-box a');
+if (vw_modern_ecommerce_scrollTopLink) {
+  vw_modern_ecommerce_scrollTopLink.onclick = function(event) {
+    event.preventDefault();
+    window.scrollTo({top: 0, behavior: 'smooth'});
+  };
+}
 
 // products tabs
 document.addEventListener("DOMContentLoaded", () => {
