@@ -21,6 +21,26 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
 
+if ( ! function_exists( 'ng_get_bacs_description_html' ) ) {
+	/**
+	 * Bank Transfer description markup, shared by the stored gateway setting
+	 * (read directly by the WooCommerce Blocks checkout) and the classic
+	 * `woocommerce_gateway_description` filter.
+	 */
+	function ng_get_bacs_description_html() {
+		// Keep this to <br>/<strong> only — the WooCommerce Blocks checkout
+		// runs the description through a client-side DOMPurify sanitizer
+		// (@woocommerce sanitizeHTML) that strips <ul>/<li>/<span> and
+		// style attributes, so those never survive to render on-screen.
+		return 'Pay directly into our Meezan Bank account.<br><br>'
+			. 'Enjoy <strong>FREE Delivery</strong> on all Bank Transfer orders!<br><br>'
+			. '• <strong>Bank:</strong> MEEZAN BANK<br>'
+			. '• <strong>Account Title:</strong> HAMIZ ARSHAD<br>'
+			. '• <strong>Account No:</strong> 00300115512676<br><br>'
+			. 'Please send payment screenshot on WhatsApp after placing your order.';
+	}
+}
+
 if ( ! function_exists( 'ng_sync_payment_gateway_settings' ) ) {
 	/**
 	 * Ensure COD + Bank Transfer are enabled and configured with the
@@ -32,48 +52,52 @@ if ( ! function_exists( 'ng_sync_payment_gateway_settings' ) ) {
 			return;
 		}
 
-		// Bank Transfer (BACS).
+		// Bank Transfer (BACS) — Free Delivery on Bank Transfer.
 		$bacs_settings = get_option( 'woocommerce_bacs_settings', array() );
 		$bacs_defaults = array(
 			'enabled'      => 'yes',
-			'title'        => __( 'Bank Transfer', 'vw-modern-ecommerce' ),
-			'description'  => __( 'Pay directly into our bank account. Your order will be shipped once payment is confirmed.', 'vw-modern-ecommerce' ),
-			'instructions' => sprintf(
-				/* translators: %s: bank name */
-				__( 'Please transfer the order total to our %s account below and share the payment screenshot with us on WhatsApp so we can confirm your order quickly.', 'vw-modern-ecommerce' ),
-				defined( 'NG_BANK_NAME' ) ? NG_BANK_NAME : ''
-			),
+			'title'        => __( 'Bank Transfer (Free Delivery)', 'vw-modern-ecommerce' ),
+			'description'  => ng_get_bacs_description_html(),
+			'instructions' => __( 'Please transfer the order total to our MEEZAN BANK account below and send the payment screenshot to us on WhatsApp so we can dispatch your order quickly.', 'vw-modern-ecommerce' ),
 		);
-		update_option( 'woocommerce_bacs_settings', wp_parse_args( $bacs_settings, $bacs_defaults ) );
+		update_option( 'woocommerce_bacs_settings', array_merge( $bacs_settings, array( 'description' => $bacs_defaults['description'], 'title' => $bacs_defaults['title'] ) ) );
 
-		$bacs_accounts = get_option( 'woocommerce_bacs_accounts', array() );
-		if ( empty( $bacs_accounts ) && defined( 'NG_BANK_ACCOUNT_NUMBER' ) ) {
-			update_option(
-				'woocommerce_bacs_accounts',
+		update_option(
+			'woocommerce_bacs_accounts',
+			array(
 				array(
-					array(
-						'account_name'   => NG_BANK_ACCOUNT_TITLE,
-						'account_number' => NG_BANK_ACCOUNT_NUMBER,
-						'bank_name'      => NG_BANK_NAME,
-						'sort_code'      => '',
-						'iban'           => NG_BANK_IBAN,
-						'bic'            => '',
-					),
-				)
-			);
-		}
+					'account_name'   => 'HAMIZ ARSHAD',
+					'account_number' => '00300115512676',
+					'bank_name'      => 'MEEZAN BANK',
+					'sort_code'      => '',
+					'iban'           => 'PK00MEZN00300115512676',
+					'bic'            => '',
+				),
+			)
+		);
 
-		// Cash on Delivery.
+		// Cash on Delivery (COD) — Rs. 200 delivery fee.
 		$cod_settings = get_option( 'woocommerce_cod_settings', array() );
 		$cod_defaults = array(
 			'enabled'     => 'yes',
-			'title'       => __( 'Cash on Delivery', 'vw-modern-ecommerce' ),
-			'description' => defined( 'NG_COD_AVAILABILITY_NOTE' ) ? NG_COD_AVAILABILITY_NOTE : __( 'Pay with cash upon delivery.', 'vw-modern-ecommerce' ),
+			'title'       => __( 'Cash on Delivery (Rs. 200 Shipping)', 'vw-modern-ecommerce' ),
+			'description' => __( 'Pay with cash upon delivery. Flat Rs. 200 delivery charge applies.', 'vw-modern-ecommerce' ),
 		);
-		update_option( 'woocommerce_cod_settings', wp_parse_args( $cod_settings, $cod_defaults ) );
+		update_option( 'woocommerce_cod_settings', array_merge( $cod_settings, $cod_defaults ) );
 	}
 }
+add_action( 'init', 'ng_sync_payment_gateway_settings' );
 add_action( 'admin_init', 'ng_sync_payment_gateway_settings' );
+
+/**
+ * Format Bank Transfer description with bullet points.
+ */
+add_filter( 'woocommerce_gateway_description', function( $description, $gateway_id ) {
+	if ( 'bacs' === $gateway_id ) {
+		return ng_get_bacs_description_html();
+	}
+	return $description;
+}, 10, 2 );
 
 if ( ! function_exists( 'ng_restrict_available_payment_gateways' ) ) {
 	/**

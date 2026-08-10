@@ -217,20 +217,21 @@ add_action( 'woocommerce_view_order', 'ng_view_order_actions_html', 20 );
 
 if ( ! function_exists( 'ng_order_confirmation_actions_html' ) ) {
 	/**
-	 * Continue Shopping CTA on the order-received page.
-	 *
-	 * This store's checkout uses the WooCommerce Checkout/Order Confirmation
-	 * blocks, not the classic [woocommerce_checkout] shortcode, so
-	 * woocommerce/checkout/thankyou.php never renders here. `woocommerce_thankyou`
-	 * still fires though — the Order Confirmation block's "Additional
-	 * Information" block calls it directly (after temporarily removing the
-	 * classic woocommerce_order_details_table callback so nothing double-
-	 * renders), only when the current visitor has permission to view the order.
+	 * Order Received WhatsApp notice and Continue Shopping CTA on the order-received page.
 	 *
 	 * @param int $order_id Order ID.
 	 */
 	function ng_order_confirmation_actions_html( $order_id ) {
 		?>
+		<div class="ng-whatsapp-received-card">
+			<div class="ng-whatsapp-received-card__header">
+				<svg class="ng-whatsapp-received-card__icon" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946.003-6.556 5.338-11.891 11.893-11.891 3.181.001 6.167 1.24 8.413 3.488 2.245 2.248 3.481 5.236 3.48 8.414-.003 6.557-5.338 11.892-11.893 11.892-1.99-.001-3.951-.5-5.688-1.448l-6.305 1.654zm6.597-3.807c1.676.995 3.276 1.591 5.392 1.592 5.448 0 9.886-4.434 9.889-9.885.002-5.462-4.415-9.89-9.881-9.892-5.452 0-9.887 4.434-9.889 9.884-.001 2.225.651 3.891 1.746 5.634l-.999 3.648 3.742-.981zm11.387-5.464c-.074-.124-.272-.198-.57-.347-.297-.149-1.758-.868-2.031-.967-.272-.099-.47-.149-.669.149-.198.297-.768.967-.941 1.165-.173.198-.347.223-.644.074-.297-.149-1.255-.462-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.297-.347.446-.521.151-.172.2-.296.3-.495.099-.198.05-.372-.025-.521-.075-.148-.669-1.611-.916-2.206-.242-.579-.487-.501-.669-.51l-.57-.01c-.198 0-.52.074-.792.372s-1.04 1.016-1.04 2.479 1.065 2.876 1.213 3.074c.149.198 2.095 3.2 5.076 4.487.709.306 1.263.489 1.694.626.712.226 1.36.194 1.872.118.571-.085 1.758-.719 2.006-1.413.248-.695.248-1.29.173-1.414z"/></svg>
+				<h3 class="ng-whatsapp-received-card__title"><?php esc_html_e( 'Order Received!', 'vw-modern-ecommerce' ); ?></h3>
+			</div>
+			<p class="ng-whatsapp-received-card__message">
+				<?php esc_html_e( 'Your order has been received. We will contact you soon on WhatsApp.', 'vw-modern-ecommerce' ); ?>
+			</p>
+		</div>
 		<div class="ng-order-confirmation-actions">
 			<a href="<?php echo esc_url( apply_filters( 'woocommerce_return_to_shop_redirect', wc_get_page_permalink( 'shop' ) ) ); ?>" class="ng-btn ng-btn--primary">
 				<?php esc_html_e( 'Continue Shopping →', 'vw-modern-ecommerce' ); ?>
@@ -240,6 +241,93 @@ if ( ! function_exists( 'ng_order_confirmation_actions_html' ) ) {
 	}
 }
 add_action( 'woocommerce_thankyou', 'ng_order_confirmation_actions_html' );
+
+/**
+ * Tag each shipping package with the chosen payment method so WooCommerce's
+ * per-package shipping-rate cache (keyed by a hash of the package — see
+ * WC_Shipping::calculate_shipping_for_package()) busts whenever the shopper
+ * switches payment method. Without this, the cache hash never changes
+ * (cart contents/destination stay the same), so WooCommerce replays the
+ * first cached rate instead of re-running woocommerce_package_rates below.
+ */
+function ng_tag_shipping_package_with_payment_method( $packages ) {
+	$chosen_payment_method = '';
+
+	if ( function_exists( 'WC' ) && WC()->session ) {
+		$chosen_payment_method = WC()->session->get( 'chosen_payment_method' );
+	}
+
+	foreach ( $packages as $key => $package ) {
+		$packages[ $key ]['ng_chosen_payment_method'] = $chosen_payment_method;
+	}
+
+	return $packages;
+}
+add_filter( 'woocommerce_cart_shipping_packages', 'ng_tag_shipping_package_with_payment_method', 9999 );
+
+/**
+ * Dynamic Shipping Charges based on Payment Method:
+ * - Bank Transfer (bacs): FREE Delivery (Rs. 0)
+ * - Cash on Delivery (cod) or default: Rs. 200 Delivery Charges
+ */
+function ng_dynamic_shipping_by_payment_method( $rates, $package ) {
+	$chosen_payment_method = '';
+
+	if ( function_exists( 'WC' ) && WC()->session ) {
+		$chosen_payment_method = WC()->session->get( 'chosen_payment_method' );
+	}
+
+	if ( empty( $chosen_payment_method ) && isset( $_POST['payment_method'] ) ) {
+		$chosen_payment_method = sanitize_text_field( $_POST['payment_method'] );
+	}
+
+	// Free shipping for Bank Transfer ('bacs'), Rs. 200 for Cash on Delivery ('cod')
+	$is_bank_transfer = ( 'bacs' === $chosen_payment_method );
+	$shipping_cost    = $is_bank_transfer ? 0 : 200;
+	$shipping_label   = $is_bank_transfer ? __( 'Free Delivery (Bank Transfer)', 'vw-modern-ecommerce' ) : __( 'Flat Shipping (COD)', 'vw-modern-ecommerce' );
+
+	if ( empty( $rates ) ) {
+		$rate = new WC_Shipping_Rate(
+			'ng_flat_rate_dynamic',
+			$shipping_label,
+			$shipping_cost,
+			array(),
+			'flat_rate'
+		);
+		return array( 'ng_flat_rate_dynamic' => $rate );
+	}
+
+	foreach ( $rates as $rate_id => $rate ) {
+		$rates[ $rate_id ]->cost  = $shipping_cost;
+		$rates[ $rate_id ]->label = $shipping_label;
+		if ( ! empty( $rates[ $rate_id ]->taxes ) && is_array( $rates[ $rate_id ]->taxes ) ) {
+			foreach ( $rates[ $rate_id ]->taxes as $k => $v ) {
+				$rates[ $rate_id ]->taxes[ $k ] = 0;
+			}
+		}
+	}
+
+	return $rates;
+}
+add_filter( 'woocommerce_package_rates', 'ng_dynamic_shipping_by_payment_method', 999, 2 );
+add_filter( 'woocommerce_cart_ready_to_calc_shipping', '__return_true', 999 );
+
+/**
+ * AJAX endpoint to update chosen payment method in WooCommerce session so shipping recalculates live.
+ */
+function ng_update_payment_method_session() {
+	if ( isset( $_POST['payment_method'] ) && function_exists( 'WC' ) && WC()->session ) {
+		$method = sanitize_text_field( $_POST['payment_method'] );
+		WC()->session->set( 'chosen_payment_method', $method );
+		if ( WC()->cart ) {
+			WC()->cart->calculate_totals();
+		}
+		wp_send_json_success( array( 'method' => $method ) );
+	}
+	wp_send_json_error();
+}
+add_action( 'wp_ajax_ng_update_payment_method_session', 'ng_update_payment_method_session' );
+add_action( 'wp_ajax_nopriv_ng_update_payment_method_session', 'ng_update_payment_method_session' );
 
 if ( ! function_exists( 'ng_get_recent_reviews' ) ) {
 	/**

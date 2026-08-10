@@ -181,9 +181,13 @@ section.ng-sec {
   .ng-categories-sec { padding-top: 0; padding-bottom: 2.5rem; }
 
   .ng-shop-filter-toggle {
-    display: flex !important;
-    margin-top: 1.8rem !important;
-    margin-bottom: 1.5rem !important;
+    display: inline-flex !important;
+    width: auto !important;
+    max-width: 200px !important;
+    margin-top: 1.2rem !important;
+    margin-bottom: 1rem !important;
+    padding: 0.55rem 1.2rem !important;
+    min-height: 44px !important;
   }
 
   .ng-categories-grid .ng-cat-card { flex: 0 0 calc(50% - 0.6rem) !important; min-width: calc(50% - 0.6rem) !important; }
@@ -200,4 +204,14 @@ section.ng-sec {
 
   /* Order-received page responsive rules live in 09-thankyou-order.css
      (single source of truth — avoids two files fighting over the same selectors). */
+
+  /* Ensure cart & checkout boxes and buttons on mobile maintain 100% sharp square corners */
+  .woocommerce-cart *,
+  .woocommerce-checkout *,
+  .wp-block-woocommerce-cart *,
+  .wp-block-woocommerce-checkout *,
+  .wc-block-cart *,
+  .wc-block-checkout * {
+    border-radius: 0 !important;
+  }
 }

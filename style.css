@@ -41,8 +41,12 @@ VW Modern Ecommerce is distributed under the terms of the GNU GPL
 /* Mobile Shop Filters Button Top Space */
 .ng-shop-filter-toggle,
 button.ng-shop-filter-toggle {
-  margin-top: 1.8rem !important;
-  margin-bottom: 1.5rem !important;
+  margin-top: 1.2rem !important;
+  margin-bottom: 1rem !important;
+  padding: 0.55rem 1.2rem !important;
+  width: auto !important;
+  max-width: 200px !important;
+  min-height: 44px !important;
 }
 
 /* Contact Page Top Section Top Space */
@@ -65,7 +69,30 @@ main.site-main .ng-contact-sec {
   margin-top: 1rem !important;
 }
 
-/* Hide empty order summary boxes in checkout and cart */
+/* Prevent inner child blocks of order summary totals container from acting as separate white cards */
+div[class*="order-summary-totals-block"] > div.wc-block-components-totals-wrapper,
+.wp-block-woocommerce-checkout-order-summary-totals-block > div,
+.wp-block-woocommerce-cart-order-summary-totals-block > div {
+  background: transparent !important;
+  border: none !important;
+  box-shadow: none !important;
+  padding: 0 !important;
+  margin: 0 !important;
+  border-radius: 0 !important;
+}
+
+/* Hide empty totals blocks/boxes and empty sub-blocks in cart and checkout */
+div[class*="order-summary-subtotal-block"]:empty,
+div[class*="order-summary-discount-block"]:empty,
+div[class*="order-summary-fee-block"]:empty,
+div[class*="order-summary-shipping-block"]:empty,
+div[class*="order-summary-taxes-block"]:empty,
+div[class*="order-summary-subtotal-block"]:not(:has(span, p, strong, div, table, a)),
+div[class*="order-summary-discount-block"]:not(:has(span, p, strong, div, table, a)),
+div[class*="order-summary-fee-block"]:not(:has(span, p, strong, div, table, a)),
+div[class*="order-summary-taxes-block"]:not(:has(span, p, strong, div, table, a)),
+.wc-block-components-totals-wrapper:empty,
+.wc-block-components-totals-wrapper:not(:has(span, p, strong, button, input, form, a, table, img, fieldset)),
 .wc-block-components-totals-item:empty,
 .wc-block-components-totals-item:not(:has(span)),
 .wc-block-components-totals-item:not(:has(.wc-block-components-totals-item__label)),
@@ -74,5 +101,13 @@ div.wc-block-components-totals-item[class*="taxes"]:empty,
 div.wc-block-components-totals-item[class*="discount"]:empty,
 .wc-block-components-order-summary-item:empty,
 .wc-block-components-totals-item:not(:has(p, span, strong, a, button, input)) {
+  display: none !important;
+}
+
+/* Hide coupon form block / Add coupons div in cart and checkout */
+.wp-block-woocommerce-checkout-order-summary-coupon-form-block,
+.wp-block-woocommerce-cart-order-summary-coupon-form-block,
+.wc-block-components-totals-coupon,
+.wc-block-components-totals-coupon-link {
   display: none !important;
 }

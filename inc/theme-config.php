@@ -65,18 +65,18 @@ if ( ! defined( 'NG_TIKTOK_URL' ) ) {
 	define( 'NG_TIKTOK_URL', 'https://tiktok.com/@nationalgoldmelamine' );
 }
 
-// TODO: client to provide — real bank details for Bank Transfer payment method.
+// Bank Transfer details (Meezan Bank).
 if ( ! defined( 'NG_BANK_NAME' ) ) {
-	define( 'NG_BANK_NAME', 'HBL Bank Limited' );
+	define( 'NG_BANK_NAME', 'MEEZAN BANK' );
 }
 if ( ! defined( 'NG_BANK_ACCOUNT_TITLE' ) ) {
-	define( 'NG_BANK_ACCOUNT_TITLE', 'National Gold Melamine' );
+	define( 'NG_BANK_ACCOUNT_TITLE', 'HAMIZ ARSHAD' );
 }
 if ( ! defined( 'NG_BANK_ACCOUNT_NUMBER' ) ) {
-	define( 'NG_BANK_ACCOUNT_NUMBER', '0000-0000-0000' );
+	define( 'NG_BANK_ACCOUNT_NUMBER', '00300115512676' );
 }
 if ( ! defined( 'NG_BANK_IBAN' ) ) {
-	define( 'NG_BANK_IBAN', 'PK00HABB0000000000000000' );
+	define( 'NG_BANK_IBAN', 'PK00MEZN00300115512676' );
 }
 
 // TODO: client to confirm — COD availability note shown at checkout.

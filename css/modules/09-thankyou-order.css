@@ -1,5 +1,5 @@
 /* =============================================================================
-   09. ORDER RECEIVED / THANK YOU PAGE — LIGHT THEME
+   09. ORDER RECEIVED / THANK YOU PAGE — LIGHT THEME (STRICT SHARP SQUARE DESIGN)
    ============================================================================= */
 
 /* ── PAGE BACKGROUND ── */
@@ -9,28 +9,19 @@ body.woocommerce-order-received main#primary {
   min-height: 60vh !important;
 }
 
-/* ── CONTAINER: fix the zero-left-padding issue.
-   The wp:woocommerce/checkout block uses alignwide which escapes constrained
-   layout — padding must be applied directly to main and the woocommerce wrappers. ── */
+/* ── CONTAINER: padding & layout alignment ── */
 body.woocommerce-order-received main#primary {
   padding-inline: max(1.5rem, 5vw) !important;
   box-sizing: border-box !important;
 }
 
-/* WooCommerce classic output wrapper (used even in Blocks checkout flow) */
 body.woocommerce-order-received .woocommerce,
-body.woocommerce-order-received .woocommerce-page .woocommerce {
-  max-width: 900px !important;
-  margin-inline: auto !important;
-  width: 100% !important;
-}
-
-/* Block checkout wrapper on order-received URL */
+body.woocommerce-order-received .woocommerce-page .woocommerce,
 body.woocommerce-order-received .wp-block-woocommerce-checkout,
 body.woocommerce-order-received .wc-block-checkout {
   max-width: 900px !important;
-  width: 100% !important;
   margin-inline: auto !important;
+  width: 100% !important;
   background: transparent !important;
   box-sizing: border-box !important;
 }
@@ -49,9 +40,9 @@ body.woocommerce-order-received .wc-block-checkout {
   text-align: center !important;
   gap: 0.6rem !important;
   background: #ffffff !important;
-  border: 1px solid rgba(26,26,26,0.09) !important;
-  border-radius: 16px !important;
-  box-shadow: 0 2px 16px rgba(0,0,0,0.06) !important;
+  border: 1px solid rgba(26,26,26,0.12) !important;
+  border-radius: 0 !important;
+  box-shadow: 0 4px 20px rgba(0,0,0,0.04) !important;
   padding: 2.5rem 2rem !important;
   margin: 0 0 2rem 0 !important;
 }
@@ -62,7 +53,7 @@ body.woocommerce-order-received .wc-block-checkout {
   justify-content: center !important;
   width: 72px !important;
   height: 72px !important;
-  border-radius: 50% !important;
+  border-radius: 0 !important;
   background: rgba(166,124,46,0.12) !important;
   color: #A67C2E !important;
   margin-bottom: 0.4rem !important;
@@ -109,7 +100,7 @@ body.woocommerce-order-received .wc-block-checkout {
   line-height: 1.6 !important;
 }
 
-/* ── CTA / ACTION BUTTON ROWS (used inside the failed hero card and after order details) ── */
+/* ── CTA / ACTION BUTTON ROWS ── */
 .ng-thankyou-actions {
   display: flex !important;
   flex-wrap: wrap !important;
@@ -133,18 +124,17 @@ body.woocommerce-order-received p.woocommerce-thankyou-order-received,
   line-height: 1.6 !important;
 }
 
-/* ── GOLD DIVIDER after thank-you text ── */
 body.woocommerce-order-received p.woocommerce-thankyou-order-received::after {
   content: '' !important;
   display: block !important;
   width: 48px !important;
   height: 3px !important;
   background: linear-gradient(90deg, #A67C2E, #F5D77F) !important;
-  border-radius: 99px !important;
+  border-radius: 0 !important;
   margin-top: 1rem !important;
 }
 
-/* ── ORDER META OVERVIEW GRID ── */
+/* ── ORDER META OVERVIEW GRID (STRICT SQUARE CARDS) ── */
 ul.woocommerce-order-overview,
 .woocommerce-order-received ul.woocommerce-order-overview {
   display: grid !important;
@@ -164,9 +154,9 @@ ul.woocommerce-order-overview::after {
 
 ul.woocommerce-order-overview li {
   background: #ffffff !important;
-  border: 1px solid rgba(26,26,26,0.09) !important;
-  border-bottom: 3px solid rgba(166,124,46,0.2) !important;
-  border-radius: 12px !important;
+  border: 1px solid rgba(26,26,26,0.12) !important;
+  border-bottom: 3px solid #A67C2E !important;
+  border-radius: 0 !important;
   padding: 1rem 0.9rem 0.9rem !important;
   display: flex !important;
   flex-direction: column !important;
@@ -178,10 +168,9 @@ ul.woocommerce-order-overview li {
 
 ul.woocommerce-order-overview li:hover {
   transform: translateY(-2px) !important;
-  border-bottom-color: #A67C2E !important;
+  border-bottom-color: #111111 !important;
 }
 
-/* Label (small uppercase eyebrow, e.g. "Order Number:") */
 .ng-thankyou-meta__label {
   display: block !important;
   font-size: 0.65rem !important;
@@ -192,7 +181,6 @@ ul.woocommerce-order-overview li:hover {
   margin-bottom: 0.2rem !important;
 }
 
-/* Value (the actual order number/date/email/etc.) */
 .ng-thankyou-meta__val {
   font-size: 0.92rem !important;
   font-weight: 700 !important;
@@ -200,20 +188,19 @@ ul.woocommerce-order-overview li:hover {
   word-break: break-word !important;
 }
 
-/* Order total gets the gold accent */
 .ng-thankyou-meta__val--gold {
   color: #A67C2E !important;
   font-size: 1rem !important;
 }
 
-/* ── ORDER DETAILS CARD ── */
+/* ── ORDER DETAILS CARD & TABLE (STRICT SHARP SQUARE BOUNDARIES) ── */
 .woocommerce-order-details,
 section.woocommerce-order-details {
   background: #ffffff !important;
-  border: 1px solid rgba(26,26,26,0.09) !important;
-  border-radius: 16px !important;
+  border: 1px solid rgba(26,26,26,0.15) !important;
+  border-radius: 0 !important;
   padding: 1.75rem !important;
-  box-shadow: 0 2px 16px rgba(0,0,0,0.06) !important;
+  box-shadow: 0 4px 16px rgba(0,0,0,0.04) !important;
   margin-bottom: 1.5rem !important;
   overflow: hidden !important;
 }
@@ -221,40 +208,46 @@ section.woocommerce-order-details {
 .woocommerce-order-details h2,
 .woocommerce-order-details__title {
   font-family: 'Outfit', sans-serif !important;
-  font-size: 1.05rem !important;
-  font-weight: 700 !important;
-  color: #1a1a1a !important;
-  margin: 0 0 1rem 0 !important;
-  padding-bottom: 0.65rem !important;
-  border-bottom: 2px solid rgba(166,124,46,0.18) !important;
+  font-size: 1.1rem !important;
+  font-weight: 800 !important;
+  text-transform: uppercase !important;
+  letter-spacing: 0.05em !important;
+  color: #111111 !important;
+  margin: 0 0 1.25rem 0 !important;
+  padding-bottom: 0.75rem !important;
+  border-bottom: 2px solid #A67C2E !important;
 }
 
-/* ── ORDER TABLE ── */
-.woocommerce-table--order-details {
+/* ── HIGH-END ORDER TABLE DESIGN ── */
+.woocommerce-table--order-details,
+table.woocommerce-table--order-details {
   width: 100% !important;
   border-collapse: collapse !important;
+  border: 1px solid #E5E5E5 !important;
+  border-radius: 0 !important;
   margin: 0 !important;
+  background: #ffffff !important;
 }
 
 .woocommerce-table--order-details th,
 .woocommerce-table--order-details td {
-  padding: 0.8rem 0.7rem !important;
-  border: none !important;
-  border-bottom: 1px solid rgba(26,26,26,0.07) !important;
-  color: #2a2a2a !important;
-  font-size: 0.9rem !important;
+  padding: 1rem 1.1rem !important;
+  border: 1px solid #E5E5E5 !important;
+  border-radius: 0 !important;
+  color: #1a1a1a !important;
+  font-size: 0.92rem !important;
   text-align: left !important;
   vertical-align: middle !important;
 }
 
 .woocommerce-table--order-details thead th {
-  font-size: 0.65rem !important;
+  font-size: 0.72rem !important;
   font-weight: 800 !important;
   text-transform: uppercase !important;
   letter-spacing: 0.12em !important;
-  color: #A67C2E !important;
-  background: rgba(166,124,46,0.05) !important;
-  border-bottom: 2px solid rgba(166,124,46,0.2) !important;
+  color: #111111 !important;
+  background: #F8F8F8 !important;
+  border-bottom: 2px solid #111111 !important;
 }
 
 .woocommerce-table--order-details thead th:last-child,
@@ -264,60 +257,74 @@ section.woocommerce-order-details {
 }
 
 .woocommerce-table--order-details tbody td:last-child {
-  font-weight: 600 !important;
-}
-
-.woocommerce-table--order-details tbody tr:last-child td {
-  border-bottom: none !important;
-}
-
-.woocommerce-table--order-details tbody td a {
-  color: #1a1a1a !important;
-  font-weight: 600 !important;
-  text-decoration: none !important;
-}
-
-.woocommerce-table--order-details tbody td a:hover {
-  color: #A67C2E !important;
-}
-
-.woocommerce-table--order-details .product-quantity {
-  background: rgba(166,124,46,0.1) !important;
-  color: #A67C2E !important;
-  font-size: 0.72rem !important;
   font-weight: 700 !important;
-  padding: 0.1rem 0.4rem !important;
-  border-radius: 99px !important;
-  margin-left: 0.35rem !important;
+  color: #111111 !important;
+}
+
+/* Product title link styling inside order table */
+.woocommerce-table--order-details tbody td a,
+.woocommerce-table--order-details td.woocommerce-table__product-name a {
+  color: #111111 !important;
+  font-weight: 700 !important;
+  text-decoration: none !important;
+  transition: color 0.15s ease !important;
+}
+
+.woocommerce-table--order-details tbody td a:hover,
+.woocommerce-table--order-details td.woocommerce-table__product-name a:hover {
+  color: #A67C2E !important;
+  text-decoration: underline !important;
+}
+
+.woocommerce-table--order-details .product-quantity,
+.woocommerce-table--order-details .wc-item-meta {
+  background: #F0F0F0 !important;
+  color: #111111 !important;
+  font-size: 0.82rem !important;
+  font-weight: 800 !important;
+  padding: 0.25rem 0.55rem !important;
+  border: 1px solid #D1D1D1 !important;
+  border-radius: 0 !important;
+  margin-left: 0.4rem !important;
   display: inline-block !important;
 }
 
-/* Tfoot rows */
+/* Tfoot summary rows (Subtotal, Shipping, Total) */
 .woocommerce-table--order-details tfoot th,
 .woocommerce-table--order-details tfoot td {
-  font-size: 0.88rem !important;
-  color: #555 !important;
-  padding: 0.65rem 0.7rem !important;
-  border-bottom: 1px solid rgba(26,26,26,0.06) !important;
-  font-weight: 500 !important;
+  font-size: 0.9rem !important;
+  color: #333333 !important;
+  padding: 0.85rem 1.1rem !important;
+  border-bottom: 1px solid #E5E5E5 !important;
+  background: #FAF9F6 !important;
+  font-weight: 600 !important;
 }
 
-/* Grand total */
+.woocommerce-table--order-details tfoot th {
+  text-transform: uppercase !important;
+  font-size: 0.75rem !important;
+  letter-spacing: 0.08em !important;
+  color: #666666 !important;
+}
+
+/* Grand total row in order table */
 .woocommerce-table--order-details tfoot tr:last-child th,
 .woocommerce-table--order-details tfoot tr:last-child td {
-  font-size: 1rem !important;
-  font-weight: 700 !important;
-  color: #1a1a1a !important;
-  border-bottom: none !important;
-  border-top: 2px solid rgba(166,124,46,0.18) !important;
-  padding-top: 0.9rem !important;
+  font-size: 1.05rem !important;
+  font-weight: 800 !important;
+  color: #111111 !important;
+  background: #FFFFFF !important;
+  border-top: 2px solid #111111 !important;
+  padding-top: 1rem !important;
+  padding-bottom: 1rem !important;
 }
 
 .woocommerce-table--order-details tfoot tr:last-child td {
   color: #A67C2E !important;
+  font-size: 1.15rem !important;
 }
 
-/* ── CUSTOMER ADDRESSES — CARD LAYOUT ── */
+/* ── CUSTOMER ADDRESSES — STRICT SQUARE CARDS ── */
 .woocommerce-customer-details {
   display: grid !important;
   grid-template-columns: repeat(2, 1fr) !important;
@@ -334,32 +341,34 @@ section.woocommerce-order-details {
 .woocommerce-column--shipping-address,
 .woocommerce-customer-details section {
   background: #ffffff !important;
-  border: 1px solid rgba(26,26,26,0.09) !important;
-  border-radius: 14px !important;
+  border: 1px solid rgba(26,26,26,0.15) !important;
+  border-radius: 0 !important;
   padding: 1.5rem !important;
-  box-shadow: 0 2px 14px rgba(0,0,0,0.05) !important;
+  box-shadow: 0 4px 16px rgba(0,0,0,0.04) !important;
 }
 
 .woocommerce-column__title {
   font-family: 'Outfit', sans-serif !important;
   font-size: 0.95rem !important;
-  font-weight: 700 !important;
-  color: #1a1a1a !important;
+  font-weight: 800 !important;
+  text-transform: uppercase !important;
+  letter-spacing: 0.06em !important;
+  color: #111111 !important;
   margin: 0 0 0.75rem 0 !important;
   padding-bottom: 0.5rem !important;
-  border-bottom: 1px solid rgba(166,124,46,0.18) !important;
+  border-bottom: 2px solid #A67C2E !important;
 }
 
 .woocommerce-customer-details address {
   font-style: normal !important;
-  color: #555 !important;
-  font-size: 0.88rem !important;
-  line-height: 1.9 !important;
+  color: #444444 !important;
+  font-size: 0.9rem !important;
+  line-height: 1.8 !important;
 }
 
 /* ── PAYMENT METHOD TEXT ── */
 body.woocommerce-order-received p:not(.woocommerce-thankyou-order-received) {
-  color: #555 !important;
+  color: #444444 !important;
   font-size: 0.9rem !important;
   margin-top: 1rem !important;
 }
@@ -371,7 +380,7 @@ body.woocommerce-order-received p:not(.woocommerce-thankyou-order-received) {
   border-top: none !important;
   border-right: none !important;
   border-bottom: none !important;
-  border-radius: 0 10px 10px 0 !important;
+  border-radius: 0 !important;
   padding: 0.9rem 1.1rem !important;
   margin-bottom: 1.5rem !important;
   font-size: 0.9rem !important;
@@ -381,13 +390,15 @@ body.woocommerce-order-received p:not(.woocommerce-thankyou-order-received) {
 /* ── BUTTONS ── */
 .woocommerce-order-received a.button,
 .woocommerce-order-received button.button {
-  background: #1a1a1a !important;
-  color: #fff !important;
-  border: 1px solid rgba(166,124,46,0.35) !important;
-  border-radius: 8px !important;
-  padding: 0.8rem 1.8rem !important;
+  background: #111111 !important;
+  color: #ffffff !important;
+  border: 1px solid #111111 !important;
+  border-radius: 0 !important;
+  padding: 0.85rem 1.8rem !important;
   font-size: 0.92rem !important;
-  font-weight: 600 !important;
+  font-weight: 700 !important;
+  text-transform: uppercase !important;
+  letter-spacing: 0.06em !important;
   text-decoration: none !important;
   display: inline-flex !important;
   align-items: center !important;
@@ -398,8 +409,8 @@ body.woocommerce-order-received p:not(.woocommerce-thankyou-order-received) {
 
 .woocommerce-order-received a.button:hover,
 .woocommerce-order-received button.button:hover {
-  background: #000 !important;
-  color: #A67C2E !important;
+  background: #A67C2E !important;
+  color: #ffffff !important;
   border-color: #A67C2E !important;
 }
 
@@ -407,7 +418,6 @@ body.woocommerce-order-received p:not(.woocommerce-thankyou-order-received) {
    RESPONSIVE — ORDER RECEIVED PAGE
    ============================================================================= */
 
-/* ── RESPONSIVE: TABLET (max 768px) ── */
 @media (max-width: 768px) {
   body.woocommerce-order-received main#primary {
     padding-inline: 1rem !important;
@@ -415,12 +425,9 @@ body.woocommerce-order-received p:not(.woocommerce-thankyou-order-received) {
 
   .ng-thankyou-hero {
     padding: 2rem 1.25rem !important;
-    border-radius: 12px !important;
+    border-radius: 0 !important;
   }
 
-  /* Only span the trailing cell when the item count is odd (last item is
-     also odd-indexed) — otherwise an even count already fills the grid
-     evenly and forcing a span would orphan an empty cell instead. */
   .ng-thankyou-meta__item:last-child:nth-child(odd) {
     grid-column: span 2 !important;
   }
@@ -443,22 +450,20 @@ body.woocommerce-order-received p:not(.woocommerce-thankyou-order-received) {
   .woocommerce-order-details,
   section.woocommerce-order-details {
     padding: 1.25rem 1rem !important;
-    border-radius: 12px !important;
+    border-radius: 0 !important;
   }
 
-  /* Addresses: stack to single column */
   .woocommerce-customer-details {
     grid-template-columns: 1fr !important;
   }
 
   .woocommerce-table--order-details th,
   .woocommerce-table--order-details td {
-    padding: 0.65rem 0.5rem !important;
+    padding: 0.75rem 0.6rem !important;
     font-size: 0.85rem !important;
   }
 }
 
-/* ── RESPONSIVE: MOBILE (max 480px) ── */
 @media (max-width: 480px) {
   body.woocommerce-order-received main#primary {
     padding-inline: 0.75rem !important;
@@ -471,25 +476,10 @@ body.woocommerce-order-received p:not(.woocommerce-thankyou-order-received) {
 
   .ng-thankyou-hero {
     padding: 1.5rem 1rem !important;
-    border-radius: 10px !important;
+    border-radius: 0 !important;
     margin-bottom: 1.25rem !important;
   }
-  .ng-thankyou-badge {
-    width: 56px !important;
-    height: 56px !important;
-  }
-  .ng-thankyou-badge__icon {
-    width: 26px !important;
-    height: 26px !important;
-  }
-  .ng-thankyou-hero__title {
-    font-size: 1.3rem !important;
-  }
-  .ng-thankyou-hero__desc {
-    font-size: 0.88rem !important;
-  }
 
-  /* Meta overview grid: 2 columns on mobile */
   ul.woocommerce-order-overview {
     grid-template-columns: 1fr 1fr !important;
     gap: 0.5rem !important;
@@ -498,152 +488,20 @@ body.woocommerce-order-received p:not(.woocommerce-thankyou-order-received) {
 
   ul.woocommerce-order-overview li {
     padding: 0.75rem 0.65rem !important;
-    border-radius: 10px !important;
+    border-radius: 0 !important;
   }
 
-  .ng-thankyou-meta__label {
-    font-size: 0.6rem !important;
-  }
-  .ng-thankyou-meta__val {
-    font-size: 0.82rem !important;
-  }
-
-  /* Order details card */
   .woocommerce-order-details,
   section.woocommerce-order-details {
     padding: 1rem 0.85rem !important;
-    border-radius: 10px !important;
+    border-radius: 0 !important;
     margin-bottom: 1rem !important;
-  }
-
-  .woocommerce-order-details h2,
-  .woocommerce-order-details__title {
-    font-size: 0.95rem !important;
-    margin-bottom: 0.75rem !important;
-    padding-bottom: 0.5rem !important;
-  }
-
-  /* Order table: make it scroll-friendly on very narrow screens */
-  .woocommerce-order-details {
-    overflow-x: auto !important;
-    -webkit-overflow-scrolling: touch !important;
-  }
-
-  .woocommerce-table--order-details th,
-  .woocommerce-table--order-details td {
-    padding: 0.55rem 0.4rem !important;
-    font-size: 0.82rem !important;
-    white-space: nowrap !important;
-  }
-
-  .woocommerce-table--order-details thead th {
-    font-size: 0.6rem !important;
-  }
-
-  .woocommerce-table--order-details tfoot th,
-  .woocommerce-table--order-details tfoot td {
-    font-size: 0.82rem !important;
-    padding: 0.5rem 0.4rem !important;
-  }
-
-  .woocommerce-table--order-details tfoot tr:last-child th,
-  .woocommerce-table--order-details tfoot tr:last-child td {
-    font-size: 0.9rem !important;
-  }
-
-  /* Address cards */
-  .woocommerce-customer-details {
-    gap: 0.75rem !important;
   }
 
   .woocommerce-column--billing-address,
   .woocommerce-column--shipping-address,
   .woocommerce-customer-details section {
     padding: 1.1rem !important;
-    border-radius: 10px !important;
-  }
-
-  .woocommerce-column__title {
-    font-size: 0.88rem !important;
-    margin-bottom: 0.6rem !important;
-    padding-bottom: 0.4rem !important;
-  }
-
-  .woocommerce-customer-details address {
-    font-size: 0.82rem !important;
-    line-height: 1.75 !important;
-  }
-
-  /* Buttons */
-  .ng-thankyou-actions {
-    gap: 0.65rem !important;
-    margin-top: 1rem !important;
-  }
-
-  .ng-thankyou-actions .ng-btn,
-  .woocommerce-order-received a.button,
-  .woocommerce-order-received button.button {
-    width: 100% !important;
-    justify-content: center !important;
-    text-align: center !important;
-    padding: 0.75rem 1.2rem !important;
-    font-size: 0.88rem !important;
-    margin-top: 0 !important;
-  }
-
-  /* Thank you paragraph */
-  body.woocommerce-order-received p.woocommerce-thankyou-order-received {
-    font-size: 0.88rem !important;
-    margin-bottom: 1.25rem !important;
-  }
-}
-
-/* ── RESPONSIVE: VERY SMALL (max 360px) ── */
-@media (max-width: 360px) {
-  body.woocommerce-order-received main#primary {
-    padding-inline: 0.5rem !important;
-  }
-
-  .ng-thankyou-hero {
-    padding: 1.25rem 0.75rem !important;
-  }
-
-  .ng-thankyou-hero__title {
-    font-size: 1.1rem !important;
-  }
-
-  ul.woocommerce-order-overview li {
-    padding: 0.6rem 0.5rem !important;
-  }
-
-  .woocommerce-order-details,
-  section.woocommerce-order-details {
-    padding: 0.75rem 0.6rem !important;
-  }
-
-  .woocommerce-column--billing-address,
-  .woocommerce-column--shipping-address {
-    padding: 0.85rem !important;
-  }
-}
-
-/* ── RESPONSIVE: DESKTOP (min 1024px) ── */
-@media (min-width: 1024px) {
-  body.woocommerce-order-received main#primary {
-    padding-inline: max(2rem, calc((100vw - 900px) / 2)) !important;
-  }
-
-  ul.woocommerce-order-overview {
-    grid-template-columns: repeat(5, 1fr) !important;
-  }
-
-  .woocommerce-order-details,
-  section.woocommerce-order-details {
-    padding: 2rem !important;
-  }
-
-  .woocommerce-customer-details {
-    grid-template-columns: repeat(2, 1fr) !important;
-    gap: 1.25rem !important;
+    border-radius: 0 !important;
   }
 }

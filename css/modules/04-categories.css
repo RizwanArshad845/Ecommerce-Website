@@ -53,6 +53,32 @@
   box-shadow: var(--ng-shadow-hover);
 }
 
+.ng-cat-card__title {
+  font-family: var(--ng-font-heading);
+  font-size: 0.9rem;
+  font-weight: 700;
+  color: var(--ng-cream);
+  margin: 0;
+  padding: 0.55rem 1.1rem;
+  background: var(--ng-dark);
+  border: 1px solid rgba(166, 124, 46, 0.4);
+  border-radius: 99px;
+  width: calc(100% - 0.4rem);
+  text-align: center;
+  transition: all 0.25s ease;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.ng-cat-card:hover .ng-cat-card__title {
+  background: var(--ng-gold);
+  color: #000000;
+  border-color: var(--ng-gold);
+  box-shadow: 0 4px 14px rgba(166, 124, 46, 0.4);
+}
+
 .ng-cat-card__thumb {
   position: relative;
   width: 100%;

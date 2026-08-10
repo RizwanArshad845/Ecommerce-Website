@@ -54,7 +54,7 @@ defined( 'ABSPATH' ) || exit;
 					</div>
 					<span class="ng-thankyou-hero__subtitle"><?php esc_html_e( 'Order Confirmed', 'vw-modern-ecommerce' ); ?></span>
 					<h1 class="ng-thankyou-hero__title"><?php esc_html_e( 'Thank You For Your Purchase!', 'vw-modern-ecommerce' ); ?></h1>
-					<p class="ng-thankyou-hero__desc"><?php esc_html_e( 'Your order has been placed successfully and is now being processed.', 'vw-modern-ecommerce' ); ?></p>
+					<p class="ng-thankyou-hero__desc"><?php esc_html_e( 'Your order has been received. We will contact you soon on WhatsApp.', 'vw-modern-ecommerce' ); ?></p>
 				</div>
 
 				<!-- ── ORDER META OVERVIEW GRID ── -->

@@ -37,8 +37,9 @@ $ng_theme_uri = esc_url( get_template_directory_uri() );
         </h1>
 
         <div class="ng-hero__actions">
-            <a href="<?php echo esc_url( $ng_shop_url ); ?>" class="ng-btn ng-btn--primary" id="ng-hero-shop-btn">
-                <?php esc_html_e('Shop Collection', 'vw-modern-ecommerce'); ?>
+            <a href="<?php echo esc_url( $ng_shop_url ); ?>" class="ng-btn ng-btn--hero-cta" id="ng-hero-shop-btn">
+                <span><?php esc_html_e('Shop Collection', 'vw-modern-ecommerce'); ?></span>
+                <span class="ng-btn__arrow" aria-hidden="true">→</span>
             </a>
         </div>
 

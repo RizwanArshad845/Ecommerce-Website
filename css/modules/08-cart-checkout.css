@@ -61,7 +61,7 @@ body.woocommerce-cart .wp-block-woocommerce-cart-totals-block {
 .woocommerce-cart-form__cart-item {
   background: var(--ng-dark-surface) !important;
   border: 1px solid var(--ng-border) !important;
-  border-radius: 12px !important;
+  border-radius: 0 !important;
   box-shadow: 0 4px 14px rgba(0, 0, 0, 0.03) !important;
 }
 
@@ -131,12 +131,61 @@ body.woocommerce-cart .wp-block-woocommerce-cart-totals-block {
 .cart-collaterals .cart_totals {
   background: #FFFFFF !important;
   border: 1px solid rgba(0, 0, 0, 0.08) !important;
-  border-radius: 16px !important;
+  border-radius: 0 !important;
   padding: 1.5rem !important;
   box-shadow: 0 4px 16px rgba(0, 0, 0, 0.03) !important;
 }
 
-/* Hide empty totals blocks/boxes in cart and checkout */
+/* Eliminate gap between Free Shipping block and Estimated total */
+div.wp-block-woocommerce-cart-order-summary-totals-block,
+.wp-block-woocommerce-cart-order-summary-totals-block,
+.wc-block-components-totals-shipping {
+  min-height: auto !important;
+  margin-bottom: 0 !important;
+  padding-bottom: 0.75rem !important;
+  display: flex !important;
+  flex-direction: column !important;
+  justify-content: flex-start !important;
+}
+
+.wp-block-woocommerce-cart-order-summary-totals-block .wc-block-components-totals-item,
+.wc-block-components-totals-wrapper .wc-block-components-totals-item {
+  margin-bottom: 0 !important;
+  padding-top: 0.5rem !important;
+  padding-bottom: 0.5rem !important;
+}
+
+.wp-block-woocommerce-cart-order-summary-totals-block + .wc-block-components-totals-footer-item,
+.wp-block-woocommerce-cart-order-summary-totals-block .wc-block-components-totals-footer-item,
+.wc-block-components-totals-footer-item {
+  margin-top: 0 !important;
+  padding-top: 0.75rem !important;
+}
+
+/* Prevent inner child blocks of order summary totals container from acting as separate white cards */
+div[class*="order-summary-totals-block"] > div.wc-block-components-totals-wrapper,
+.wp-block-woocommerce-checkout-order-summary-totals-block > div,
+.wp-block-woocommerce-cart-order-summary-totals-block > div {
+  background: transparent !important;
+  border: none !important;
+  box-shadow: none !important;
+  padding: 0 !important;
+  margin: 0 !important;
+  border-radius: 0 !important;
+}
+
+/* Hide empty totals blocks/boxes and empty sub-blocks in cart and checkout */
+div[class*="order-summary-subtotal-block"]:empty,
+div[class*="order-summary-discount-block"]:empty,
+div[class*="order-summary-fee-block"]:empty,
+div[class*="order-summary-shipping-block"]:empty,
+div[class*="order-summary-taxes-block"]:empty,
+div[class*="order-summary-subtotal-block"]:not(:has(span, p, strong, div, table, a)),
+div[class*="order-summary-discount-block"]:not(:has(span, p, strong, div, table, a)),
+div[class*="order-summary-fee-block"]:not(:has(span, p, strong, div, table, a)),
+div[class*="order-summary-taxes-block"]:not(:has(span, p, strong, div, table, a)),
+.wc-block-components-totals-wrapper:empty,
+.wc-block-components-totals-wrapper:not(:has(span, p, strong, button, input, form, a, table, img, fieldset)),
 .wc-block-components-totals-item:empty,
 .wc-block-components-totals-item:not(:has(span)),
 .wc-block-components-totals-item:not(:has(.wc-block-components-totals-item__label)),
@@ -145,6 +194,14 @@ div.wc-block-components-totals-item[class*="taxes"]:empty,
 div.wc-block-components-totals-item[class*="discount"]:empty,
 .wc-block-components-order-summary-item:empty,
 .wc-block-components-totals-item:not(:has(p, span, strong, a, button, input)) {
+  display: none !important;
+}
+
+/* Hide coupon form block / Add coupons div in cart and checkout */
+.wp-block-woocommerce-checkout-order-summary-coupon-form-block,
+.wp-block-woocommerce-cart-order-summary-coupon-form-block,
+.wc-block-components-totals-coupon,
+.wc-block-components-totals-coupon-link {
   display: none !important;
 }
 
@@ -495,4 +552,149 @@ body.woocommerce-cart .wc-block-cart__totals {
   body.woocommerce-cart .wc-block-cart-item__product .wc-block-components-product-name {
     font-size: 0.8rem !important;
   }
+}
+
+/* ── RED ASTERISK FOR MANDATORY CHECKOUT FIELDS ── */
+.woocommerce-checkout label .required,
+.woocommerce-checkout label abbr.required,
+.wc-block-components-text-input label .required,
+.wc-block-components-text-input label .wc-block-components-text-input__required,
+.wc-block-components-combobox label .wc-block-components-combobox__required,
+.wc-block-components-text-input__required,
+.wc-block-checkout__form label .required,
+abbr.required,
+span.required,
+.required {
+  color: #E53935 !important;
+  font-weight: 900 !important;
+  font-size: 1.15em !important;
+  margin-left: 3px !important;
+  text-decoration: none !important;
+  border-bottom: none !important;
+  display: inline-block !important;
+}
+
+/* Ensure mandatory asterisk indicator for required inputs if block doesn't output one */
+.form-row.validate-required > label::after,
+.wc-block-components-text-input:has(input[required]:not([required="false"])) label::after,
+.wc-block-components-text-input:has(input[aria-required="true"]) label::after {
+  content: " *" !important;
+  color: #E53935 !important;
+  font-weight: 900 !important;
+  font-size: 1.15em !important;
+}
+
+/* Prevent double asterisk if .required or .wc-block-components-text-input__required already exists */
+.form-row.validate-required > label:has(.required)::after,
+.wc-block-components-text-input:has(.required) label::after,
+.wc-block-components-text-input:has(.wc-block-components-text-input__required) label::after {
+  content: "" !important;
+}
+
+/* ── BANK TRANSFER: GREY OUT SHIPPING OPTIONS BLOCK ── */
+body.is-payment-bacs .wp-block-woocommerce-checkout-shipping-methods-block,
+body.is-payment-bacs .wc-block-checkout__shipping-option,
+body.is-payment-bacs .wc-block-components-shipping-rates-control,
+body.is-payment-bacs ul#shipping_method {
+  opacity: 0.55 !important;
+  filter: grayscale(1) !important;
+  background: #F5F5F5 !important;
+  border-color: #E0E0E0 !important;
+  pointer-events: none !important;
+}
+
+/* Preserve vertical list layout & bullet linebreaks in checkout payment descriptions */
+.wc-block-components-radio-control__description,
+.wc-block-components-radio-control__description *,
+.wc-block-checkout__payment-method .wc-block-components-radio-control__description,
+.wc-block-checkout__payment-method-description,
+.wc-block-checkout__payment-method-description *,
+.wc-block-components-radio-control-accordion__content,
+.payment_box.payment_method_bacs,
+.payment_method_bacs .payment_box {
+  white-space: pre-wrap !important;
+  line-height: 1.65 !important;
+  margin-top: 6px !important;
+  display: block !important;
+}
+
+/* ── SHOW PRODUCT NAME & HIDE ONLY SHORT DESCRIPTION PARAGRAPH TEXT ── */
+.wc-block-components-order-summary-item__description,
+.wc-block-components-product-name,
+.wc-block-components-product-details__name,
+.wc-block-components-order-summary-item__title,
+.wc-block-components-order-summary-item .wc-block-components-product-name,
+a.wc-block-components-product-name,
+.wc-block-cart-item__wrap,
+.wc-block-cart-item__name {
+  display: block !important;
+  visibility: visible !important;
+  opacity: 1 !important;
+}
+
+.wc-block-components-product-details__short-description,
+.wc-block-components-order-summary-item__short-description,
+.wc-block-components-order-summary-item__description p,
+.wc-block-components-product-details p,
+.wc-block-cart-item__description p,
+.wc-block-components-order-summary-item .wc-block-components-product-details__short-description,
+.wp-block-woocommerce-checkout-order-summary-block .wc-block-components-product-details__short-description,
+.wp-block-woocommerce-cart-order-summary-block .wc-block-components-product-details__short-description {
+  display: none !important;
+}
+
+/* ── FORCE STRICT SHARP SQUARE BORDERS (NO ROUNDED CORNERS) FOR ALL CART & CHECKOUT ELEMENTS & BUTTONS (DESKTOP & MOBILE) ── */
+.wc-block-cart,
+.wc-block-cart *,
+.wc-block-checkout,
+.wc-block-checkout *,
+.wp-block-woocommerce-cart,
+.wp-block-woocommerce-cart *,
+.wp-block-woocommerce-checkout,
+.wp-block-woocommerce-checkout *,
+.woocommerce-cart,
+.woocommerce-cart *,
+.woocommerce-checkout,
+.woocommerce-checkout *,
+.wp-block-woocommerce-checkout-order-summary-block,
+.wp-block-woocommerce-cart-order-summary-block,
+.wc-block-components-totals-wrapper,
+.wc-block-cart__totals,
+.cart-collaterals .cart_totals,
+.wc-block-components-totals-footer-item,
+.wc-block-components-totals-footer-item *,
+.wc-block-components-totals-item,
+.wc-block-cart-items__row,
+.woocommerce-cart-form__cart-item,
+.wc-block-components-order-summary,
+.wc-block-components-order-summary-item,
+.wc-block-components-order-summary-item *,
+.wc-block-components-panel,
+.wc-block-checkout__shipping-option,
+.wc-block-checkout__payment-method,
+.wc-block-components-radio-control,
+.wc-block-components-radio-control-accordion-option,
+.wc-block-components-text-input,
+.wc-block-components-text-input input,
+.wc-block-cart-item__image img,
+.wc-block-components-order-summary-item__image,
+.wc-block-components-order-summary-item__image img,
+.wp-block-woocommerce-checkout-shipping-methods-block,
+.wc-block-components-shipping-rates-control,
+.ng-checkout-bank-details,
+fieldset,
+.wc-block-components-combobox,
+.wc-block-components-combobox__control,
+.wc-block-checkout__form fieldset,
+.wc-block-cart__submit-button,
+.wc-block-cart__submit-container .wc-block-components-button,
+.wc-block-components-checkout-place-order-button,
+a.checkout-button,
+.button.alt,
+button.button,
+div[class*="totals"],
+div[class*="order-summary"],
+div[class*="cart-item"],
+div[class*="radio-control"] {
+  border-radius: 0 !important;
 }

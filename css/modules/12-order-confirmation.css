@@ -170,6 +170,53 @@ body.woocommerce-order-received .wc-block-components-additional-fields-list {
   box-shadow: 0 2px 14px rgba(0,0,0,0.05);
 }
 
+/* ── WHATSAPP ORDER RECEIVED NOTICE CARD ── */
+body.woocommerce-order-received .ng-whatsapp-received-card,
+.ng-whatsapp-received-card {
+  background: linear-gradient(135deg, rgba(37, 211, 102, 0.08) 0%, rgba(18, 140, 126, 0.12) 100%) !important;
+  border: 1px solid rgba(37, 211, 102, 0.35) !important;
+  border-radius: 14px !important;
+  padding: 1.25rem 1.5rem !important;
+  margin: 1.5rem 0 2rem 0 !important;
+  text-align: center !important;
+  box-shadow: 0 4px 16px rgba(37, 211, 102, 0.08) !important;
+}
+
+body.woocommerce-order-received .ng-whatsapp-received-card__header,
+.ng-whatsapp-received-card__header {
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  gap: 0.6rem !important;
+  margin-bottom: 0.4rem !important;
+}
+
+body.woocommerce-order-received .ng-whatsapp-received-card__icon,
+.ng-whatsapp-received-card__icon {
+  width: 24px !important;
+  height: 24px !important;
+  color: #25D366 !important;
+  flex-shrink: 0 !important;
+}
+
+body.woocommerce-order-received .ng-whatsapp-received-card__title,
+.ng-whatsapp-received-card__title {
+  font-family: 'Outfit', sans-serif !important;
+  font-size: 1.2rem !important;
+  font-weight: 800 !important;
+  color: #128C7E !important;
+  margin: 0 !important;
+}
+
+body.woocommerce-order-received .ng-whatsapp-received-card__message,
+.ng-whatsapp-received-card__message {
+  font-size: 1rem !important;
+  font-weight: 600 !important;
+  color: #1a1a1a !important;
+  margin: 0 !important;
+  line-height: 1.5 !important;
+}
+
 /* ── CONTINUE SHOPPING CTA (added via woocommerce_thankyou hook) ── */
 body.woocommerce-order-received .ng-order-confirmation-actions {
   display: flex;

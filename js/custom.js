@@ -191,3 +191,109 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 });
 
+// Dynamic Checkout Shipping Recalculation on Payment Method Toggle
+document.addEventListener("DOMContentLoaded", () => {
+  const updatePaymentState = () => {
+    let isBacs = false;
+    const radios = document.querySelectorAll(
+      "input[name='payment_method']:checked, input[id*='radio-control']:checked, .wc-block-components-radio-control__input:checked"
+    );
+    radios.forEach((radio) => {
+      const val = (radio.value || radio.id || "").toLowerCase();
+      const containerText = (radio.closest("label, .wc-block-components-radio-control, .wc-block-checkout__payment-method")?.textContent || "").toLowerCase();
+      if (val === "bacs" || val.includes("bacs") || containerText.includes("bank transfer")) {
+        isBacs = true;
+      }
+    });
+
+    if (!isBacs) {
+      const activeBlock = document.querySelector(".wc-block-components-radio-control--checked, .wc-block-checkout__payment-method--active, [data-radio-control-option-checked='true']");
+      if (activeBlock && activeBlock.textContent.toLowerCase().includes("bank transfer")) {
+        isBacs = true;
+      }
+    }
+
+    if (isBacs) {
+      document.body.classList.add("is-payment-bacs");
+      document.body.classList.remove("is-payment-cod");
+    } else {
+      document.body.classList.add("is-payment-cod");
+      document.body.classList.remove("is-payment-bacs");
+    }
+
+    // Apply greyed out / disabled styles directly to shipping options containers
+    const shippingBlocks = document.querySelectorAll(
+      ".wp-block-woocommerce-checkout-shipping-methods-block, .wc-block-components-shipping-rates-control, [class*='shipping-methods'], [class*='shipping-rates'], #shipping_method, ul.woocommerce-shipping-methods, .wc-block-checkout__shipping-option"
+    );
+
+    shippingBlocks.forEach((block) => {
+      if (isBacs) {
+        block.style.opacity = "0.5";
+        block.style.filter = "grayscale(1)";
+        block.style.pointerEvents = "none";
+        block.style.background = "#F5F5F5";
+        block.style.borderRadius = "8px";
+      } else {
+        block.style.opacity = "1";
+        block.style.filter = "none";
+        block.style.pointerEvents = "auto";
+        block.style.background = "transparent";
+      }
+    });
+  };
+
+  updatePaymentState();
+
+  document.addEventListener("change", (e) => {
+    if (e.target.matches("input[name='payment_method'], input[id*='radio-control'], .wc-block-components-radio-control__input, [type='radio']")) {
+      updatePaymentState();
+      
+      const method = document.body.classList.contains("is-payment-bacs") ? "bacs" : "cod";
+      const refreshBlockCartTotals = () => {
+        // Classic checkout (shortcode) listens for this jQuery event.
+        if (typeof jQuery !== "undefined") {
+          jQuery(document.body).trigger("update_checkout");
+        }
+        // Checkout/Cart blocks are React + the Store API and don't listen
+        // to jQuery events — force them to refetch cart data so the new
+        // shipping rate (set server-side via session) is reflected in the
+        // displayed total.
+        if (window.wp && wp.data && typeof wp.data.dispatch === "function") {
+          const cartStore = wp.data.dispatch("wc/store/cart");
+          if (cartStore && typeof cartStore.invalidateResolutionForStoreSelector === "function") {
+            cartStore.invalidateResolutionForStoreSelector("getCartData");
+          }
+        }
+      };
+
+      if (typeof jQuery !== "undefined") {
+        const ajaxUrl = (typeof wc_checkout_params !== "undefined" && wc_checkout_params.ajax_url) ? wc_checkout_params.ajax_url : "/wp-admin/admin-ajax.php";
+        jQuery.post(ajaxUrl, {
+          action: "ng_update_payment_method_session",
+          payment_method: method
+        }, refreshBlockCartTotals);
+      }
+    }
+  });
+
+  document.addEventListener("click", (e) => {
+    if (e.target.closest(".wc-block-components-radio-control, .wc-block-checkout__payment-method")) {
+      setTimeout(updatePaymentState, 50);
+    }
+  });
+
+  const observerTarget = document.querySelector(".wp-block-woocommerce-checkout, .woocommerce-checkout");
+  if (observerTarget) {
+    let observerScheduled = false;
+    const observer = new MutationObserver(() => {
+      if (observerScheduled) return;
+      observerScheduled = true;
+      observer.disconnect();
+      updatePaymentState();
+      observer.observe(observerTarget, { childList: true, subtree: true });
+      observerScheduled = false;
+    });
+    observer.observe(observerTarget, { childList: true, subtree: true });
+  }
+});
+

@@ -5,9 +5,9 @@
 @import url('https://fonts.googleapis.com/css2?family=Outfit:wght@400;600;700;900&family=Inter:wght@400;500;600;700&display=swap');
 
 :root {
-  --ng-gold:          #A67C2E;   /* sparing accent — sale badges/price, ratings, link hover */
-  --ng-gold-light:    #C9A55C;
-  --ng-gold-glow:     rgba(166,124,46,0.12);
+  --ng-gold:          #8E6A26;   /* refined muted champagne bronze accent */
+  --ng-gold-light:    #A68545;
+  --ng-gold-glow:     rgba(142,106,38,0.10);
   --ng-cream:         #1A1A1A;   /* primary heading/text ink — neutral near-black */
   --ng-ink:           #241C0B;   /* text on GOLD-filled surfaces (sale badge) */
   --ng-on-primary:    #FFFFFF;   /* text on solid-dark primary buttons */
