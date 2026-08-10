@@ -4,6 +4,11 @@
  * Slug: vw-modern-ecommerce/home-banner
  * Categories: template
  */
+
+if ( ! defined( 'ABSPATH' ) ) {
+	exit;
+}
+
 $ng_shop_url = '#';
 if ( function_exists( 'wc_get_page_id' ) ) {
     $ng_shop_page_id = wc_get_page_id( 'shop' );
@@ -23,10 +28,6 @@ $ng_theme_uri = esc_url( get_template_directory_uri() );
     <!-- ── LEFT: COPY ─────────────────────────────────────────── -->
     <div class="ng-hero__left">
 
-        <div class="ng-hero__badge">
-            <?php esc_html_e('Premium Melamine Dinnerware', 'vw-modern-ecommerce'); ?>
-        </div>
-
         <h1 class="ng-hero__heading">
             <?php esc_html_e('Premium Melamine', 'vw-modern-ecommerce'); ?><br>
             <span class="ng-hero__heading-accent">
@@ -34,11 +35,6 @@ $ng_theme_uri = esc_url( get_template_directory_uri() );
             </span><br>
             <?php esc_html_e('For Every Table', 'vw-modern-ecommerce'); ?>
         </h1>
-
-        <ul class="ng-hero__bullets">
-            <li><span class="ng-bullet-icon">✦</span> <span><strong>Unbreakable Quality:</strong> Restaurant-grade melamine crafted for daily Pakistani dining.</span></li>
-            <li><span class="ng-bullet-icon">✦</span> <span><strong>Luxury Aesthetics:</strong> Elegant gold-rim crockery designs perfect for everyday meals & dawats.</span></li>
-        </ul>
 
         <div class="ng-hero__actions">
             <a href="<?php echo esc_url( $ng_shop_url ); ?>" class="ng-btn ng-btn--primary" id="ng-hero-shop-btn">
@@ -83,17 +79,6 @@ $ng_theme_uri = esc_url( get_template_directory_uri() );
 
     </div><!-- /.ng-hero__left -->
 
-    <!-- ── RIGHT: STATIC PLATE STAGE ─────────────────────────── -->
-    <div class="ng-hero__right">
-        <div class="ng-stage" id="ng-plate-stage">
-            <div class="ng-stage__plate-wrap ng-stage__plate-wrap--static">
-                <img src="<?php echo $ng_theme_uri; ?>/images/hero-plate-premium.png"
-                    alt="<?php esc_attr_e('Premium Gold-Rim Melamine Plate by National Gold', 'vw-modern-ecommerce'); ?>"
-                    width="480" height="480" loading="eager" decoding="async">
-            </div>
-        </div><!-- /.ng-stage -->
-    </div><!-- /.ng-hero__right -->
-
 </section><!-- /.ng-hero -->
 
 <!-- ============================================================
@@ -102,7 +87,7 @@ $ng_theme_uri = esc_url( get_template_directory_uri() );
 <section class="ng-categories-sec" id="ng-categories">
   <div class="ng-container">
 
-    <div class="ng-sec-header">
+    <div class="ng-sec-header ng-reveal">
       <span class="ng-sec-subtitle">Explore Our Range</span>
       <h2 class="ng-sec-title">Shop By Category</h2>
       <p class="ng-sec-desc">Designed specifically for Pakistani dining, high temperatures, and festive occasions.</p>
@@ -119,7 +104,7 @@ $ng_theme_uri = esc_url( get_template_directory_uri() );
     ?>
 
     <?php if ( ! empty( $ng_categories ) ) : ?>
-    <div class="ng-categories-carousel-wrap">
+    <div class="ng-categories-carousel-wrap ng-reveal">
       <div class="ng-categories-grid" id="ng-categories-scroll">
         <?php foreach ( $ng_categories as $ng_cat ) :
           $ng_cat_link = get_term_link( $ng_cat );

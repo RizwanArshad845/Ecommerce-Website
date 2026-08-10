@@ -4,19 +4,24 @@
  * Slug: vw-modern-ecommerce/faq-section
  * Categories: template
  */
+
+if ( ! defined( 'ABSPATH' ) ) {
+	exit;
+}
+
 $ng_faq_phone = defined( 'NG_PHONE_DISPLAY' ) ? NG_PHONE_DISPLAY : '+92 300 1234567';
 ?>
 
 <section class="ng-faq-sec" id="ng-faq">
   <div class="ng-container">
 
-    <div class="ng-sec-header">
+    <div class="ng-sec-header ng-reveal">
       <span class="ng-sec-subtitle">Frequently Asked Questions</span>
       <h2 class="ng-sec-title">Crockery & Shopping Guidance</h2>
       <p class="ng-sec-desc">Everything you need to know about National Gold Melamine products, delivery, and microwave safety in Pakistan.</p>
     </div>
 
-    <div class="ng-faq-grid">
+    <div class="ng-faq-grid ng-reveal">
 
       <!-- FAQ 1 -->
       <details class="ng-faq-card" open>

@@ -1,0 +1,185 @@
+/* =============================================================================
+   05. PRODUCTS MODULE (CAROUSEL & CARDS)
+   ============================================================================= */
+
+.ng-products-sec {
+  padding: 4.5rem 0;
+}
+.ng-products-carousel-wrap {
+  position: relative;
+  width: 100%;
+}
+.ng-products-grid {
+  display: flex !important;
+  flex-wrap: nowrap !important;
+  overflow-x: auto !important;
+  scroll-behavior: smooth !important;
+  scroll-snap-type: x mandatory !important;
+  gap: 1.25rem !important;
+  padding: 0.5rem 0.2rem 1rem !important;
+  margin: 0 !important;
+  scrollbar-width: none !important;
+  -ms-overflow-style: none !important;
+  -webkit-overflow-scrolling: touch;
+}
+.ng-products-grid::-webkit-scrollbar {
+  display: none !important;
+}
+
+.ng-products-grid .ng-product-card {
+  flex: 0 0 clamp(220px, 34vw, 270px) !important;
+  min-width: clamp(220px, 34vw, 270px) !important;
+  scroll-snap-align: start !important;
+  position: relative;
+  background: var(--ng-dark-surface);
+  border: 1px solid var(--ng-border);
+  box-shadow: var(--ng-shadow);
+  border-radius: 14px;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
+}
+.ng-product-card:hover {
+  transform: translateY(-4px);
+  box-shadow: var(--ng-shadow-hover);
+  border-color: rgba(166, 124, 46, 0.3);
+}
+.ng-product-card__badge {
+  position: absolute;
+  top: 12px;
+  left: 12px;
+  z-index: 5;
+  font-size: 0.65rem;
+  font-weight: 700;
+  color: var(--ng-on-primary);
+  background: rgba(26, 26, 26, 0.85);
+  padding: 0.25rem 0.65rem;
+  border-radius: 6px;
+}
+.ng-product-card__badge--gold { background: var(--ng-gold); color: var(--ng-ink); }
+
+.ng-product-card__img-wrap {
+  width: 100%;
+  padding: 0.6rem;
+  display: block;
+  text-decoration: none;
+}
+.ng-product-card__thumb {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 1 / 1;
+  border-radius: 10px;
+  overflow: hidden;
+  background: #F4F4F2;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.ng-product-card__thumb img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+  display: block;
+  transition: transform 0.4s ease;
+}
+.ng-product-card:hover .ng-product-card__thumb img { transform: scale(1.06); }
+.ng-product-card__thumb--fallback img { object-fit: contain; padding: 1rem; }
+
+/* Gloss-sweep on hover — evokes the glossy melamine finish */
+.ng-product-card__thumb::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background: linear-gradient(115deg, transparent 40%, rgba(255,255,255,0.55) 50%, transparent 60%);
+  background-size: 250% 250%;
+  background-position: -60% -60%;
+  transition: background-position 0.7s ease;
+}
+.ng-product-card:hover .ng-product-card__thumb::after {
+  background-position: 100% 100%;
+}
+@media (prefers-reduced-motion: reduce) {
+  .ng-product-card__thumb::after {
+    transition: none;
+    display: none;
+  }
+}
+
+.ng-product-card__body {
+  padding: 1.2rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  flex: 1;
+}
+.ng-product-card__cat { font-size: 0.72rem; color: var(--ng-gold); text-transform: uppercase; font-weight: 600; }
+.ng-product-card__cat a { color: inherit; text-decoration: none; }
+.ng-product-card__title { font-family: var(--ng-font-display); font-size: 1.05rem; font-weight: 700; color: var(--ng-cream); margin: 0; }
+.ng-product-card__title a { color: inherit; text-decoration: none; }
+.ng-product-card__title a:hover { color: var(--ng-gold); }
+.ng-product-card__desc { font-size: 0.8rem; color: var(--ng-muted); margin: 0; line-height: 1.4; flex: 1; }
+.ng-product-card__price-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.6rem;
+  padding-top: 0.6rem;
+  border-top: 1px solid var(--ng-border);
+  margin-top: 0.4rem;
+  flex-wrap: wrap;
+}
+.ng-product-card__price { font-family: var(--ng-font-display); font-size: 1.1rem; font-weight: 700; color: var(--ng-cream); }
+.ng-product-card__price ins { color: var(--ng-gold); text-decoration: none; }
+.ng-product-card__price del { color: var(--ng-muted); font-weight: 400; font-size: 0.8em; opacity: 0.8; margin-right: 0.3em; }
+.ng-product-card__old-price { font-size: 0.75rem; color: var(--ng-muted); text-decoration: line-through; margin-left: 0.3rem; }
+
+/* Native WooCommerce add-to-cart button rendered inside product cards */
+.ng-product-card__body .button,
+.ng-product-card__body .add_to_cart_button {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-family: var(--ng-font-body);
+  font-size: 0.8rem;
+  font-weight: 600;
+  padding: 0.55rem 1.1rem;
+  border-radius: var(--ng-radius-pill);
+  background: var(--ng-cream);
+  color: var(--ng-on-primary);
+  text-decoration: none;
+  border: none;
+  cursor: pointer;
+  white-space: nowrap;
+  transition: opacity 0.2s ease;
+}
+.ng-product-card__body .button:hover,
+.ng-product-card__body .add_to_cart_button:hover { opacity: 0.85; }
+.ng-product-card__body .button.loading { opacity: 0.5; pointer-events: none; }
+.ng-product-card__body .added_to_cart {
+  display: block;
+  font-size: 0.72rem;
+  color: var(--ng-gold);
+  margin-top: 0.3rem;
+  text-decoration: underline;
+}
+
+/* SHARED EMPTY STATE */
+.ng-empty-state {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  gap: 0.9rem;
+  max-width: 460px;
+  margin-inline: auto;
+  padding: 3rem 1.5rem;
+  background: var(--ng-dark-surface);
+  border: 1px dashed var(--ng-border-strong);
+  border-radius: var(--ng-radius-card);
+}
+.ng-empty-state__icon { font-size: 2.6rem; color: var(--ng-muted); }
+.ng-empty-state__title { font-family: var(--ng-font-display); font-size: 1.3rem; font-weight: 700; color: var(--ng-cream); margin: 0; }
+.ng-empty-state__text { font-size: 0.9rem; color: var(--ng-muted); margin: 0; line-height: 1.6; }

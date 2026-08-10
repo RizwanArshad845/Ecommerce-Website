@@ -1,0 +1,59 @@
+/* =============================================================================
+   EDITOR MODULE 01: BASE & HEADER
+   ============================================================================= */
+
+.footer-section, 
+.error-page ,
+.blog-section h3, 
+.featured-car-section h3,
+.featured-car-section h4, 
+.gallery-section h3, 
+.footer-section h3,
+.error-page h2{
+	font-family: "Plus Jakarta Sans", sans-serif;
+}
+
+/*Header*/ 
+.buynow-btn a{
+  background: var(--wp--preset--color--primary);
+  border-radius: 6px;
+  padding: 10px !important;
+}
+.buynow-btn .wp-block-navigation-item__label{
+  color: #fff !important;
+}
+.wp-block-site-title{
+  font-size: 20px !important;
+  color: #222222;
+  margin-top: 0;
+  text-transform: capitalize;
+}
+.main-header-section .header-btn-box img{
+  width: auto !important;
+  height: 28px !important;
+}
+.about-voice-section .about-voice-right .voice-img:after{
+  content: none !important;
+}
+/* Banner */
+.main-banner-section .banner-right .bnr-product-info.tab-content.active, 
+.main-banner-section .banner-right .bnr-product-info.tab-content {
+  visibility: visible !important;
+  opacity: 1 !important;
+  position: unset !important;
+  inset: 1 !important;
+  pointer-events: all !important;
+  display: block;
+}
+
+/* Testimonial Section */
+.testimonial-section .block-editor-block-list__block.owl-carousel{
+  display: flex;
+  gap: 10px;
+}
+.testimonial-section .block-editor-block-list__block.owl-carousel .client-box{
+  margin-top: 2rem;
+}
+.about-section .about-left-content .about-images .components-resizable-box__container{
+  width: auto !important;
+}

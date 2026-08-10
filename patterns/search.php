@@ -1,10 +1,15 @@
-
 <?php
 /**
  * Title: Primary Sidebar
  * Slug: vw-modern-ecommerce/search
  * Categories: template
  */
+
+if ( ! defined( 'ABSPATH' ) ) {
+	exit;
+}
+
+
 ?>
 
 

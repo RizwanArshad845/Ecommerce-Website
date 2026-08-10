@@ -4,6 +4,11 @@
  * Slug: vw-modern-ecommerce/theme-button
  * Categories: template
  */
+
+if ( ! defined( 'ABSPATH' ) ) {
+	exit;
+}
+
 ?>
 <!-- wp:buttons -->
 <div class="wp-block-buttons theme-button-section"><!-- wp:button {"style":{"color":{"background":"var(--wp--preset--color--primary)","text":"#fff"},"typography":{"fontSize":"12px"},"border":{"radius":"30px"}},"className":"theme-button"} -->

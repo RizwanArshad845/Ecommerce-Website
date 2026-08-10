@@ -4,12 +4,18 @@
  * Slug: vw-modern-ecommerce/contact-section
  * Categories: template
  */
+
+if ( ! defined( 'ABSPATH' ) ) {
+	exit;
+}
+
 ?>
 
-<section class="ng-contact-sec" id="ng-contact">
+<div class="ng-top-page-spacer" style="height: 35px; width: 100%; display: block; clear: both;"></div>
+<section class="ng-contact-sec" id="ng-contact" style="margin-top: 25px !important; padding-top: 40px !important;">
   <div class="ng-container ng-contact-grid">
 
-    <div class="ng-contact-info">
+    <div class="ng-contact-info ng-reveal">
       <span class="ng-sec-subtitle"><?php esc_html_e( "Get In Touch", 'vw-modern-ecommerce' ); ?></span>
       <h2 class="ng-sec-title"><?php esc_html_e( "We'd Love To Hear From You", 'vw-modern-ecommerce' ); ?></h2>
       <p class="ng-sec-desc">
@@ -29,7 +35,7 @@
       </a>
     </div>
 
-    <div class="ng-contact-panel">
+    <div class="ng-contact-panel ng-reveal">
       <h3 class="ng-contact-panel__title"><?php esc_html_e( 'Find Us', 'vw-modern-ecommerce' ); ?></h3>
       <p class="ng-contact-panel__address"><?php echo esc_html( NG_ADDRESS_LINE ); ?></p>
       <p class="ng-contact-panel__note"><?php esc_html_e( 'Walk-ins welcome during business hours. For bulk/wholesale visits, please call or WhatsApp ahead so our team can assist you properly.', 'vw-modern-ecommerce' ); ?></p>

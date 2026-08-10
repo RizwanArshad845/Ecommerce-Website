@@ -1,0 +1,480 @@
+/* =============================================================================
+   NATIONAL GOLD MELAMINE — SINGLE PRODUCT MODERN STYLING (MODULE 13)
+   ============================================================================= */
+
+/* Single Product Container Layout */
+.single-product #primary,
+.single-product main {
+  padding-top: 2rem !important;
+}
+
+.single-product .wp-block-columns.alignwide {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 2.5rem;
+  max-width: 1280px;
+  margin: 3.5rem auto 3rem auto !important;
+  padding: 0 1.5rem;
+}
+
+@media (min-width: 992px) {
+  .single-product .wp-block-columns.alignwide {
+    grid-template-columns: 1fr 1fr;
+    align-items: start;
+  }
+}
+
+/* Product Gallery Styling */
+.single-product .woocommerce-product-gallery {
+  position: relative;
+  border-radius: 16px;
+  overflow: hidden;
+  background: #ffffff;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+  border: 1px solid rgba(166, 124, 46, 0.2);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.single-product .woocommerce-product-gallery:hover {
+  box-shadow: 0 15px 35px rgba(166, 124, 46, 0.12);
+}
+
+.single-product .woocommerce-product-gallery__image img {
+  width: 100%;
+  height: auto;
+  object-fit: cover;
+  border-radius: 12px;
+  display: block;
+}
+
+.single-product .woocommerce-product-gallery .flex-control-thumbs {
+  display: flex;
+  gap: 12px;
+  margin-top: 15px;
+  list-style: none;
+  padding: 0;
+}
+
+.single-product .woocommerce-product-gallery .flex-control-thumbs li {
+  flex: 1;
+  border-radius: 8px;
+  overflow: hidden;
+  border: 2px solid transparent;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.single-product .woocommerce-product-gallery .flex-control-thumbs li.flex-active,
+.single-product .woocommerce-product-gallery .flex-control-thumbs li:hover {
+  border-color: var(--ng-gold);
+  transform: translateY(-2px);
+}
+
+/* Product Main Details Column */
+.single-product .wp-block-column:nth-child(2) {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+/* Product Category Badge */
+.single-product .product_meta .posted_in {
+  display: inline-block;
+  font-size: 0.8rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 1.5px;
+  color: var(--ng-gold-light);
+  background: rgba(166, 124, 46, 0.1);
+  padding: 4px 12px;
+  border-radius: 20px;
+  margin-bottom: 0.75rem;
+}
+
+.single-product .product_meta .posted_in a {
+  color: var(--ng-gold-light);
+  text-decoration: none;
+}
+
+/* Product Title */
+.single-product h1.wp-block-post-title,
+.single-product .product_title {
+  font-family: var(--ng-font-display);
+  font-size: 2.2rem !important;
+  font-weight: 700 !important;
+  color: var(--ng-cream) !important;
+  line-height: 1.25 !important;
+  margin-bottom: 0.75rem !important;
+  text-align: left !important;
+}
+
+/* Product Rating */
+.single-product .star-rating {
+  font-size: 1.1rem;
+  color: #F59E0B;
+  margin-bottom: 1rem;
+}
+
+.single-product .woocommerce-product-rating {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 1.25rem;
+}
+
+/* Product Price */
+.single-product p.price,
+.single-product .wp-block-woocommerce-product-price {
+  font-size: 1.8rem !important;
+  font-weight: 800 !important;
+  color: var(--ng-cream) !important;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 1.5rem !important;
+}
+
+.single-product p.price ins,
+.single-product .wp-block-woocommerce-product-price ins {
+  color: var(--ng-gold) !important;
+  text-decoration: none !important;
+}
+
+.single-product p.price del,
+.single-product .wp-block-woocommerce-product-price del {
+  color: #9CA3AF !important;
+  font-size: 1.3rem;
+}
+
+/* Stock Status Pill */
+.single-product .stock {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 0.85rem;
+  font-weight: 600;
+  padding: 4px 10px;
+  border-radius: 20px;
+  margin-bottom: 1.25rem;
+}
+
+.single-product .stock.in-stock {
+  background: #ECFDF5;
+  color: #059669;
+}
+
+.single-product .stock.out-of-stock {
+  background: #FEF2F2;
+  color: #DC2626;
+}
+
+/* Short Description */
+.single-product .wp-block-post-excerpt,
+.single-product .woocommerce-product-details__short-description {
+  font-size: 1rem;
+  line-height: 1.7;
+  color: #4B5563;
+  margin-bottom: 1.75rem;
+  padding-bottom: 1.5rem;
+  border-bottom: 1px solid #E5E7EB;
+}
+
+/* Variations Dropdown / Form */
+.single-product form.cart {
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+  margin-bottom: 2rem;
+}
+
+.single-product form.cart .variations {
+  width: 100%;
+  border-collapse: separate;
+  border-spacing: 0 10px;
+}
+
+.single-product form.cart .variations label {
+  font-weight: 600;
+  color: #111;
+  font-size: 0.95rem;
+}
+
+.single-product form.cart .variations select {
+  width: 100%;
+  padding: 12px 16px;
+  border-radius: 10px;
+  border: 1px solid #D1D5DB;
+  background-color: #F9FAFB;
+  font-size: 0.95rem;
+  color: #111;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.single-product form.cart .variations select:focus {
+  border-color: var(--ng-gold);
+  box-shadow: 0 0 0 3px rgba(166, 124, 46, 0.2);
+  outline: none;
+}
+
+/* Quantity Stepper Outer Box */
+.single-product form.cart .quantity,
+.woocommerce div.product form.cart .quantity {
+  position: relative !important;
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: space-between !important;
+  width: 156px !important;
+  height: 50px !important;
+  background: #F5F5F7 !important;
+  border: 1.5px solid var(--ng-cream) !important;
+  border-radius: 10px !important;
+  padding: 0 4px !important;
+  margin-top: 2.2rem !important;
+  margin-bottom: 0.75rem !important;
+  box-sizing: border-box !important;
+}
+
+/* "Quantity" Label positioned cleanly above */
+.single-product form.cart .quantity::before,
+.woocommerce div.product form.cart .quantity::before {
+  content: 'Quantity' !important;
+  position: absolute !important;
+  top: -1.75rem !important;
+  left: 0 !important;
+  font-family: var(--ng-font-body, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif) !important;
+  font-size: 0.95rem !important;
+  font-weight: 700 !important;
+  color: var(--ng-cream) !important;
+  letter-spacing: 0.2px !important;
+  white-space: nowrap !important;
+}
+
+/* Stepper Buttons (- and +) */
+.single-product form.cart .quantity .qty-btn,
+.woocommerce div.product form.cart .quantity .qty-btn {
+  background: transparent !important;
+  border: none !important;
+  color: var(--ng-cream) !important;
+  font-size: 1.3rem !important;
+  font-weight: 700 !important;
+  width: 44px !important;
+  height: 44px !important;
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  cursor: pointer !important;
+  border-radius: 6px !important;
+  transition: all 0.15s ease !important;
+  padding: 0 !important;
+  line-height: 1 !important;
+  user-select: none !important;
+  flex-shrink: 0 !important;
+}
+
+.single-product form.cart .quantity .qty-btn:hover:not(:disabled),
+.woocommerce div.product form.cart .quantity .qty-btn:hover:not(:disabled) {
+  background: rgba(0, 0, 0, 0.08) !important;
+}
+
+.single-product form.cart .quantity .qty-btn:disabled,
+.woocommerce div.product form.cart .quantity .qty-btn:disabled {
+  cursor: not-allowed !important;
+  opacity: 0.35 !important;
+}
+
+/* Quantity Input Number (Center) */
+.single-product form.cart .quantity input.qty,
+.single-product form.cart .quantity .qty,
+.woocommerce div.product form.cart .quantity input.qty {
+  width: 44px !important;
+  height: 100% !important;
+  border: none !important;
+  background: transparent !important;
+  text-align: center !important;
+  font-weight: 700 !important;
+  font-size: 1.1rem !important;
+  color: var(--ng-cream) !important;
+  padding: 0 !important;
+  margin: 0 !important;
+  box-shadow: none !important;
+  outline: none !important;
+  display: block !important;
+  -webkit-appearance: none !important;
+  -moz-appearance: textfield !important;
+  appearance: none !important;
+}
+
+.single-product form.cart .quantity input.qty::-webkit-outer-spin-button,
+.single-product form.cart .quantity input.qty::-webkit-inner-spin-button,
+.woocommerce div.product form.cart .quantity input.qty::-webkit-outer-spin-button,
+.woocommerce div.product form.cart .quantity input.qty::-webkit-inner-spin-button {
+  -webkit-appearance: none !important;
+  appearance: none !important;
+  margin: 0 !important;
+}
+
+/* Stock Limit Notice (shown by the quantity stepper in js/custom.js) */
+.ng-stock-notice {
+  display: none;
+  margin-top: 6px;
+  color: #DC2626;
+  font-size: 0.82rem;
+  font-weight: 600;
+}
+
+.ng-stock-notice.is-visible {
+  display: block;
+}
+
+.single-product form.cart .button.single_add_to_cart_button,
+.single-product .wp-block-button__link {
+  background: var(--ng-cream) !important;
+  color: #FFFFFF !important;
+  font-weight: 700 !important;
+  font-size: 1.05rem !important;
+  padding: 14px 32px !important;
+  border-radius: 30px !important;
+  border: 1px solid var(--ng-cream) !important;
+  cursor: pointer;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1) !important;
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.15) !important;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+.single-product form.cart .button.single_add_to_cart_button:hover,
+.single-product .wp-block-button__link:hover {
+  background: linear-gradient(135deg, var(--ng-gold-light) 0%, var(--ng-gold) 100%) !important;
+  border-color: var(--ng-gold) !important;
+  color: var(--ng-ink) !important;
+  transform: translateY(-2px);
+  box-shadow: 0 8px 24px rgba(166, 124, 46, 0.35) !important;
+}
+
+/* Trust Features Grid */
+.ng-single-product-features {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1rem;
+  margin: 1.5rem 0 2rem 0;
+  padding: 1.25rem;
+  background: #FAF8F5;
+  border: 1px dashed rgba(166, 124, 46, 0.4);
+  border-radius: 14px;
+}
+
+@media (max-width: 576px) {
+  .ng-single-product-features {
+    grid-template-columns: 1fr;
+  }
+}
+
+.ng-single-product-features__item {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 0.88rem;
+  font-weight: 600;
+  color: #333333;
+}
+
+.ng-single-product-features__icon {
+  width: 34px;
+  height: 34px;
+  border-radius: 50%;
+  background: rgba(166, 124, 46, 0.15);
+  color: var(--ng-gold);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.1rem;
+  flex-shrink: 0;
+}
+
+/* Product Tabs Section */
+.single-product .woocommerce-tabs {
+  margin-top: 3.5rem;
+  border-top: 1px solid #E5E7EB;
+  padding-top: 2.5rem;
+}
+
+.single-product .woocommerce-tabs ul.tabs {
+  display: flex;
+  gap: 1.5rem;
+  border-bottom: 2px solid #F3F4F6;
+  padding-left: 0;
+  list-style: none;
+  margin-bottom: 2rem;
+}
+
+.single-product .woocommerce-tabs ul.tabs li {
+  background: transparent;
+  border: none;
+  padding: 0 0 12px 0;
+  margin: 0;
+}
+
+.single-product .woocommerce-tabs ul.tabs li a {
+  font-family: var(--ng-font-display);
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: #6B7280;
+  text-decoration: none;
+  transition: color 0.2s ease;
+  position: relative;
+}
+
+.single-product .woocommerce-tabs ul.tabs li.active a {
+  color: var(--ng-cream);
+}
+
+.single-product .woocommerce-tabs ul.tabs li.active a::after {
+  content: '';
+  position: absolute;
+  bottom: -14px;
+  left: 0;
+  right: 0;
+  height: 3px;
+  background: var(--ng-gold);
+  border-radius: 3px;
+}
+
+.single-product .woocommerce-tabs .panel {
+  font-size: 1rem;
+  line-height: 1.7;
+  color: #374151;
+}
+
+/* Related Products Header & Grid */
+.single-product .related.products,
+.single-product .wp-block-woocommerce-product-collection {
+  margin-top: 4rem;
+  padding-top: 2.5rem;
+  border-top: 1px solid #E5E7EB;
+}
+
+.single-product .related.products h2,
+.single-product .wp-block-woocommerce-product-collection h2 {
+  font-family: var(--ng-font-display);
+  font-size: 1.8rem;
+  font-weight: 700;
+  color: var(--ng-cream);
+  text-align: center;
+  margin-bottom: 2rem;
+  position: relative;
+}
+
+.single-product .related.products h2::after,
+.single-product .wp-block-woocommerce-product-collection h2::after {
+  content: '';
+  display: block;
+  width: 60px;
+  height: 3px;
+  background: var(--ng-gold);
+  margin: 10px auto 0 auto;
+  border-radius: 2px;
+}

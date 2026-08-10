@@ -4,6 +4,11 @@
  * Slug: vw-modern-ecommerce/news-section
  * Categories: template
  */
+
+if ( ! defined( 'ABSPATH' ) ) {
+	exit;
+}
+
 ?>
 <!-- wp:group {"className":"news-section","style":{"spacing":{"margin":{"top":"0px","bottom":"0px"},"padding":{"top":"0px","bottom":"0px","left":"0px","right":"0px"}}},"backgroundColor":"ng-dark","layout":{"type":"constrained","contentSize":"95%"}} -->
 <div class="wp-block-group news-section has-ng-dark-background-color has-background" style="margin-top:0px;margin-bottom:0px;padding-top:0px;padding-right:0px;padding-bottom:0px;padding-left:0px"><!-- wp:group {"style":{"border":{"radius":{"topLeft":"20px","topRight":"20px","bottomLeft":"20px","bottomRight":"20px"}},"spacing":{"padding":{"top":"var:preset|spacing|80","bottom":"var:preset|spacing|80","left":"0px","right":"0px"}}},"backgroundColor":"ng-dark-surface","layout":{"type":"constrained","contentSize":"85%"}} -->

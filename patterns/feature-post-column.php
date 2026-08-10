@@ -4,6 +4,11 @@
  * Slug: vw-modern-ecommerce/feature-post-column
  * Categories: template
  */
+
+if ( ! defined( 'ABSPATH' ) ) {
+	exit;
+}
+
 ?>
 <!-- wp:group {"align":"wide","style":{"spacing":{"padding":{"bottom":"30px"}}},"layout":{"inherit":true}} -->
 <div class="wp-block-group alignwide" style="padding-bottom: 30px">

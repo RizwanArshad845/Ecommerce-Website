@@ -4,6 +4,11 @@
  * Slug: vw-modern-ecommerce/header-default
  * Categories: header
  */
+
+if ( ! defined( 'ABSPATH' ) ) {
+	exit;
+}
+
 $ng_shop_url = '#';
 if ( function_exists( 'wc_get_page_id' ) ) {
     $ng_shop_page_id = wc_get_page_id( 'shop' );
@@ -31,6 +36,7 @@ $ng_nav_categories = function_exists( 'ng_get_shop_categories' )
 
     <!-- ── BRAND LOGO ── -->
     <a href="<?php echo esc_url( home_url( '/' ) ); ?>" class="ng-navbar__logo" aria-label="National Gold Melamine Home">
+      <?php echo ng_get_brand_mark_svg( 'ng-navbar__logo-mark' ); ?>
       <span class="ng-navbar__logo-main">National Gold</span>
       <span class="ng-navbar__logo-badge">MELAMINE</span>
     </a>
@@ -70,11 +76,7 @@ $ng_nav_categories = function_exists( 'ng_get_shop_categories' )
         <?php echo ng_icon( 'search' ); ?>
       </button>
 
-      <?php $ng_cart_has_items = ( function_exists( 'WC' ) && WC()->cart && WC()->cart->get_cart_contents_count() > 0 ); ?>
-      <a href="<?php echo esc_url( function_exists( 'wc_get_cart_url' ) ? wc_get_cart_url() : '#' ); ?>" class="ng-navbar__cart <?php echo $ng_cart_has_items ? 'has-items' : ''; ?>" aria-label="<?php esc_attr_e( 'View cart', 'vw-modern-ecommerce' ); ?>">
-        <?php echo ng_icon( 'bag' ); ?>
-        <span class="ng-navbar__cart-dot" aria-hidden="true"></span>
-      </a>
+      <?php echo ng_get_cart_link_html(); ?>
 
       <a href="<?php echo esc_url( $ng_shop_url ); ?>" class="ng-btn ng-btn--primary ng-navbar__cta">
         <?php esc_html_e( 'Explore Products', 'vw-modern-ecommerce' ); ?>

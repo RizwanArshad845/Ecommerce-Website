@@ -9,6 +9,11 @@
  * results for: {term}"), matching the same small/left-aligned treatment
  * as ng-page-header/ng-shop-header for sitewide consistency.
  */
+
+if ( ! defined( 'ABSPATH' ) ) {
+	exit;
+}
+
 ?>
 <!-- wp:group {"align":"full","className":"ng-page-header","backgroundColor":"ng-dark-surface","layout":{"type":"constrained"}} -->
 <div class="wp-block-group alignfull ng-page-header has-ng-dark-surface-background-color has-background">

@@ -1,5 +1,5 @@
 // Scroll to Top
-window.onscroll = function() {
+window.onscroll = function () {
   const vw_modern_ecommerce_button = document.querySelector('.scroll-top-box');
   if (!vw_modern_ecommerce_button) return;
   if (document.body.scrollTop > 100 || document.documentElement.scrollTop > 100) {
@@ -11,9 +11,9 @@ window.onscroll = function() {
 
 const vw_modern_ecommerce_scrollTopLink = document.querySelector('.scroll-top-box a');
 if (vw_modern_ecommerce_scrollTopLink) {
-  vw_modern_ecommerce_scrollTopLink.onclick = function(event) {
+  vw_modern_ecommerce_scrollTopLink.onclick = function (event) {
     event.preventDefault();
-    window.scrollTo({top: 0, behavior: 'smooth'});
+    window.scrollTo({ top: 0, behavior: 'smooth' });
   };
 }
 
@@ -71,15 +71,123 @@ document.addEventListener("DOMContentLoaded", () => {
 
 // Single Product Link
 document.addEventListener("click", function (e) {
-const vw_modern_ecommerce_btn = e.target.closest(".bnr-product-btn, .product-box-btn");
-if (!vw_modern_ecommerce_btn) return;
+  const vw_modern_ecommerce_btn = e.target.closest(".bnr-product-btn, .product-box-btn");
+  if (!vw_modern_ecommerce_btn) return;
 
-const vw_modern_ecommerce_product = vw_modern_ecommerce_btn.closest(".product, .wc-block-product, li");
-if (!vw_modern_ecommerce_product) return;
+  const vw_modern_ecommerce_product = vw_modern_ecommerce_btn.closest(".product, .wc-block-product, li");
+  if (!vw_modern_ecommerce_product) return;
 
-const vw_modern_ecommerce_link = vw_modern_ecommerce_product.querySelector("a[href]");
-if (!vw_modern_ecommerce_link) return;
+  const vw_modern_ecommerce_link = vw_modern_ecommerce_product.querySelector("a[href]");
+  if (!vw_modern_ecommerce_link) return;
 
-e.preventDefault();
-window.location.href = vw_modern_ecommerce_link.href;
+  e.preventDefault();
+  window.location.href = vw_modern_ecommerce_link.href;
 }, true);
+
+// Single Product Quantity Stepper (- / +) with Stock Limit Checking
+document.addEventListener("DOMContentLoaded", () => {
+  const initQuantitySteppers = () => {
+    document.querySelectorAll(".single-product form.cart .quantity, .woocommerce div.product form.cart .quantity").forEach((qtyContainer) => {
+      const input = qtyContainer.querySelector("input.qty");
+      if (!input || qtyContainer.querySelector(".qty-minus")) return;
+
+      // Extract max stock limit dynamically
+      const getMaxStock = () => {
+        let max = parseInt(input.getAttribute("max"), 10);
+        if (isNaN(max) || max <= 0) {
+          const stockEl = document.querySelector(".single-product .stock, .woocommerce .stock");
+          if (stockEl) {
+            const match = stockEl.textContent.match(/(\d+)/);
+            if (match) max = parseInt(match[1], 10);
+          }
+        }
+        return isNaN(max) || max <= 0 ? 9999 : max;
+      };
+
+      const minusBtn = document.createElement("button");
+      minusBtn.type = "button";
+      minusBtn.className = "qty-btn qty-minus";
+      minusBtn.setAttribute("aria-label", "Decrease quantity");
+      minusBtn.innerHTML = "&#8722;"; // −
+
+      const plusBtn = document.createElement("button");
+      plusBtn.type = "button";
+      plusBtn.className = "qty-btn qty-plus";
+      plusBtn.setAttribute("aria-label", "Increase quantity");
+      plusBtn.innerHTML = "&#43;"; // +
+
+      input.parentNode.insertBefore(minusBtn, input);
+      input.parentNode.insertBefore(plusBtn, input.nextSibling);
+
+      // Stock limit notice banner — inserted right after the stepper so it
+      // reads as feedback for it, not floating below the Add to Cart button.
+      let noticeEl = qtyContainer.nextElementSibling;
+      if (!noticeEl || !noticeEl.classList.contains("ng-stock-notice")) {
+        noticeEl = document.createElement("div");
+        noticeEl.className = "ng-stock-notice";
+        noticeEl.setAttribute("aria-live", "polite");
+        qtyContainer.insertAdjacentElement("afterend", noticeEl);
+      }
+
+      const updateButtonsAndNotice = () => {
+        const maxStock = getMaxStock();
+        let val = parseInt(input.value, 10) || 1;
+
+        if (val > maxStock) {
+          val = maxStock;
+          input.value = maxStock;
+        }
+
+        if (val >= maxStock) {
+          noticeEl.textContent = `Maximum stock reached (${maxStock} items available)`;
+          noticeEl.classList.add("is-visible");
+        } else {
+          noticeEl.classList.remove("is-visible");
+        }
+
+        minusBtn.disabled = val <= (parseInt(input.min, 10) || 1);
+        plusBtn.disabled = val >= maxStock;
+      };
+
+      minusBtn.addEventListener("click", (e) => {
+        e.preventDefault();
+        let val = parseInt(input.value, 10) || 1;
+        let min = parseInt(input.min, 10) || 1;
+        if (val > min) {
+          input.value = val - 1;
+          input.dispatchEvent(new Event("change", { bubbles: true }));
+          input.dispatchEvent(new Event("input", { bubbles: true }));
+        }
+        updateButtonsAndNotice();
+      });
+
+      plusBtn.addEventListener("click", (e) => {
+        e.preventDefault();
+        const maxStock = getMaxStock();
+        let val = parseInt(input.value, 10) || 1;
+        if (val < maxStock) {
+          input.value = val + 1;
+          input.dispatchEvent(new Event("change", { bubbles: true }));
+          input.dispatchEvent(new Event("input", { bubbles: true }));
+        }
+        updateButtonsAndNotice();
+      });
+
+      input.addEventListener("input", () => {
+        updateButtonsAndNotice();
+      });
+
+      input.addEventListener("change", () => {
+        updateButtonsAndNotice();
+      });
+
+      updateButtonsAndNotice();
+    });
+  };
+
+  initQuantitySteppers();
+  if (typeof jQuery !== "undefined") {
+    jQuery(document.body).on("updated_wc_div reset_data", initQuantitySteppers);
+  }
+});
+

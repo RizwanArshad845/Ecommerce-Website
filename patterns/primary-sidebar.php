@@ -4,6 +4,11 @@
  * Slug: vw-modern-ecommerce/primary-sidebar
  * Categories: template
  */
+
+if ( ! defined( 'ABSPATH' ) ) {
+	exit;
+}
+
 ?>
 <!-- wp:group {"className":"theme-sidebar"} -->
 <div class="wp-block-group theme-sidebar"><!-- wp:group {"className":"wow zoomIn"} -->

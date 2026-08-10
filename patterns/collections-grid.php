@@ -8,6 +8,11 @@
  * WooCommerce category archive (Products page). Unlike the homepage's
  * 4-card teaser, this shows every product_cat term.
  */
+
+if ( ! defined( 'ABSPATH' ) ) {
+	exit;
+}
+
 $ng_all_categories = function_exists( 'ng_get_shop_categories' )
   ? ng_get_shop_categories( array( 'orderby' => 'name', 'order' => 'ASC' ) )
   : array();

@@ -4,6 +4,11 @@
  * Slug: vw-modern-ecommerce/footer-default
  * Categories: footer
  */
+
+if ( ! defined( 'ABSPATH' ) ) {
+	exit;
+}
+
 $ng_shop_url = '#';
 if ( function_exists( 'wc_get_page_id' ) ) {
     $ng_shop_page_id = wc_get_page_id( 'shop' );

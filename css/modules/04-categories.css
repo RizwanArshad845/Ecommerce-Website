@@ -1,0 +1,131 @@
+/* =============================================================================
+   04. CATEGORIES SECTION (HORIZONTAL CAROUSEL SLIDER)
+   ============================================================================= */
+
+.ng-categories-sec {
+  margin: 0 !important;
+  margin-top: 0 !important;
+  margin-block-start: 0 !important;
+  padding: 0 0 4.5rem;
+  background: radial-gradient(circle at 15% 20%, rgba(166, 124, 46, 0.07), transparent 45%), var(--ng-dark-mid);
+}
+.ng-categories-carousel-wrap {
+  position: relative;
+  width: 100%;
+}
+.ng-categories-grid {
+  display: flex !important;
+  flex-wrap: nowrap !important;
+  overflow-x: auto !important;
+  scroll-behavior: smooth !important;
+  scroll-snap-type: x mandatory !important;
+  gap: 1.25rem !important;
+  padding: 0.5rem 0.2rem 1rem !important;
+  margin: 0 !important;
+  scrollbar-width: none !important;
+  -ms-overflow-style: none !important;
+  -webkit-overflow-scrolling: touch;
+}
+.ng-categories-grid::-webkit-scrollbar {
+  display: none !important;
+}
+
+.ng-categories-grid .ng-cat-card {
+  flex: 0 0 clamp(200px, 32vw, 260px) !important;
+  min-width: clamp(200px, 32vw, 260px) !important;
+  scroll-snap-align: start !important;
+  position: relative;
+  text-decoration: none;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.8rem;
+  background: var(--ng-dark-surface);
+  padding: 0.8rem;
+  border-radius: 14px;
+  border: 1px solid var(--ng-border);
+  box-shadow: var(--ng-shadow);
+  transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
+}
+.ng-cat-card:hover {
+  transform: translateY(-3px);
+  border-color: rgba(166, 124, 46, 0.3);
+  box-shadow: var(--ng-shadow-hover);
+}
+
+.ng-cat-card__thumb {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 1 / 1;
+  border-radius: 10px;
+  overflow: hidden;
+  background: #F4F4F2;
+}
+.ng-cat-card__thumb img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+  display: block;
+  transition: transform 0.4s ease;
+}
+.ng-cat-card:hover .ng-cat-card__thumb img { transform: scale(1.06); }
+.ng-cat-card__thumb--fallback img { object-fit: contain; padding: 1rem; }
+
+/* Gloss-sweep on hover — evokes the glossy melamine finish */
+.ng-cat-card__thumb::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background: linear-gradient(115deg, transparent 40%, rgba(255,255,255,0.55) 50%, transparent 60%);
+  background-size: 250% 250%;
+  background-position: -60% -60%;
+  transition: background-position 0.7s ease;
+}
+.ng-cat-card:hover .ng-cat-card__thumb::after {
+  background-position: 100% 100%;
+}
+@media (prefers-reduced-motion: reduce) {
+  .ng-cat-card__thumb::after {
+    transition: none;
+    display: none;
+  }
+}
+
+/* ── HORIZONTAL SLIDER CURSORS / ARROWS BELOW ── */
+.ng-carousel-controls {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1.2rem;
+  margin-top: 1.6rem;
+}
+.ng-carousel-arrow {
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  background: var(--ng-dark-surface);
+  border: 1.5px solid rgba(166, 124, 46, 0.35);
+  color: var(--ng-cream);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.06);
+  transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+}
+.ng-carousel-arrow .ng-icon {
+  width: 1.2rem;
+  height: 1.2rem;
+  color: var(--ng-cream);
+}
+.ng-carousel-arrow:hover {
+  background: #000000;
+  border-color: var(--ng-gold);
+  box-shadow: 0 6px 18px rgba(166, 124, 46, 0.3);
+  transform: translateY(-2px);
+}
+.ng-carousel-arrow:hover .ng-icon {
+  color: var(--ng-gold);
+}

@@ -10,6 +10,11 @@
  * whichever page it's inserted into. Deliberately small/left-aligned —
  * a utility header, not a hero banner.
  */
+
+if ( ! defined( 'ABSPATH' ) ) {
+	exit;
+}
+
 ?>
 <!-- wp:group {"align":"full","className":"ng-page-header","backgroundColor":"ng-dark-surface","layout":{"type":"constrained"}} -->
 <div class="wp-block-group alignfull ng-page-header has-ng-dark-surface-background-color has-background">

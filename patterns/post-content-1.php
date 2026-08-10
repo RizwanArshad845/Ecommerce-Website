@@ -4,6 +4,11 @@
  * Slug: vw-modern-ecommerce/post-content-1
  * Categories: template
  */
+
+if ( ! defined( 'ABSPATH' ) ) {
+	exit;
+}
+
 ?>
 <!-- wp:group {"tagName":"main","layout":{"inherit":true}} -->
 <main class="wp-block-group">

@@ -1,0 +1,181 @@
+/* =============================================================================
+   03. HERO SECTION MODULE
+   ============================================================================= */
+
+.ng-hero {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  min-height: calc(100vh - 80px);
+  width: 100%;
+  max-width: 100vw;
+  margin: 0;
+  padding: clamp(4rem, 8vw, 6rem) clamp(1.5rem, 4vw, 3rem) clamp(3.5rem, 5vw, 5.5rem);
+  background-image: url('../../images/hero-bg-melamine.png');
+  background-size: cover;
+  background-position: center;
+  border-radius: 0;
+  overflow: hidden;
+}
+
+/* Kill any gap WordPress injects between navbar, hero, and main sections */
+.wp-site-blocks {
+  gap: 0 !important;
+}
+.wp-site-blocks > header.wp-block-template-part + * {
+  margin-top: 0 !important;
+}
+main#primary,
+main#primary > *,
+main#primary > .is-layout-flow > * {
+  margin-top: 0 !important;
+  margin-block-start: 0 !important;
+  padding-top: 0 !important;
+}
+
+.ng-hero::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  background: linear-gradient(180deg, rgba(255,255,255,0.6) 0%, rgba(255,255,255,0.45) 50%, rgba(255,255,255,0.25) 100%);
+}
+
+.ng-hero__left {
+  flex: 1;
+  max-width: 720px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  gap: 1.4rem;
+  position: relative;
+  z-index: 2;
+  margin-inline: auto;
+  padding-top: 3.5rem;
+}
+
+.ng-hero__heading {
+  font-family: var(--ng-font-display);
+  font-size: clamp(2.2rem, 4.5vw, 3.6rem);
+  font-weight: 800;
+  line-height: 1.12;
+  margin: 0;
+  text-align: center;
+  color: var(--ng-cream);
+}
+.ng-hero__heading-accent { color: var(--ng-gold); }
+
+.ng-hero__subtext {
+  font-size: clamp(0.95rem, 1.4vw, 1.1rem);
+  line-height: 1.7;
+  color: var(--ng-muted);
+  margin: 0;
+  max-width: 44ch;
+}
+
+.ng-hero__bullets {
+  list-style: none !important;
+  padding: 0 !important;
+  margin: 0.4rem 0 0.8rem 0 !important;
+  display: flex !important;
+  flex-direction: column !important;
+  gap: 0.65rem !important;
+  align-items: center !important;
+  text-align: left !important;
+}
+.ng-hero__bullets li {
+  list-style: none !important;
+  list-style-type: none !important;
+  display: flex !important;
+  align-items: flex-start !important;
+  gap: 0.6rem !important;
+  font-size: 0.95rem !important;
+  line-height: 1.5 !important;
+  color: var(--ng-muted) !important;
+  text-align: left !important;
+}
+.ng-hero__bullets li::before { content: none !important; }
+.ng-hero__bullets li strong {
+  color: var(--ng-cream) !important;
+  font-weight: 700 !important;
+}
+.ng-bullet-icon {
+  color: var(--ng-gold) !important;
+  font-size: 0.9rem !important;
+  margin-top: 0.15rem !important;
+  flex-shrink: 0 !important;
+  display: inline-block !important;
+  animation: ng-sparkle-twinkle 2.6s ease-in-out infinite;
+}
+.ng-hero__bullets li:nth-child(2) .ng-bullet-icon { animation-delay: 0.4s; }
+.ng-hero__bullets li:nth-child(3) .ng-bullet-icon { animation-delay: 0.8s; }
+
+@keyframes ng-sparkle-twinkle {
+  0%, 100% { opacity: 0.55; transform: scale(0.9); }
+  50%      { opacity: 1; transform: scale(1.15); }
+}
+
+/* ── HERO FEATURE CARDS GRID ── */
+.ng-hero__cards {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 0.85rem;
+  width: 100%;
+  margin: 0.4rem 0 0.8rem;
+}
+.ng-hero-card {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  background: var(--ng-dark-surface);
+  border: 1px solid rgba(166, 124, 46, 0.18);
+  border-radius: 12px;
+  padding: 0.85rem 1rem;
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.04);
+  transition: transform 0.25s ease, border-color 0.25s ease, box-shadow 0.25s ease;
+}
+.ng-hero-card:hover {
+  transform: translateY(-2px);
+  border-color: var(--ng-gold);
+  box-shadow: 0 8px 20px rgba(166, 124, 46, 0.12);
+}
+.ng-hero-card__icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 38px;
+  height: 38px;
+  border-radius: 10px;
+  background: rgba(166, 124, 46, 0.1);
+  color: var(--ng-gold);
+  flex-shrink: 0;
+}
+.ng-hero-card__icon .ng-icon { width: 1.25rem; height: 1.25rem; }
+.ng-hero-card__content { display: flex; flex-direction: column; gap: 0.15rem; }
+.ng-hero-card__title {
+  font-family: var(--ng-font-display);
+  font-size: 0.88rem;
+  font-weight: 700;
+  color: var(--ng-cream);
+  margin: 0;
+  line-height: 1.25;
+}
+.ng-hero-card__sub { font-size: 0.75rem; color: var(--ng-muted); margin: 0; line-height: 1.25; }
+
+.ng-hero__actions { display: flex; flex-wrap: wrap; gap: 1rem; align-items: center; justify-content: center; }
+
+.ng-hero__trust { display: flex; align-items: center; gap: 0.6rem; color: var(--ng-gold); }
+.ng-hero__trust > .ng-icon { width: 1.2rem; height: 1.2rem; }
+.ng-hero__trust-text { font-size: 0.85rem; color: var(--ng-muted); }
+.ng-hero__trust-text strong { color: var(--ng-cream); }
+
+@media (prefers-reduced-motion: reduce) {
+  .ng-bullet-icon {
+    animation: none;
+  }
+}

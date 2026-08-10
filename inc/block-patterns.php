@@ -5,6 +5,11 @@
  * @since VW Modern Ecommerce 1.0
  */
 
+if ( ! defined( 'ABSPATH' ) ) {
+	exit;
+}
+
+
  /**
   * Get patterns content.
   *

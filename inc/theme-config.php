@@ -159,6 +159,26 @@ if ( ! function_exists( 'ng_icon' ) ) {
 	}
 }
 
+if ( ! function_exists( 'ng_get_brand_mark_svg' ) ) {
+	/**
+	 * "NG" monogram brand mark — a gold ring + lettering emblem used
+	 * anywhere the navbar wordmark alone isn't enough (page loader, etc.).
+	 * Shared here so the navbar and loader can never visually drift apart.
+	 *
+	 * @param string $class BEM-style base class; child parts get `{$class}-bg`,
+	 *                      `{$class}-ring`, `{$class}-text` for styling.
+	 * @return string Inline SVG markup.
+	 */
+	function ng_get_brand_mark_svg( $class = 'ng-brand-mark' ) {
+		$class = esc_attr( $class );
+		return '<svg class="' . $class . '" viewBox="0 0 40 40" aria-hidden="true" focusable="false">'
+			. '<circle class="' . $class . '-bg" cx="20" cy="20" r="19"></circle>'
+			. '<circle class="' . $class . '-ring" cx="20" cy="20" r="19"></circle>'
+			. '<text class="' . $class . '-text" x="20" y="25">NG</text>'
+			. '</svg>';
+	}
+}
+
 if ( ! function_exists( 'ng_render_contact_details_list' ) ) {
 	/**
 	 * Shared address/phone/email/hours markup used by both the footer

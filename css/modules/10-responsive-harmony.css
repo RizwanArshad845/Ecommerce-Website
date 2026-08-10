@@ -1,0 +1,203 @@
+/* =============================================================================
+   10. RESPONSIVE HARMONY (DESKTOP, TABLET & MOBILE BREAKPOINTS)
+   ============================================================================= */
+
+/* ── VISUAL SECTION BOUNDARIES & METALLIC SEPARATORS ── */
+.ng-cat-carousel-sec,
+.ng-products-sec,
+.about-section,
+.ng-reviews-sec,
+.ng-faq-sec,
+section.ng-sec {
+  position: relative !important;
+  border-bottom: 1px solid rgba(166, 124, 46, 0.18) !important;
+}
+
+.ng-cat-carousel-sec {
+  background: rgba(166, 124, 46, 0.03) !important;
+  border-top: 1px solid rgba(166, 124, 46, 0.18) !important;
+}
+
+.about-section {
+  background: var(--ng-dark-surface) !important;
+  border-top: 1px solid rgba(166, 124, 46, 0.18) !important;
+  border-bottom: 1px solid rgba(166, 124, 46, 0.18) !important;
+}
+
+.ng-products-sec {
+  background: radial-gradient(circle at 85% 80%, rgba(166, 124, 46, 0.06), transparent 45%), var(--ng-dark) !important;
+}
+
+.ng-reviews-sec {
+  background: radial-gradient(circle at 15% 20%, rgba(166, 124, 46, 0.06), transparent 45%), rgba(255, 255, 255, 0.02) !important;
+  border-bottom: 1px solid rgba(166, 124, 46, 0.18) !important;
+}
+
+.ng-faq-sec {
+  background: radial-gradient(circle at 50% 0%, rgba(166, 124, 46, 0.05), transparent 40%), var(--ng-dark) !important;
+}
+
+/* Bold Metallic Gold Heading Separator Bar */
+.ng-sec-title::after,
+.about-right-content h4::after {
+  content: '' !important;
+  display: block !important;
+  width: 90px !important;
+  height: 5px !important;
+  background: linear-gradient(90deg, #A67C2E 0%, #F5D77F 50%, #A67C2E 100%) !important;
+  border-radius: 99px !important;
+  margin: 0.85rem auto 0 !important;
+  box-shadow: 0 3px 12px rgba(166, 124, 46, 0.45) !important;
+}
+
+/* Full-width Section Separator Band */
+.ng-cat-carousel-sec::before,
+.ng-products-sec::before,
+.about-section::before,
+.ng-reviews-sec::before,
+.ng-faq-sec::before {
+  content: '' !important;
+  position: absolute !important;
+  top: 0 !important;
+  left: 5% !important;
+  right: 5% !important;
+  height: 2px !important;
+  background: linear-gradient(90deg, transparent 0%, rgba(166, 124, 46, 0.5) 20%, #A67C2E 50%, rgba(166, 124, 46, 0.5) 80%, transparent 100%) !important;
+}
+
+/* Hide legacy title header banner */
+.ng-page-header,
+.woocommerce-breadcrumb,
+.wp-block-woocommerce-breadcrumbs,
+.ng-page-header__breadcrumbs {
+  display: none !important;
+}
+
+/* ── DESKTOP OPTIMIZATIONS (1025px and up) ── */
+@media (min-width: 1025px) {
+  .ng-navbar { padding: 0.9rem 0 !important; }
+  .ng-navbar__cta { display: inline-flex !important; }
+  .ng-navbar__mobile-toggle { display: none !important; }
+  .ng-navbar__menu {
+    display: flex !important; flex-direction: row !important; position: static !important;
+    background: transparent !important; box-shadow: none !important; border: none !important; padding: 0 !important;
+  }
+
+  .ng-hero {
+    flex-direction: column !important; text-align: center !important; align-items: center !important;
+    justify-content: center !important;
+  }
+  .ng-hero__left { flex: 1 !important; max-width: 720px !important; align-items: center !important; }
+  .ng-hero__actions { justify-content: center !important; }
+
+  .ng-categories-grid .ng-cat-card { flex: 0 0 calc(25% - 0.94rem) !important; min-width: calc(25% - 0.94rem) !important; }
+  .ng-products-grid .ng-product-card { flex: 0 0 calc(25% - 0.94rem) !important; min-width: calc(25% - 0.94rem) !important; }
+
+  .ng-shop-filter-toggle { display: none !important; }
+  .ng-shop-layout { display: flex !important; flex-direction: row !important; gap: 1.25rem !important; }
+  .ng-shop-layout__sidebar,
+  #ng-shop-sidebar-panel { display: block !important; flex: 0 0 260px !important; position: sticky !important; top: 100px !important; }
+  .ng-shop-layout__content { flex: 1 !important; min-width: 0 !important; padding-left: 0 !important; margin-left: 0 !important; }
+  .ng-shop-layout__content .wc-block-product-template,
+  .ng-shop-layout__content .wp-block-woocommerce-product-template,
+  .ng-shop-layout__content ul.wc-block-grid__products {
+    display: grid !important; grid-template-columns: repeat(3, 1fr) !important; gap: 1.5rem !important;
+  }
+
+  .ng-footer__trust-grid { grid-template-columns: repeat(4, 1fr) !important; gap: 2rem !important; }
+
+  .about-inner-content { display: flex !important; flex-direction: row !important; gap: 3rem !important; align-items: center !important; }
+  .about-left-content { flex: 0 0 46% !important; }
+  .about-right-content { flex: 0 0 50% !important; }
+}
+
+/* ── LARGE DESKTOP WIDESCREEN (1400px and up) ── */
+@media (min-width: 1400px) {
+  .ng-shop-layout__content .wc-block-product-template,
+  .ng-shop-layout__content .wp-block-woocommerce-product-template,
+  .ng-shop-layout__content ul.wc-block-grid__products {
+    grid-template-columns: repeat(4, 1fr) !important;
+  }
+}
+
+/* ── TABLET RESPONSIVE (601px to 1024px) ── */
+@media (min-width: 601px) and (max-width: 1024px) {
+  .ng-footer__grid { grid-template-columns: 1fr 1fr; }
+  .ng-shop-filter-toggle { display: flex !important; }
+  /* WordPress core only forces columns to stack below ~782px; the filter
+     toggle shows across the full 601-1024px range, so force full-width
+     stacking here too instead of leaving a cramped 25%-width panel. */
+  .ng-shop-layout__sidebar,
+  #ng-shop-sidebar-panel,
+  .ng-shop-layout__content {
+    flex-basis: 100% !important;
+    width: 100% !important;
+  }
+  .ng-hero { flex-direction: column; text-align: center; padding: 3rem 1.5rem; min-height: auto; width: 100% !important; max-width: 100vw !important; }
+  .ng-hero__left { flex: unset; width: 100% !important; max-width: 100% !important; align-items: center !important; }
+  .ng-hero__subtext { max-width: 100%; }
+  .ng-hero__actions, .ng-hero__trust, .ng-hero__features { justify-content: center !important; text-align: center !important; }
+
+  .ng-categories-grid .ng-cat-card { flex: 0 0 calc(33.333% - 0.83rem) !important; min-width: calc(33.333% - 0.83rem) !important; }
+  .ng-products-grid .ng-product-card { flex: 0 0 calc(33.333% - 0.83rem) !important; min-width: calc(33.333% - 0.83rem) !important; }
+  .ng-footer__trust-grid { grid-template-columns: repeat(2, 1fr) !important; gap: 1.2rem !important; }
+}
+
+/* ── MOBILE RESPONSIVE (Up to 600px) ── */
+@media (max-width: 600px) {
+  .ng-footer__grid { grid-template-columns: 1fr; }
+  .ng-footer__bottom-inner { flex-direction: column; gap: 0.5rem; text-align: center; }
+  .ng-shop-filter-toggle { display: flex !important; }
+  .ng-hero {
+    flex-direction: column !important;
+    text-align: center !important;
+    min-height: auto !important;
+    padding: 2.2rem 1rem !important;
+    width: 100% !important;
+    max-width: 100vw !important;
+    overflow-x: hidden !important;
+  }
+  .ng-hero__left { flex: 0 0 auto !important; width: 100% !important; max-width: 100% !important; align-items: center !important; }
+  .ng-hero__actions, .ng-hero__trust, .ng-hero__features { justify-content: center !important; text-align: center !important; }
+  .ng-hero__cards { grid-template-columns: repeat(2, 1fr) !important; gap: 0.65rem !important; margin: 0.5rem 0 1rem !important; }
+  .ng-hero-card { padding: 0.65rem 0.7rem !important; gap: 0.5rem !important; text-align: left !important; }
+  .ng-hero-card__icon { width: 32px !important; height: 32px !important; }
+  .ng-hero-card__title { font-size: 0.78rem !important; }
+  .ng-hero-card__sub { font-size: 0.68rem !important; }
+  .ng-hero__actions { flex-direction: column; width: 100%; }
+  .ng-btn { width: 100%; justify-content: center; }
+  .ng-cat-card__thumb { height: 190px; }
+  .ng-sec-header { margin-bottom: 1.8rem; }
+  .ng-products-sec, .ng-reviews-sec, .ng-faq-sec,
+  .ng-collections-sec { padding-top: 2.5rem; padding-bottom: 2.5rem; }
+  .ng-contact-sec,
+  .page-template-page-contact .site-main,
+  .page-id-contact .site-main,
+  .contact-section {
+    padding-top: 4.5rem !important;
+    margin-top: 1.5rem !important;
+    padding-bottom: 2.5rem;
+  }
+  .ng-categories-sec { padding-top: 0; padding-bottom: 2.5rem; }
+
+  .ng-shop-filter-toggle {
+    display: flex !important;
+    margin-top: 1.8rem !important;
+    margin-bottom: 1.5rem !important;
+  }
+
+  .ng-categories-grid .ng-cat-card { flex: 0 0 calc(50% - 0.6rem) !important; min-width: calc(50% - 0.6rem) !important; }
+  .ng-products-grid .ng-product-card { flex: 0 0 calc(50% - 0.6rem) !important; min-width: calc(50% - 0.6rem) !important; }
+  .ng-review-card { flex: 0 0 240px !important; width: 240px !important; padding: 1.4rem 1.1rem !important; }
+  .ng-footer__trust-grid { grid-template-columns: 1fr !important; gap: 1rem !important; }
+
+  .ng-shop-toolbar {
+    flex-direction: column !important;
+    align-items: stretch !important;
+    gap: 0.75rem !important;
+    padding: 0.85rem 1rem !important;
+  }
+
+  /* Order-received page responsive rules live in 09-thankyou-order.css
+     (single source of truth — avoids two files fighting over the same selectors). */
+}

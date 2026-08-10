@@ -2,9 +2,9 @@
 
 Contributors: VWThemes
 Tags: left-sidebar, right-sidebar, one-column, two-columns, three-columns, four-columns, grid-layout, wide-blocks, rtl-language-support, block-styles, style-variations, translation-ready, custom-colors, custom-menu, custom-logo, editor-style, featured-images, footer-widgets, full-site-editing, block-patterns, sticky-post, threaded-comments, template-editing, blog, photography, e-commerce
-Requires at least: 5.9
-Tested up to: 7.0
-Requires PHP: 5.6
+Requires at least: 6.0
+Tested up to: 6.7
+Requires PHP: 7.4
 License: GPLv3 or later
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
 Theme URI: https://www.vwthemes.com/products/vw-modern-ecommerce

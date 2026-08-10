@@ -1,0 +1,298 @@
+/* =============================================================================
+   07. SHOP CATALOG & FILTERS SIDEBAR MODULE
+   ============================================================================= */
+
+/* COMPACT BREADCRUMB / PAGE HEADER */
+.ng-page-header {
+  text-align: left;
+  border-bottom: 1px solid var(--ng-border);
+  padding-top: 1.25rem;
+  padding-bottom: 1.25rem;
+}
+
+.ng-page-header .wp-block-post-title,
+.ng-page-header .wp-block-query-title {
+  margin: 0.2rem 0 0;
+}
+
+.ng-page-header__breadcrumbs,
+.ng-page-header .woocommerce-breadcrumb {
+  text-align: left;
+  color: var(--ng-muted);
+  font-size: 0.8rem;
+  margin: 0;
+}
+
+.ng-page-header .woocommerce-breadcrumb a {
+  color: var(--ng-muted);
+  text-decoration: none;
+}
+
+.ng-page-header .woocommerce-breadcrumb a:hover {
+  color: var(--ng-gold);
+}
+
+/* COLLECTIONS PAGE TOOLBAR */
+.ng-collections-sec {
+  padding: 3.5rem 0 5rem;
+  background: radial-gradient(circle at 20% 80%, rgba(166, 124, 46, 0.06), transparent 45%), var(--ng-dark);
+}
+
+.ng-collections-toolbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  margin-bottom: 2rem;
+  flex-wrap: wrap;
+}
+
+.ng-collections-search {
+  position: relative;
+  min-width: 240px;
+  flex: 0 1 320px;
+}
+
+.ng-collections-search input[type="search"] {
+  width: 100%;
+  background: var(--ng-dark-surface);
+  border: 1px solid var(--ng-border-strong);
+  border-radius: var(--ng-radius-pill);
+  color: var(--ng-cream);
+  font-family: var(--ng-font-body);
+  font-size: 0.9rem;
+  padding: 0.65rem 1.2rem;
+}
+
+.ng-collections-search input[type="search"]::placeholder {
+  color: var(--ng-muted);
+}
+
+.ng-collections-search input[type="search"]:focus {
+  outline: none;
+  border-color: var(--ng-gold);
+}
+
+.ng-collections-count {
+  font-size: 0.85rem;
+  color: var(--ng-muted);
+}
+
+.ng-collections-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 1.75rem;
+}
+
+.ng-collections-grid .ng-cat-card[hidden] {
+  display: none;
+}
+
+/* SHOPIFY-STYLE MOBILE FILTER TOGGLE */
+.ng-shop-filter-toggle {
+  display: none;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.75rem;
+  width: 100%;
+  min-height: 56px !important;
+  margin-top: 1.8rem !important;
+  margin-bottom: 1.5rem !important;
+  padding: 1.15rem 1.5rem !important;
+  background: var(--ng-dark-surface);
+  border: 1px solid var(--ng-border-strong);
+  border-radius: 14px;
+  color: var(--ng-cream);
+  font-family: var(--ng-font-body);
+  font-size: 1rem !important;
+  font-weight: 700 !important;
+  cursor: pointer;
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.12);
+}
+
+.ng-shop-filter-toggle .ng-icon {
+  width: 1.3rem !important;
+  height: 1.3rem !important;
+  color: var(--ng-gold);
+}
+
+.ng-shop-filter-toggle .ng-icon--chevron {
+  margin-left: auto;
+  transition: transform 0.2s ease;
+}
+
+.ng-shop-filter-toggle[aria-expanded="true"] .ng-icon--chevron {
+  transform: rotate(180deg);
+}
+
+/* SIDEBAR PANEL OPEN/CLOSE STATE — closed by default; toggled via .is-open on mobile/tablet.
+   Desktop (>=1025px) forces this back open in 10-responsive-harmony.css. */
+#ng-shop-sidebar-panel {
+  display: none;
+}
+
+#ng-shop-sidebar-panel.is-open {
+  display: block;
+}
+
+/* SIDEBAR FILTER PANEL STYLING */
+.ng-shop-layout {
+  align-items: flex-start;
+  gap: 1.25rem;
+}
+
+.ng-product-sidebar {
+  background: var(--ng-dark-surface) !important;
+  border: 1px solid var(--ng-border) !important;
+  border-radius: 16px !important;
+  padding: 1.5rem !important;
+  box-shadow: var(--ng-shadow) !important;
+}
+
+/* Visually separate each stacked filter section (price, categories, stock, attribute, rating)
+   so the panel reads as distinct groups instead of one dense block. */
+.ng-product-sidebar>* {
+  padding-bottom: 1.5rem !important;
+  margin-bottom: 1.5rem !important;
+  border-bottom: 1px solid var(--ng-border) !important;
+}
+
+.ng-product-sidebar>*:last-child {
+  padding-bottom: 0 !important;
+  margin-bottom: 0 !important;
+  border-bottom: none !important;
+}
+
+.ng-product-sidebar h3,
+.ng-product-sidebar .wp-block-heading,
+.ng-product-sidebar .wc-block-components-filter-wrapper__title {
+  font-family: var(--ng-font-display, 'Outfit', sans-serif) !important;
+  font-size: 0.82rem !important;
+  font-weight: 800 !important;
+  text-transform: uppercase !important;
+  letter-spacing: 0.1em !important;
+  color: var(--ng-cream) !important;
+  margin-top: 0 !important;
+  margin-bottom: 1.2rem !important;
+  padding-bottom: 0.6rem !important;
+  border-bottom: 1px solid rgba(166, 124, 46, 0.25) !important;
+}
+
+.ng-product-sidebar ul {
+  list-style: none !important;
+  padding: 0 !important;
+  margin: 0 !important;
+}
+
+.ng-product-sidebar li {
+  display: flex !important;
+  align-items: center !important;
+  justify-content: space-between !important;
+  padding: 0.45rem 0 !important;
+  border-bottom: 1px dashed rgba(255, 255, 255, 0.06) !important;
+}
+
+.ng-product-sidebar li a {
+  color: var(--ng-muted) !important;
+  font-size: 0.92rem !important;
+  font-weight: 500 !important;
+  text-decoration: none !important;
+  transition: color 0.2s ease !important;
+}
+
+.ng-product-sidebar li a:hover {
+  color: var(--ng-gold) !important;
+}
+
+.ng-product-sidebar li .count,
+.ng-product-sidebar li span.count {
+  color: var(--ng-gold) !important;
+  font-size: 0.85rem !important;
+  font-weight: 600 !important;
+  opacity: 0.85 !important;
+}
+
+/* PRICE FILTER SLIDER */
+.wc-block-price-filter__range-input,
+.wc-block-components-price-slider__range-input {
+  accent-color: #A67C2E !important;
+}
+
+.wc-block-price-filter__range-text,
+.wc-block-components-price-slider__amount {
+  color: var(--ng-cream) !important;
+  font-weight: 700 !important;
+}
+
+/* SHOP TOOLBAR & DEFAULT SORTING POSITIONING */
+.ng-shop-toolbar {
+  display: flex !important;
+  align-items: center !important;
+  justify-content: space-between !important;
+  gap: 1rem !important;
+  padding: 0 0 1rem 0 !important;
+  margin: 0 0 1.5rem 0 !important;
+  background: transparent !important;
+  border: none !important;
+  border-bottom: 1px solid rgba(166, 124, 46, 0.2) !important;
+  border-radius: 0 !important;
+  box-shadow: none !important;
+  width: 100% !important;
+}
+
+.ng-shop-toolbar .woocommerce-result-count,
+.ng-shop-toolbar .wc-block-product-results-count {
+  color: var(--ng-muted) !important;
+  font-family: var(--ng-font-body) !important;
+  font-size: 0.9rem !important;
+  font-weight: 500 !important;
+  margin: 0 !important;
+  padding: 0 !important;
+}
+
+.ng-shop-toolbar .woocommerce-ordering,
+.ng-shop-toolbar .wc-block-catalog-sorting {
+  margin: 0 !important;
+  padding: 0 !important;
+  display: flex !important;
+  align-items: center !important;
+}
+
+/* LUXURY CUSTOM SELECT DROPDOWN FOR SORTING */
+.woocommerce-ordering select,
+.wc-block-catalog-sorting select,
+.wc-block-catalog-sorting__select {
+  appearance: none !important;
+  -webkit-appearance: none !important;
+  -moz-appearance: none !important;
+  background-color: var(--ng-dark) !important;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='%23A67C2E' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M6 9l6 6 6-6'/%3E%3C/svg%3E") !important;
+  background-repeat: no-repeat !important;
+  background-position: right 1rem center !important;
+  background-size: 1rem !important;
+  color: var(--ng-cream) !important;
+  font-family: var(--ng-font-body) !important;
+  font-size: 0.88rem !important;
+  font-weight: 600 !important;
+  padding: 0.55rem 2.6rem 0.55rem 1.1rem !important;
+  border: 1px solid rgba(166, 124, 46, 0.4) !important;
+  border-radius: 99px !important;
+  cursor: pointer !important;
+  outline: none !important;
+  transition: all 0.25s ease !important;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15) !important;
+}
+
+.woocommerce-ordering select:hover,
+.wc-block-catalog-sorting select:hover,
+.wc-block-catalog-sorting select:focus {
+  border-color: var(--ng-gold) !important;
+  box-shadow: 0 4px 16px rgba(166, 124, 46, 0.3) !important;
+}
+
+.woocommerce-ordering select option,
+.wc-block-catalog-sorting select option {
+  background-color: #1A1A1A !important;
+  color: #FFFFFF !important;
+  padding: 0.5rem !important;
+}

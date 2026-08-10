@@ -1,0 +1,296 @@
+/* =============================================================================
+   12. ORDER CONFIRMATION (WooCommerce Order Confirmation blocks)
+   =============================================================================
+   This page (/checkout/order-received/{id}/) is served by WooCommerce's own
+   "order-confirmation" block template, NOT the theme's woocommerce/checkout/
+   thankyou.php override — that classic template is only used by the
+   [woocommerce_checkout] shortcode, which this store's block-based Checkout
+   never invokes. Every selector below targets the real wc-block-order-
+   confirmation-* markup WooCommerce actually renders here.
+   ============================================================================= */
+
+body.woocommerce-order-received main.wp-block-group {
+  width: min(900px, 94%) !important;
+  margin-inline: auto !important;
+  padding-block: 2.5rem 4rem !important;
+  box-sizing: border-box !important;
+}
+
+/* ── STATUS (heading + confirmation text) ── */
+body.woocommerce-order-received .wc-block-order-confirmation-status {
+  text-align: center;
+  padding: 2rem 1.5rem;
+  background: #ffffff;
+  border: 1px solid rgba(26,26,26,0.09);
+  border-radius: 16px;
+  box-shadow: 0 2px 16px rgba(0,0,0,0.06);
+  margin-bottom: 1.75rem;
+}
+body.woocommerce-order-received .wc-block-order-confirmation-status h1 {
+  font-family: 'Outfit', sans-serif;
+  font-size: clamp(1.6rem, 4vw, 2.3rem);
+  font-weight: 800;
+  color: #1a1a1a;
+  margin: 0 0 0.6rem 0;
+  line-height: 1.25;
+}
+body.woocommerce-order-received .wc-block-order-confirmation-status p {
+  font-size: 1rem;
+  color: #555;
+  max-width: 480px;
+  margin-inline: auto;
+}
+body.woocommerce-order-received .wc-block-order-confirmation-status-description {
+  text-align: center;
+  margin-bottom: 1.75rem;
+  color: #555;
+  font-size: 0.92rem;
+}
+
+/* ── ORDER SUMMARY — meta card grid (order #, date, total, email, payment) ── */
+body.woocommerce-order-received .wc-block-order-confirmation-summary {
+  margin: 0 0 1.75rem 0 !important;
+}
+body.woocommerce-order-received .wc-block-order-confirmation-summary-list {
+  display: grid !important;
+  grid-template-columns: repeat(auto-fit, minmax(140px, 1fr)) !important;
+  gap: 0.85rem !important;
+}
+body.woocommerce-order-received .wc-block-order-confirmation-summary-list-item {
+  background: #ffffff;
+  border: 1px solid rgba(26,26,26,0.09);
+  border-bottom: 3px solid rgba(166,124,46,0.2);
+  border-radius: 12px;
+  padding: 1rem 0.9rem 0.9rem;
+  box-shadow: 0 2px 10px rgba(0,0,0,0.04);
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+  transition: transform 0.2s ease, border-bottom-color 0.2s ease;
+}
+body.woocommerce-order-received .wc-block-order-confirmation-summary-list-item:hover {
+  transform: translateY(-2px);
+  border-bottom-color: #A67C2E;
+}
+body.woocommerce-order-received .wc-block-order-confirmation-summary-list-item__key {
+  display: block;
+  font-size: 0.65rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: #A67C2E;
+}
+body.woocommerce-order-received .wc-block-order-confirmation-summary-list-item__value {
+  font-size: 0.92rem;
+  font-weight: 700;
+  color: #1a1a1a;
+  word-break: break-word;
+}
+
+/* ── TOTALS + DOWNLOADS TABLES — card wrapper, gold header, scrolls instead of squishing ── */
+body.woocommerce-order-received .wc-block-order-confirmation-totals-wrapper,
+body.woocommerce-order-received .wc-block-order-confirmation-downloads-wrapper {
+  margin: 0 0 1.75rem 0 !important;
+}
+body.woocommerce-order-received .wc-block-order-confirmation-totals-wrapper .wp-block-heading,
+body.woocommerce-order-received .wc-block-order-confirmation-downloads-wrapper .wp-block-heading,
+body.woocommerce-order-received .wc-block-order-confirmation-shipping-wrapper .wp-block-heading,
+body.woocommerce-order-received .wc-block-order-confirmation-billing-wrapper .wp-block-heading,
+body.woocommerce-order-received .wc-block-order-confirmation-additional-fields-wrapper .wp-block-heading {
+  font-family: 'Outfit', sans-serif !important;
+  font-size: 1.05rem !important;
+  font-weight: 700 !important;
+  color: #1a1a1a !important;
+  margin: 0 0 0.85rem 0 !important;
+  padding-bottom: 0.6rem !important;
+  border-bottom: 2px solid rgba(166,124,46,0.18) !important;
+}
+body.woocommerce-order-received .wc-block-order-confirmation-totals,
+body.woocommerce-order-received .wc-block-order-confirmation-downloads {
+  overflow-x: auto !important;
+  -webkit-overflow-scrolling: touch;
+}
+body.woocommerce-order-received .wc-block-order-confirmation-totals table,
+body.woocommerce-order-received .wc-block-order-confirmation-downloads table {
+  background: #ffffff !important;
+  border-radius: 12px !important;
+  box-shadow: 0 2px 14px rgba(0,0,0,0.05) !important;
+  min-width: 420px;
+}
+body.woocommerce-order-received .wc-block-order-confirmation-totals table thead th {
+  font-size: 0.65rem !important;
+  font-weight: 800 !important;
+  text-transform: uppercase !important;
+  letter-spacing: 0.1em !important;
+  color: #A67C2E !important;
+  background: rgba(166,124,46,0.05) !important;
+}
+body.woocommerce-order-received .wc-block-order-confirmation-totals table tfoot th,
+body.woocommerce-order-received .wc-block-order-confirmation-totals table tfoot td {
+  color: #555;
+}
+body.woocommerce-order-received .wc-block-order-confirmation-totals table tfoot tr:last-child th,
+body.woocommerce-order-received .wc-block-order-confirmation-totals table tfoot tr:last-child td {
+  font-size: 1rem !important;
+  font-weight: 700 !important;
+  color: #A67C2E !important;
+}
+
+/* ── SHIPPING / BILLING ADDRESS CARDS ── */
+body.woocommerce-order-received .wc-block-order-confirmation-address-wrapper {
+  display: grid !important;
+  grid-template-columns: repeat(2, 1fr) !important;
+  gap: 1rem !important;
+  margin-block-start: 1.75rem !important;
+}
+body.woocommerce-order-received .wc-block-order-confirmation-address-wrapper.wp-block-columns {
+  flex-wrap: nowrap !important;
+}
+body.woocommerce-order-received .wc-block-order-confirmation-shipping-address,
+body.woocommerce-order-received .wc-block-order-confirmation-billing-address {
+  background: #ffffff !important;
+  border: 1px solid rgba(26,26,26,0.09) !important;
+  border-radius: 14px !important;
+  padding: 1.5rem !important;
+  box-shadow: 0 2px 14px rgba(0,0,0,0.05) !important;
+}
+body.woocommerce-order-received .wc-block-order-confirmation-shipping-address address,
+body.woocommerce-order-received .wc-block-order-confirmation-billing-address address {
+  color: #555 !important;
+  font-size: 0.88rem !important;
+  line-height: 1.9 !important;
+}
+
+/* ── ADDITIONAL FIELDS ── */
+body.woocommerce-order-received .wc-block-order-confirmation-additional-fields-wrapper {
+  margin: 1.75rem 0 !important;
+}
+body.woocommerce-order-received .wc-block-components-additional-fields-list {
+  background: #ffffff;
+  box-shadow: 0 2px 14px rgba(0,0,0,0.05);
+}
+
+/* ── CONTINUE SHOPPING CTA (added via woocommerce_thankyou hook) ── */
+body.woocommerce-order-received .ng-order-confirmation-actions {
+  display: flex;
+  justify-content: center;
+  margin-top: 2rem;
+}
+
+/* ── RESPONSIVE: TABLET (≤768px) ── */
+@media (max-width: 768px) {
+  body.woocommerce-order-received main.wp-block-group {
+    padding-block: 1.75rem 3rem !important;
+  }
+  body.woocommerce-order-received .wc-block-order-confirmation-status {
+    padding: 1.5rem 1.1rem;
+  }
+  body.woocommerce-order-received .wc-block-order-confirmation-address-wrapper {
+    grid-template-columns: 1fr !important;
+  }
+}
+
+/* ── RESPONSIVE: MOBILE (≤480px) ── */
+@media (max-width: 480px) {
+  body.woocommerce-order-received .wc-block-order-confirmation-summary-list {
+    grid-template-columns: repeat(2, 1fr) !important;
+    gap: 0.6rem !important;
+  }
+  body.woocommerce-order-received .wc-block-order-confirmation-summary-list-item:last-child:nth-child(odd) {
+    grid-column: span 2 !important;
+  }
+  body.woocommerce-order-received .wc-block-order-confirmation-shipping-address,
+  body.woocommerce-order-received .wc-block-order-confirmation-billing-address {
+    padding: 1.1rem;
+  }
+}
+
+/* ── MOBILE (≤600px): order-items table becomes stacked invoice cards
+   instead of a horizontally-scrolling table — the Product/Total table only
+   has 2 columns, so this converts cleanly. Downloads table (rarer, more
+   columns) keeps the horizontal-scroll fallback from the tablet tier. ── */
+@media (max-width: 600px) {
+  body.woocommerce-order-received .wc-block-order-confirmation-totals {
+    overflow-x: visible !important;
+  }
+  body.woocommerce-order-received .wc-block-order-confirmation-totals table {
+    min-width: 0;
+    box-shadow: none !important;
+  }
+  body.woocommerce-order-received .wc-block-order-confirmation-totals__table thead {
+    position: absolute !important;
+    width: 1px !important;
+    height: 1px !important;
+    overflow: hidden !important;
+    clip: rect(0 0 0 0) !important;
+    white-space: nowrap !important;
+  }
+  body.woocommerce-order-received .wc-block-order-confirmation-totals__table,
+  body.woocommerce-order-received .wc-block-order-confirmation-totals__table tbody,
+  body.woocommerce-order-received .wc-block-order-confirmation-totals__table tfoot,
+  body.woocommerce-order-received .wc-block-order-confirmation-totals__table tr,
+  body.woocommerce-order-received .wc-block-order-confirmation-totals__table td,
+  body.woocommerce-order-received .wc-block-order-confirmation-totals__table th {
+    display: block !important;
+    width: 100% !important;
+    box-sizing: border-box !important;
+  }
+  body.woocommerce-order-received .wc-block-order-confirmation-totals__table tbody tr {
+    background: #ffffff;
+    border: 1px solid rgba(26,26,26,0.09);
+    border-radius: 10px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+    padding: 0.85rem 0.9rem;
+    margin-bottom: 0.65rem;
+    display: flex !important;
+    flex-direction: column;
+    gap: 0.4rem;
+  }
+  body.woocommerce-order-received .wc-block-order-confirmation-totals__table tbody td {
+    border: none !important;
+    padding: 0 !important;
+    text-align: left !important;
+  }
+  body.woocommerce-order-received .wc-block-order-confirmation-totals__table tbody td.wc-block-order-confirmation-totals__total {
+    font-weight: 700 !important;
+    color: #A67C2E !important;
+    font-size: 0.95rem !important;
+    text-align: left !important;
+  }
+  body.woocommerce-order-received .wc-block-order-confirmation-totals__table tfoot {
+    margin-top: 0.75rem;
+    border-top: 1px solid rgba(26,26,26,0.08);
+    padding-top: 0.75rem;
+  }
+  body.woocommerce-order-received .wc-block-order-confirmation-totals__table tfoot tr {
+    display: flex !important;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+    padding: 0.4rem 0;
+  }
+  body.woocommerce-order-received .wc-block-order-confirmation-totals__table tfoot th,
+  body.woocommerce-order-received .wc-block-order-confirmation-totals__table tfoot td {
+    border: none !important;
+    padding: 0 !important;
+    width: auto !important;
+    font-size: 0.88rem !important;
+    text-align: right !important;
+  }
+  body.woocommerce-order-received .wc-block-order-confirmation-totals__table tfoot tr:last-of-type th,
+  body.woocommerce-order-received .wc-block-order-confirmation-totals__table tfoot tr:last-of-type td {
+    font-size: 1.05rem !important;
+    font-weight: 800 !important;
+    color: #A67C2E !important;
+  }
+}
+
+/* ── RESPONSIVE: DESKTOP (≥1024px) ── */
+@media (min-width: 1024px) {
+  body.woocommerce-order-received main.wp-block-group {
+    padding-block: 3.5rem 5rem !important;
+  }
+  body.woocommerce-order-received .wc-block-order-confirmation-summary-list {
+    grid-template-columns: repeat(5, 1fr) !important;
+  }
+}

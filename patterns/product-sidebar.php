@@ -4,6 +4,11 @@
   * Slug: vw-modern-ecommerce/product-sidebar
   * Categories: vw-modern-ecommerce-sidebar
   */
+
+if ( ! defined( 'ABSPATH' ) ) {
+	exit;
+}
+
 ?>
 <!-- wp:group {"className":"ng-product-sidebar","style":{"spacing":{"padding":{"top":"var:preset|spacing|60","right":"var:preset|spacing|60","bottom":"var:preset|spacing|60","left":"var:preset|spacing|60"}},"elements":{"link":{"color":{"text":"var:preset|color|ng-gold"}}}},"backgroundColor":"ng-dark-surface","textColor":"ng-cream","layout":{"type":"constrained"}} -->
 <div class="wp-block-group ng-product-sidebar has-no-hover-shadow-dark has-ng-cream-color has-ng-dark-surface-background-color has-text-color has-background has-link-color" style="padding-top:var(--wp--preset--spacing--60);padding-right:var(--wp--preset--spacing--60);padding-bottom:var(--wp--preset--spacing--60);padding-left:var(--wp--preset--spacing--60)"><!-- wp:woocommerce/filter-wrapper {"filterType":"price-filter"} -->

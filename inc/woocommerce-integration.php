@@ -45,7 +45,7 @@ if ( ! function_exists( 'ng_get_shop_categories' ) ) {
 
 		$terms = get_terms( wp_parse_args( $args, $defaults ) );
 
-		if ( is_wp_error( $terms ) || empty( $terms ) ) {
+		if ( is_wp_error( $terms ) || ! is_array( $terms ) || empty( $terms ) ) {
 			$cache[ $cache_key ] = array();
 			return $cache[ $cache_key ];
 		}
@@ -99,6 +99,49 @@ if ( ! function_exists( 'ng_get_category_thumbnail_html' ) ) {
 	}
 }
 
+if ( ! function_exists( 'ng_get_product_thumbnail_html' ) ) {
+	/**
+	 * Render a product thumbnail with a graceful fallback, matching category card design.
+	 *
+	 * @param WC_Product $product WooCommerce product.
+	 * @param string     $size Registered image size.
+	 * @return string Escaped HTML markup inside 1:1 container.
+	 */
+	function ng_get_product_thumbnail_html( $product, $size = 'woocommerce_thumbnail' ) {
+		if ( ! ( $product instanceof WC_Product ) ) {
+			return '';
+		}
+
+		$image_id    = $product->get_image_id();
+		$is_fallback = false;
+
+		if ( $image_id ) {
+			$image = wp_get_attachment_image(
+				$image_id,
+				$size,
+				false,
+				array( 'alt' => esc_attr( $product->get_name() ), 'loading' => 'lazy' )
+			);
+		} else {
+			$image = '';
+		}
+
+		if ( ! $image ) {
+			$is_fallback  = true;
+			$fallback_src = esc_url( get_template_directory_uri() . '/images/hero-plate-premium.png' );
+			$image        = sprintf(
+				'<img src="%s" alt="%s" loading="lazy" width="300" height="300">',
+				$fallback_src,
+				esc_attr( $product->get_name() )
+			);
+		}
+
+		$wrap_class = $is_fallback ? 'ng-product-card__thumb ng-product-card__thumb--fallback' : 'ng-product-card__thumb ng-product-card__thumb--real';
+
+		return sprintf( '<div class="%s">%s</div>', esc_attr( $wrap_class ), $image );
+	}
+}
+
 if ( ! function_exists( 'ng_get_featured_products' ) ) {
 	/**
 	 * Get products for the homepage products section.
@@ -145,40 +188,58 @@ if ( ! function_exists( 'ng_get_featured_products' ) ) {
 	}
 }
 
-if ( ! function_exists( 'ng_cart_count_fragment' ) ) {
+if ( ! function_exists( 'ng_view_order_actions_html' ) ) {
 	/**
-	 * Keep the navbar cart count badge live via WooCommerce's cart
-	 * fragments mechanism (AJAX on add-to-cart AND on every page load).
+	 * Continue Shopping / Back to Orders action row on the My Account
+	 * "View Order" screen.
 	 *
-	 * The header pattern's PHP runs once at the `init` hook (pattern
-	 * registration time), before WooCommerce's session-based cart object
-	 * exists (that's set up on `wp_loaded`) — so the count can't be baked
-	 * into the static markup. Fragments are the correct mechanism: the
-	 * navbar renders an empty count span, and wc-cart-fragments.js fills
-	 * it in via AJAX right after the page loads, and again after every
-	 * add-to-cart, without a full page reload.
+	 * WooCommerce core never renders a return-to-shop link on this
+	 * template — hooked at priority 20 on `woocommerce_view_order` so it
+	 * lands after `woocommerce_order_details_table` (priority 10), i.e.
+	 * after the order table and billing/shipping address cards.
 	 *
-	 * @param array $fragments Fragment selector => HTML map.
-	 * @return array
+	 * @param int $order_id Order ID.
 	 */
-	function ng_cart_count_fragment( $fragments ) {
-		$count = ( WC()->cart ) ? WC()->cart->get_cart_contents_count() : 0;
-		$cart_url = function_exists( 'wc_get_cart_url' ) ? wc_get_cart_url() : '#';
-		$has_items_class = $count > 0 ? 'has-items' : '';
-
-		ob_start();
+	function ng_view_order_actions_html( $order_id ) {
 		?>
-		<a href="<?php echo esc_url( $cart_url ); ?>" class="ng-navbar__cart <?php echo esc_attr( $has_items_class ); ?>" aria-label="<?php esc_attr_e( 'View cart', 'vw-modern-ecommerce' ); ?>">
-			<?php echo ng_icon( 'bag' ); ?>
-			<span class="ng-navbar__cart-dot" aria-hidden="true"></span>
-		</a>
+		<div class="ng-thankyou-actions ng-view-order-actions">
+			<a href="<?php echo esc_url( apply_filters( 'woocommerce_return_to_shop_redirect', wc_get_page_permalink( 'shop' ) ) ); ?>" class="ng-btn ng-btn--primary">
+				<?php esc_html_e( 'Continue Shopping →', 'vw-modern-ecommerce' ); ?>
+			</a>
+			<a href="<?php echo esc_url( wc_get_account_endpoint_url( 'orders' ) ); ?>" class="ng-btn ng-btn--ghost">
+				<?php esc_html_e( 'Back to Orders', 'vw-modern-ecommerce' ); ?>
+			</a>
+		</div>
 		<?php
-		$fragments['.ng-navbar__cart'] = ob_get_clean();
-
-		return $fragments;
 	}
 }
-add_filter( 'woocommerce_add_to_cart_fragments', 'ng_cart_count_fragment' );
+add_action( 'woocommerce_view_order', 'ng_view_order_actions_html', 20 );
+
+if ( ! function_exists( 'ng_order_confirmation_actions_html' ) ) {
+	/**
+	 * Continue Shopping CTA on the order-received page.
+	 *
+	 * This store's checkout uses the WooCommerce Checkout/Order Confirmation
+	 * blocks, not the classic [woocommerce_checkout] shortcode, so
+	 * woocommerce/checkout/thankyou.php never renders here. `woocommerce_thankyou`
+	 * still fires though — the Order Confirmation block's "Additional
+	 * Information" block calls it directly (after temporarily removing the
+	 * classic woocommerce_order_details_table callback so nothing double-
+	 * renders), only when the current visitor has permission to view the order.
+	 *
+	 * @param int $order_id Order ID.
+	 */
+	function ng_order_confirmation_actions_html( $order_id ) {
+		?>
+		<div class="ng-order-confirmation-actions">
+			<a href="<?php echo esc_url( apply_filters( 'woocommerce_return_to_shop_redirect', wc_get_page_permalink( 'shop' ) ) ); ?>" class="ng-btn ng-btn--primary">
+				<?php esc_html_e( 'Continue Shopping →', 'vw-modern-ecommerce' ); ?>
+			</a>
+		</div>
+		<?php
+	}
+}
+add_action( 'woocommerce_thankyou', 'ng_order_confirmation_actions_html' );
 
 if ( ! function_exists( 'ng_get_recent_reviews' ) ) {
 	/**
@@ -211,24 +272,189 @@ if ( ! function_exists( 'ng_get_recent_reviews' ) ) {
 	}
 }
 
-if ( ! function_exists( 'ng_reviews_empty_state_html' ) ) {
+if ( ! function_exists( 'ng_get_review_initials' ) ) {
 	/**
-	 * Shared on-brand empty state for the reviews section.
+	 * Turn a display name into up to two uppercase initials, for the
+	 * review-card avatar circle.
 	 *
+	 * @param string $name Full name.
+	 * @return string Up to 2 uppercase letters.
+	 */
+	function ng_get_review_initials( $name ) {
+		$initials = '';
+		foreach ( explode( ' ', trim( $name ) ) as $name_part ) {
+			$initials .= mb_substr( $name_part, 0, 1 );
+		}
+		return mb_strtoupper( mb_substr( $initials, 0, 2 ) );
+	}
+}
+
+if ( ! function_exists( 'ng_get_seed_reviews' ) ) {
+	/**
+	 * Curated seed reviews for the homepage testimonial marquee.
+	 *
+	 * First-party sample content written to give the reviews section
+	 * substance before real customer reviews accumulate. Always shown
+	 * alongside real approved WooCommerce reviews (see
+	 * ng_get_display_reviews()) — never a stand-in that disappears once
+	 * real reviews exist.
+	 *
+	 * @return array[] { name, subtitle, quote, rating }
+	 */
+	function ng_get_seed_reviews() {
+		return array(
+			array(
+				'name'     => 'Ayesha Raza',
+				'subtitle' => 'Dinner Set — Lahore',
+				'quote'    => "The gold-rim design looks so premium on our dining table, guests always ask where we got it. Doesn't chip or fade even after months of daily use.",
+				'rating'   => 5,
+			),
+			array(
+				'name'     => 'Bilal Ahmed',
+				'subtitle' => 'Serving Bowls — Karachi',
+				'quote'    => 'Ordered for my restaurant and honestly these are tougher than ceramic. Survived a few drops with zero cracks. Great value for bulk orders.',
+				'rating'   => 5,
+			),
+			array(
+				'name'     => 'Sana Tariq',
+				'subtitle' => 'Tea Set — Islamabad',
+				'quote'    => 'Bought this as a wedding gift and the finishing is beautiful. Feels heavy and premium in hand, not cheap plastic at all.',
+				'rating'   => 5,
+			),
+			array(
+				'name'     => 'Usman Khalid',
+				'subtitle' => 'Dinner Plates — Faisalabad',
+				'quote'    => "Colors haven't faded after regular dishwasher use. Exactly what we needed for daily family meals.",
+				'rating'   => 4,
+			),
+			array(
+				'name'     => 'Mehwish Iqbal',
+				'subtitle' => 'Dessert Bowls — Multan',
+				'quote'    => 'Delivery was quick and packaging was solid, nothing arrived broken. The gold rim catches the light beautifully at dinner parties.',
+				'rating'   => 5,
+			),
+			array(
+				'name'     => 'Hamza Sheikh',
+				'subtitle' => 'Full Crockery Set — Rawalpindi',
+				'quote'    => 'Switched our whole kitchen from ceramic to National Gold melamine. Lighter, unbreakable, and honestly looks more elegant.',
+				'rating'   => 5,
+			),
+		);
+	}
+}
+
+if ( ! function_exists( 'ng_get_display_reviews' ) ) {
+	/**
+	 * Normalized review list for the homepage marquee: curated seed
+	 * reviews plus any real approved WooCommerce reviews, merged into one
+	 * shape so the template has a single render path.
+	 *
+	 * @param int $limit_real Max real reviews to pull in alongside the seed set.
+	 * @return array[] { rating, quote, name, subtitle, initials }
+	 */
+	function ng_get_display_reviews( $limit_real = 8 ) {
+		$display = array();
+
+		foreach ( ng_get_seed_reviews() as $seed ) {
+			$display[] = array(
+				'rating'   => (int) $seed['rating'],
+				'quote'    => $seed['quote'],
+				'name'     => $seed['name'],
+				'subtitle' => $seed['subtitle'],
+				'initials' => ng_get_review_initials( $seed['name'] ),
+			);
+		}
+
+		foreach ( ng_get_recent_reviews( $limit_real ) as $comment ) {
+			$product = get_post( $comment->comment_post_ID );
+			$display[] = array(
+				'rating'   => (int) get_comment_meta( $comment->comment_ID, 'rating', true ),
+				'quote'    => wp_trim_words( $comment->comment_content, 40 ),
+				'name'     => $comment->comment_author,
+				'subtitle' => $product ? get_the_title( $product ) : '',
+				'initials' => ng_get_review_initials( $comment->comment_author ),
+			);
+		}
+
+		return $display;
+	}
+}
+
+if ( ! function_exists( 'ng_get_review_card_html' ) ) {
+	/**
+	 * Render one review card for the testimonial marquee.
+	 *
+	 * @param array $review { rating, quote, name, subtitle, initials } from ng_get_display_reviews().
 	 * @return string Escaped HTML.
 	 */
-	function ng_reviews_empty_state_html() {
+	function ng_get_review_card_html( $review ) {
 		ob_start();
 		?>
-		<div class="ng-empty-state">
-			<div class="ng-empty-state__icon"><?php echo ng_icon( 'verified' ); ?></div>
-			<h3 class="ng-empty-state__title"><?php esc_html_e( 'Be Our First Reviewer', 'vw-modern-ecommerce' ); ?></h3>
-			<p class="ng-empty-state__text"><?php esc_html_e( "We're just getting started — customer reviews will appear here as soon as orders start coming in.", 'vw-modern-ecommerce' ); ?></p>
+		<div class="ng-review-card">
+			<p class="ng-review-card__quote">&ldquo;<?php echo esc_html( $review['quote'] ); ?>&rdquo;</p>
+			<div class="ng-review-card__author">
+				<div class="ng-review-card__avatar"><?php echo $review['initials'] ? esc_html( $review['initials'] ) : 'NG'; ?></div>
+				<div class="ng-review-card__info">
+					<h4 class="ng-review-card__name"><?php echo esc_html( $review['name'] ); ?></h4>
+					<?php if ( $review['subtitle'] ) : ?>
+					<span class="ng-review-card__city"><?php echo esc_html( $review['subtitle'] ); ?></span>
+					<?php endif; ?>
+				</div>
+			</div>
 		</div>
 		<?php
 		return ob_get_clean();
 	}
 }
+
+if ( ! function_exists( 'ng_get_cart_link_html' ) ) {
+	/**
+	 * Render the navbar cart icon + count badge + accessible label as one unit.
+	 *
+	 * Shared by the initial server render (header-default.php) and by
+	 * ng_cart_link_fragment() below, so the two never drift apart and the
+	 * badge can be kept fresh via WooCommerce's built-in AJAX cart
+	 * fragments instead of a full page reload.
+	 *
+	 * @return string Escaped HTML.
+	 */
+	function ng_get_cart_link_html() {
+		$cart_count = ( function_exists( 'WC' ) && WC()->cart ) ? WC()->cart->get_cart_contents_count() : 0;
+		$cart_url   = function_exists( 'wc_get_cart_url' ) ? wc_get_cart_url() : '#';
+		$label      = sprintf(
+			/* translators: %d: number of items in cart */
+			_n( 'View cart (%d item)', 'View cart (%d items)', $cart_count, 'vw-modern-ecommerce' ),
+			$cart_count
+		);
+		$count_class = 'ng-navbar__cart-count' . ( $cart_count > 0 ? '' : ' is-hidden' );
+
+		ob_start();
+		?>
+		<a href="<?php echo esc_url( $cart_url ); ?>" class="ng-navbar__cart" id="ng-navbar-cart-link" aria-label="<?php echo esc_attr( $label ); ?>">
+			<?php echo ng_icon( 'bag' ); ?>
+			<span class="<?php echo esc_attr( $count_class ); ?>"><?php echo esc_html( $cart_count > 99 ? '99+' : $cart_count ); ?></span>
+		</a>
+		<?php
+		return ob_get_clean();
+	}
+}
+
+if ( ! function_exists( 'ng_cart_link_fragment' ) ) {
+	/**
+	 * Keep the navbar cart badge in sync via WooCommerce's built-in AJAX
+	 * cart fragments (core `woocommerce_add_to_cart_fragments` filter +
+	 * the bundled wc-cart-fragments script), instead of a full page reload
+	 * on every add-to-cart.
+	 *
+	 * @param array $fragments Existing fragments keyed by CSS selector.
+	 * @return array
+	 */
+	function ng_cart_link_fragment( $fragments ) {
+		$fragments['#ng-navbar-cart-link'] = ng_get_cart_link_html();
+		return $fragments;
+	}
+}
+add_filter( 'woocommerce_add_to_cart_fragments', 'ng_cart_link_fragment' );
 
 if ( ! function_exists( 'ng_categories_empty_state_html' ) ) {
 	/**

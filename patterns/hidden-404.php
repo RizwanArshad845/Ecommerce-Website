@@ -4,6 +4,11 @@
  * Slug: vw-modern-ecommerce/hidden-404
  * Categories: template
  */
+
+if ( ! defined( 'ABSPATH' ) ) {
+	exit;
+}
+
 ?>
 <!-- wp:heading {"style":{"typography":{"fontWeight":"600","lineHeight":"1","fontStyle":"normal","fontSize":"clamp(90px, 22vw, 200px)"}},"textColor":"ng-cream","className":"has-text-align-center"} -->
 <h2 class="wp-block-heading has-text-align-center has-ng-cream-color has-text-color" style="font-size:clamp(90px, 22vw, 200px);font-style:normal;font-weight:600;line-height:1"> 4<mark style="background-color: rgba(0, 0, 0, 0);color:var(--wp--preset--color--ng-gold)" class="has-inline-color">0</mark>4 </h2>

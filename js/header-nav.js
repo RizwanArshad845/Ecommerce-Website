@@ -13,7 +13,7 @@
 			return;
 		}
 		options = options || {};
-		openPanels.push( { button: button, panel: panel } );
+		openPanels.push( { button: button, panel: panel, lockScroll: !! options.lockScroll } );
 
 		button.addEventListener( 'click', function ( event ) {
 			var willOpen = ! panel.classList.contains( 'is-open' );
@@ -25,6 +25,10 @@
 			panel.classList.toggle( 'is-open', willOpen );
 			button.setAttribute( 'aria-expanded', String( willOpen ) );
 			button.classList.toggle( 'is-active', willOpen );
+
+			if ( options.lockScroll ) {
+				document.body.classList.toggle( 'ng-scroll-locked', willOpen );
+			}
 
 			if ( willOpen ) {
 				var input = panel.querySelector( 'input[type="search"]' );
@@ -39,12 +43,19 @@
 		} );
 	}
 
+	function closePanel( entry ) {
+		entry.panel.classList.remove( 'is-open' );
+		entry.button.setAttribute( 'aria-expanded', 'false' );
+		entry.button.classList.remove( 'is-active' );
+		if ( entry.lockScroll ) {
+			document.body.classList.remove( 'ng-scroll-locked' );
+		}
+	}
+
 	function closeAllExcept( keepOpenPanel ) {
 		openPanels.forEach( function ( entry ) {
 			if ( entry.panel !== keepOpenPanel ) {
-				entry.panel.classList.remove( 'is-open' );
-				entry.button.setAttribute( 'aria-expanded', 'false' );
-				entry.button.classList.remove( 'is-active' );
+				closePanel( entry );
 			}
 		} );
 	}
@@ -57,9 +68,7 @@
 				}
 				var clickedInside = entry.panel.contains( event.target ) || entry.button.contains( event.target );
 				if ( ! clickedInside ) {
-					entry.panel.classList.remove( 'is-open' );
-					entry.button.setAttribute( 'aria-expanded', 'false' );
-					entry.button.classList.remove( 'is-active' );
+					closePanel( entry );
 				}
 			} );
 		} );
@@ -71,9 +80,11 @@
 				return;
 			}
 			openPanels.forEach( function ( entry ) {
-				entry.panel.classList.remove( 'is-open' );
-				entry.button.setAttribute( 'aria-expanded', 'false' );
-				entry.button.classList.remove( 'is-active' );
+				var wasOpen = entry.panel.classList.contains( 'is-open' );
+				closePanel( entry );
+				if ( wasOpen ) {
+					entry.button.focus();
+				}
 			} );
 		} );
 	}
@@ -136,39 +147,35 @@
 		} );
 	}
 
-	function initCartCounter() {
-		var cartLink = document.querySelector( '.ng-navbar__cart' );
-		if ( ! cartLink ) {
+	function initProductSlider() {
+		var container = document.getElementById( 'ng-products-scroll' );
+		var prevBtn = document.getElementById( 'ng-prod-prev' );
+		var nextBtn = document.getElementById( 'ng-prod-next' );
+
+		if ( ! container || ! prevBtn || ! nextBtn ) {
 			return;
 		}
 
-		function triggerDotPulse() {
-			cartLink.classList.add( 'has-items' );
-			var dot = cartLink.querySelector( '.ng-navbar__cart-dot' );
-			if ( dot ) {
-				dot.style.transform = 'scale(1.5)';
-				setTimeout( function () {
-					dot.style.transform = 'scale(1)';
-				}, 300 );
-			}
-		}
+		prevBtn.addEventListener( 'click', function () {
+			var scrollAmount = container.clientWidth * 0.75;
+			container.scrollBy( { left: -scrollAmount, behavior: 'smooth' } );
+		} );
 
-		if ( typeof jQuery !== 'undefined' ) {
-			jQuery( document.body ).on( 'added_to_cart updated_wc_div', function () {
-				triggerDotPulse();
-			} );
-		}
+		nextBtn.addEventListener( 'click', function () {
+			var scrollAmount = container.clientWidth * 0.75;
+			container.scrollBy( { left: scrollAmount, behavior: 'smooth' } );
+		} );
 	}
 
 	function init() {
-		toggle( document.getElementById( 'ng-mobile-nav-toggle' ), document.getElementById( 'ng-navbar-nav' ) );
+		toggle( document.getElementById( 'ng-mobile-nav-toggle' ), document.getElementById( 'ng-navbar-nav' ), { lockScroll: true } );
 		toggle( document.getElementById( 'ng-search-toggle' ), document.getElementById( 'ng-navbar-search' ), { stopPropagation: true } );
 		toggle( document.getElementById( 'ng-categories-dropdown-toggle' ), document.getElementById( 'ng-categories-dropdown-menu' ), { stopPropagation: true } );
 		toggle( document.getElementById( 'ng-shop-filter-toggle' ), document.getElementById( 'ng-shop-sidebar-panel' ) );
 
 		highlightActiveLink();
 		initCategorySlider();
-		initCartCounter();
+		initProductSlider();
 		closeOnOutsideClick();
 		closeOnEscape();
 	}

@@ -1,0 +1,542 @@
+/* =============================================================================
+   06. SECTIONS (ABOUT, REVIEWS, FAQ) & FOOTER MODULE
+   ============================================================================= */
+
+/* ── ABOUT US SECTION ── */
+.about-card {
+  background: var(--ng-dark-surface) !important;
+  border: 1px solid rgba(166, 124, 46, 0.2) !important;
+  border-radius: 14px !important;
+  padding: 1.3rem 1.2rem !important;
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.04) !important;
+  transition: transform 0.25s ease, border-color 0.25s ease, box-shadow 0.25s ease !important;
+  height: 100% !important;
+  box-sizing: border-box !important;
+}
+
+.about-card:hover {
+  transform: translateY(-2px) !important;
+  border-color: var(--ng-gold) !important;
+  box-shadow: 0 10px 24px rgba(166, 124, 46, 0.15) !important;
+}
+
+.about-card__title {
+  font-family: var(--ng-font-display) !important;
+  font-size: 1.05rem !important;
+  font-weight: 700 !important;
+  color: var(--ng-cream) !important;
+  margin: 0.5rem 0 0.4rem 0 !important;
+}
+
+.about-bullets,
+.about-card__bullets {
+  list-style: none !important;
+  padding: 0 !important;
+  margin: 0.4rem 0 0 !important;
+  display: flex !important;
+  flex-direction: column !important;
+  gap: 0.45rem !important;
+}
+
+.about-bullets li,
+.about-card__bullets li {
+  font-size: 0.85rem !important;
+  line-height: 1.45 !important;
+  color: var(--ng-muted) !important;
+  display: flex !important;
+  align-items: flex-start !important;
+  gap: 0.4rem !important;
+}
+
+.about-card__bullets li::before {
+  content: "•" !important;
+  color: var(--ng-gold) !important;
+  font-size: 1rem !important;
+  line-height: 1 !important;
+  margin-right: 0.2rem !important;
+}
+
+.about-icon {
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  width: 44px !important;
+  height: 44px !important;
+  border-radius: 12px !important;
+  background: rgba(166, 124, 46, 0.1) !important;
+  border: 1px solid rgba(166, 124, 46, 0.25) !important;
+  color: var(--ng-gold) !important;
+  margin-bottom: 0.4rem !important;
+}
+
+.about-icon .ng-icon {
+  width: 22px !important;
+  height: 22px !important;
+  color: var(--ng-gold) !important;
+}
+
+/* ── REVIEWS SECTION — AUTO-SCROLL MARQUEE ── */
+.ng-reviews-sec {
+  padding: 5rem 0;
+}
+
+.ng-reviews-track-wrap {
+  overflow: hidden;
+  mask-image: linear-gradient(90deg, transparent, #000 5%, #000 95%, transparent);
+  -webkit-mask-image: linear-gradient(90deg, transparent, #000 5%, #000 95%, transparent);
+}
+
+.ng-reviews-track {
+  display: flex;
+  gap: 1.5rem;
+  width: max-content;
+  animation: ng-marquee-scroll 36s linear infinite;
+}
+
+.ng-reviews-track-wrap:hover .ng-reviews-track,
+.ng-reviews-track-wrap:focus-within .ng-reviews-track {
+  animation-play-state: paused;
+}
+
+@keyframes ng-marquee-scroll {
+  from {
+    transform: translateX(0);
+  }
+
+  to {
+    transform: translateX(-50%);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .ng-reviews-track {
+    animation: none;
+  }
+}
+
+.ng-review-card {
+  flex: 0 0 300px;
+  width: 300px;
+  background: var(--ng-dark-surface);
+  border: 1px solid var(--ng-border);
+  box-shadow: var(--ng-shadow);
+  border-radius: var(--ng-radius-card);
+  padding: 1.8rem 1.4rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.ng-review-card__stars {
+  color: var(--ng-gold);
+  font-size: 1rem;
+  letter-spacing: 0.05em;
+}
+
+.ng-review-card__quote {
+  font-size: 0.88rem;
+  color: #333333;
+  line-height: 1.6;
+  margin: 0;
+  flex: 1;
+  font-style: italic;
+}
+
+.ng-review-card__author {
+  display: flex;
+  align-items: center;
+  gap: 0.8rem;
+  padding-top: 0.6rem;
+  border-top: 1px solid var(--ng-border);
+}
+
+.ng-review-card__avatar {
+  width: 42px;
+  height: 42px;
+  border-radius: 50%;
+  background: var(--ng-cream);
+  color: var(--ng-on-primary);
+  font-weight: 700;
+  font-size: 0.85rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.ng-review-card__name {
+  font-size: 0.95rem;
+  font-weight: 700;
+  color: var(--ng-cream);
+  margin: 0;
+}
+
+.ng-review-card__city {
+  font-size: 0.75rem;
+  color: var(--ng-muted);
+}
+
+/* ── FAQ SECTION ── */
+.ng-faq-sec {
+  padding: 5rem 0;
+}
+
+.ng-faq-grid {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  max-width: 860px;
+  margin-inline: auto;
+}
+
+.ng-faq-card {
+  background: var(--ng-dark-surface);
+  border: 1px solid var(--ng-border);
+  border-radius: var(--ng-radius-card);
+  padding: 1.2rem 1.5rem;
+  cursor: pointer;
+  transition: border-color 0.2s ease;
+}
+
+.ng-faq-card[open] {
+  border-color: var(--ng-border-strong);
+}
+
+.ng-faq-card__question {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-family: var(--ng-font-display);
+  font-size: 1.02rem;
+  font-weight: 600;
+  color: var(--ng-cream);
+  list-style: none;
+}
+
+.ng-faq-card__question::-webkit-details-marker {
+  display: none;
+}
+
+.ng-faq-card__icon {
+  color: var(--ng-muted);
+  font-size: 1.2rem;
+  font-weight: 400;
+}
+
+.ng-faq-card__answer {
+  padding-top: 0.8rem;
+  font-size: 0.9rem;
+  color: var(--ng-muted);
+  line-height: 1.6;
+}
+
+.ng-faq-card__answer p {
+  margin: 0;
+}
+
+/* ── CONTACT SECTION ── */
+.ng-contact-sec,
+.page-template-page-contact .site-main,
+.page-id-contact .site-main,
+.contact-section,
+.page-contact-wrapper {
+  padding-top: 4.5rem !important;
+  padding-bottom: 5rem !important;
+  margin-top: 1.5rem !important;
+  background: radial-gradient(circle at 80% 20%, rgba(166, 124, 46, 0.06), transparent 45%), var(--ng-dark);
+}
+
+.ng-contact-grid {
+  display: grid;
+  grid-template-columns: 1.1fr 0.9fr;
+  gap: clamp(2rem, 4vw, 3.5rem);
+  align-items: start;
+}
+
+.ng-contact-info {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  align-items: flex-start;
+}
+
+.ng-contact-details {
+  list-style: none;
+  margin: 0.5rem 0 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  font-size: 0.92rem;
+  color: var(--ng-muted);
+}
+
+.ng-contact-details a {
+  color: var(--ng-cream);
+  text-decoration: none;
+}
+
+.ng-contact-details a:hover {
+  color: var(--ng-gold);
+}
+
+.ng-contact-socials {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.6rem;
+  margin-top: 0.25rem;
+}
+
+.ng-contact-whatsapp-cta {
+  margin-top: 0.5rem;
+}
+
+.ng-contact-panel {
+  background: var(--ng-dark-surface);
+  border: 1px solid var(--ng-border);
+  border-radius: var(--ng-radius-card);
+  box-shadow: var(--ng-shadow);
+  padding: 2rem 1.8rem;
+  transition: border-color 0.25s ease, box-shadow 0.25s ease;
+}
+
+.ng-contact-panel:hover {
+  border-color: rgba(166, 124, 46, 0.3);
+  box-shadow: var(--ng-shadow-hover);
+}
+
+.ng-contact-panel__title {
+  font-family: var(--ng-font-display);
+  font-size: 1.05rem;
+  font-weight: 700;
+  color: var(--ng-cream);
+  margin: 0 0 0.9rem;
+  padding-bottom: 0.7rem;
+  border-bottom: 1px solid var(--ng-border);
+}
+
+.ng-contact-panel__address {
+  font-size: 0.95rem;
+  font-weight: 600;
+  color: var(--ng-cream);
+  margin: 0 0 0.75rem;
+  line-height: 1.6;
+}
+
+.ng-contact-panel__note {
+  font-size: 0.85rem;
+  color: var(--ng-muted);
+  line-height: 1.6;
+  margin: 0;
+}
+
+@media (max-width: 768px) {
+  .ng-contact-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .ng-contact-info {
+    align-items: center;
+    text-align: center;
+  }
+
+  .ng-contact-details {
+    align-items: center;
+  }
+
+  .ng-contact-socials {
+    justify-content: center;
+  }
+}
+
+/* ── FOOTER ── */
+.ng-footer {
+  background: radial-gradient(circle at 80% 0%, rgba(166, 124, 46, 0.05), transparent 40%), var(--ng-dark-mid);
+  border-top: 1px solid var(--ng-border);
+}
+
+.ng-footer__trust-bar {
+  border-bottom: 1px solid var(--ng-border);
+  padding: 1.6rem 0;
+}
+
+.ng-footer__trust-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 1.5rem;
+}
+
+.ng-trust-item {
+  display: flex;
+  align-items: center;
+  gap: 0.8rem;
+}
+
+.ng-trust-item__icon {
+  font-size: 1.5rem;
+  color: var(--ng-cream);
+  flex-shrink: 0;
+}
+
+.ng-trust-item__text {
+  display: flex;
+  flex-direction: column;
+}
+
+.ng-trust-item__text strong {
+  font-size: 0.85rem;
+  color: var(--ng-cream);
+}
+
+.ng-trust-item__text span {
+  font-size: 0.72rem;
+  color: var(--ng-muted);
+}
+
+.ng-footer__main {
+  padding: 3.5rem 0 2.5rem;
+}
+
+.ng-footer__grid {
+  display: grid;
+  grid-template-columns: 2fr 1fr 1.5fr;
+  gap: 2.5rem;
+}
+
+.ng-footer__desc {
+  font-size: 0.85rem;
+  color: var(--ng-muted);
+  line-height: 1.6;
+  margin: 0 0 1.2rem;
+}
+
+.ng-footer__socials {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.6rem;
+}
+
+.ng-footer__social {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.4rem;
+  width: 36px;
+  height: 36px;
+  background: transparent;
+  border: 1px solid var(--ng-border-strong);
+  color: var(--ng-cream);
+  text-decoration: none;
+  font-size: 0.75rem;
+  font-weight: 700;
+  border-radius: 50%;
+  transition: border-color 0.2s ease, background 0.2s ease;
+}
+
+.ng-footer__social .ng-icon {
+  width: 1rem;
+  height: 1rem;
+}
+
+.ng-footer__social:hover {
+  border-color: var(--ng-cream);
+  background: rgba(26, 26, 26, 0.04);
+}
+
+.ng-footer__social--label {
+  width: auto;
+  border-radius: var(--ng-radius-pill);
+  padding: 0.5rem 1rem;
+}
+
+.ng-footer__title {
+  font-family: var(--ng-font-display);
+  font-size: 1rem;
+  font-weight: 700;
+  color: var(--ng-cream);
+  margin: 0 0 1.2rem;
+}
+
+.ng-footer__list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.6rem;
+}
+
+.ng-footer__list a {
+  color: var(--ng-muted);
+  text-decoration: none;
+  font-size: 0.85rem;
+  transition: color 0.2s ease;
+}
+
+.ng-footer__list a:hover {
+  color: var(--ng-gold);
+}
+
+.ng-footer__contact {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.6rem;
+  font-size: 0.85rem;
+  color: var(--ng-muted);
+}
+
+.ng-footer__contact a {
+  color: var(--ng-cream);
+  text-decoration: none;
+}
+
+.ng-footer__contact a:hover {
+  color: var(--ng-gold);
+}
+
+.ng-footer__contact .ng-icon,
+.ng-contact-details .ng-icon {
+  color: var(--ng-muted);
+  margin-right: 0.15rem;
+  vertical-align: -0.15em;
+}
+
+.ng-footer__bottom {
+  border-top: 1px solid var(--ng-border);
+  padding: 1.2rem 0;
+}
+
+.ng-footer__bottom-inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-size: 0.78rem;
+  color: var(--ng-muted);
+}
+
+/* FLOATING WHATSAPP BUTTON */
+.ng-whatsapp-float {
+  position: fixed;
+  right: clamp(1rem, 3vw, 1.8rem);
+  bottom: clamp(1rem, 3vw, 1.8rem);
+  z-index: 1100;
+  width: 56px;
+  height: 56px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #25D366;
+  color: #FFFFFF;
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.18);
+  text-decoration: none;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  padding-bottom: env(safe-area-inset-bottom, 0);
+}
+
+.ng-whatsapp-float:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 10px 24px rgba(0, 0, 0, 0.22);
+}

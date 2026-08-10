@@ -4,6 +4,11 @@
  * Slug: vw-modern-ecommerce/comment-section-1
  * Categories: template
  */
+
+if ( ! defined( 'ABSPATH' ) ) {
+	exit;
+}
+
 ?>
 
 <!-- wp:group {"align":"wide","className":"has-no-hover-shadow-dark animated animated-fadeInUp fadeInUp","style":{"spacing":{"blockGap":"80px","padding":{"top":"40px","right":"40px","bottom":"40px","left":"40px"}},"color":{"background":"#ffffff"}},"layout":{"inherit":true,"type":"constrained"}} -->

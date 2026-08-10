@@ -4,6 +4,11 @@
  * Slug: vw-modern-ecommerce/about-us-section
  * Categories: template
  */
+
+if ( ! defined( 'ABSPATH' ) ) {
+	exit;
+}
+
 // Note: experience1.png/experience2.png/about-icon*.png are placeholder stock imagery pending real factory/product photography.
 ?>
 <!-- wp:group {"className":"about-section","style":{"spacing":{"margin":{"top":"0rem"},"padding":{"top":"0px","bottom":"0px","left":"0px","right":"0px"}}},"layout":{"type":"constrained","contentSize":"95%"}} -->
@@ -11,7 +16,7 @@
 <div class="wp-block-group has-ng-dark-surface-background-color has-background" style="border-top-left-radius:20px;border-top-right-radius:20px;border-bottom-left-radius:20px;border-bottom-right-radius:20px;padding-top:var(--wp--preset--spacing--80);padding-right:0px;padding-bottom:var(--wp--preset--spacing--80);padding-left:0px"><!-- wp:columns {"className":"about-inner-content"} -->
 <div class="wp-block-columns about-inner-content"><!-- wp:column {"width":"","className":"about-left-content"} -->
 <div class="wp-block-column about-left-content"><!-- wp:group {"className":"about-images","layout":{"type":"flex","flexWrap":"nowrap","justifyContent":"space-between"}} -->
-<div class="wp-block-group about-images"><!-- wp:image {"id":147,"width":"auto","height":"450px","aspectRatio":"1","scale":"cover","sizeSlug":"full","linkDestination":"none","style":{"border":{"radius":"20px"}}} -->
+<div class="wp-block-group about-images ng-reveal"><!-- wp:image {"id":147,"width":"auto","height":"450px","aspectRatio":"1","scale":"cover","sizeSlug":"full","linkDestination":"none","style":{"border":{"radius":"20px"}}} -->
 <figure class="wp-block-image size-full is-resized has-custom-border"><img src="<?php echo esc_url(get_template_directory_uri()); ?>/images/experience1.png" alt="" class="wp-image-147" style="border-radius:20px;aspect-ratio:1;object-fit:cover;width:auto;height:450px"/></figure>
 <!-- /wp:image -->
 
@@ -37,7 +42,7 @@
 <!-- wp:column {"width":"48%","className":"about-btm-left"} -->
 <div class="wp-block-column about-btm-left" style="flex-basis:48%">
     <div class="about-card">
-        <div class="about-icon"><?php echo ng_icon( 'shield-check' ); ?></div>
+        <div class="about-icon ng-reveal ng-reveal--icon"><?php echo ng_icon( 'shield-check' ); ?></div>
         <h6 class="about-card__title"><?php echo esc_html__('Quality You Can Trust', 'vw-modern-ecommerce'); ?></h6>
         <ul class="about-card__bullets">
             <li>100% Virgin Food-Grade Melamine</li>
@@ -50,7 +55,7 @@
 <!-- wp:column {"width":"48%","className":"about-btm-right"} -->
 <div class="wp-block-column about-btm-right" style="flex-basis:48%">
     <div class="about-card">
-        <div class="about-icon"><?php echo ng_icon( 'truck' ); ?></div>
+        <div class="about-icon ng-reveal ng-reveal--icon"><?php echo ng_icon( 'truck' ); ?></div>
         <h6 class="about-card__title"><?php echo esc_html__('Your Satisfaction First', 'vw-modern-ecommerce'); ?></h6>
         <ul class="about-card__bullets">
             <li>Nationwide Cash on Delivery (COD)</li>

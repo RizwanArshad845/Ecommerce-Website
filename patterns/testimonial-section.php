@@ -4,53 +4,46 @@
  * Slug: vw-modern-ecommerce/testimonial-section
  * Categories: template
  *
- * Pulls real, approved WooCommerce product reviews — no fabricated
- * testimonials. Shows an on-brand empty state until real reviews exist.
+ * Shows curated seed reviews plus any real, approved WooCommerce product
+ * reviews, merged into one auto-scrolling marquee. Seed reviews always
+ * appear; real reviews join them automatically as customers leave them.
  */
-$ng_reviews = function_exists( 'ng_get_recent_reviews' ) ? ng_get_recent_reviews( 4 ) : array();
+
+if ( ! defined( 'ABSPATH' ) ) {
+	exit;
+}
+
+$ng_reviews = function_exists( 'ng_get_display_reviews' ) ? ng_get_display_reviews() : array();
 ?>
 
 <section class="ng-reviews-sec" id="ng-reviews">
   <div class="ng-container">
 
-    <div class="ng-sec-header">
+    <div class="ng-sec-header ng-reveal">
       <span class="ng-sec-subtitle"><?php esc_html_e( 'Customer Trust', 'vw-modern-ecommerce' ); ?></span>
       <h2 class="ng-sec-title"><?php esc_html_e( 'What Our Customers Say', 'vw-modern-ecommerce' ); ?></h2>
       <p class="ng-sec-desc"><?php esc_html_e( 'Real reviews from verified buyers.', 'vw-modern-ecommerce' ); ?></p>
     </div>
 
     <?php if ( ! empty( $ng_reviews ) ) : ?>
-    <div class="ng-reviews-grid">
-      <?php foreach ( $ng_reviews as $ng_review ) :
-        $ng_rating  = (int) get_comment_meta( $ng_review->comment_ID, 'rating', true );
-        $ng_product = get_post( $ng_review->comment_post_ID );
-        $ng_initials = '';
-        foreach ( explode( ' ', trim( $ng_review->comment_author ) ) as $ng_name_part ) {
-          $ng_initials .= mb_substr( $ng_name_part, 0, 1 );
+    <div class="ng-reviews-track-wrap ng-reveal">
+      <div class="ng-reviews-track">
+        <?php
+        // Render the list twice back-to-back so the marquee can loop seamlessly.
+        for ( $ng_pass = 0; $ng_pass < 2; $ng_pass++ ) {
+          foreach ( $ng_reviews as $ng_review ) {
+            echo ng_get_review_card_html( $ng_review );
+          }
         }
-        $ng_initials = esc_html( mb_strtoupper( mb_substr( $ng_initials, 0, 2 ) ) );
-      ?>
-      <div class="ng-review-card">
-        <?php if ( $ng_rating > 0 ) : ?>
-        <div class="ng-review-card__stars" aria-label="<?php echo esc_attr( sprintf( /* translators: %d: rating out of 5 */ __( '%d out of 5 stars', 'vw-modern-ecommerce' ), $ng_rating ) ); ?>">
-          <?php echo esc_html( str_repeat( '★', $ng_rating ) . str_repeat( '☆', 5 - $ng_rating ) ); ?>
-        </div>
-        <?php endif; ?>
-        <p class="ng-review-card__quote">&ldquo;<?php echo esc_html( wp_trim_words( $ng_review->comment_content, 40 ) ); ?>&rdquo;</p>
-        <div class="ng-review-card__author">
-          <div class="ng-review-card__avatar"><?php echo $ng_initials ? $ng_initials : '★'; ?></div>
-          <div class="ng-review-card__info">
-            <h4 class="ng-review-card__name"><?php echo esc_html( $ng_review->comment_author ); ?></h4>
-            <?php if ( $ng_product ) : ?>
-            <span class="ng-review-card__city"><?php echo esc_html( get_the_title( $ng_product ) ); ?></span>
-            <?php endif; ?>
-          </div>
-        </div>
+        ?>
       </div>
-      <?php endforeach; ?>
     </div>
     <?php else : ?>
-      <?php echo ng_reviews_empty_state_html(); ?>
+      <div class="ng-empty-state">
+        <div class="ng-empty-state__icon"><?php echo ng_icon( 'verified' ); ?></div>
+        <h3 class="ng-empty-state__title"><?php esc_html_e( 'Be Our First Reviewer', 'vw-modern-ecommerce' ); ?></h3>
+        <p class="ng-empty-state__text"><?php esc_html_e( "We're just getting started — customer reviews will appear here as soon as orders start coming in.", 'vw-modern-ecommerce' ); ?></p>
+      </div>
     <?php endif; ?>
 
   </div>
