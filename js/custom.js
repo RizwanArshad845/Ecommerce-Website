@@ -1,3 +1,18 @@
+// Bridge WooCommerce Blocks add/remove-to-cart (Product Button on the shop
+// grid, which only dispatches the native "wc-blocks_added_to_cart" /
+// "wc-blocks_removed_from_cart" DOM events) into the classic jQuery
+// "added_to_cart" fragment-refresh system that the navbar cart badge relies
+// on (see ng_cart_link_fragment() in inc/woocommerce-integration.php) — core
+// only bridges the other direction (classic -> blocks), so without this the
+// badge count stays stale until the next full page load.
+["wc-blocks_added_to_cart", "wc-blocks_removed_from_cart"].forEach((eventName) => {
+  document.body.addEventListener(eventName, () => {
+    if (window.jQuery) {
+      window.jQuery(document.body).trigger("wc_fragment_refresh");
+    }
+  });
+});
+
 // Scroll to Top
 window.onscroll = function () {
   const vw_modern_ecommerce_button = document.querySelector('.scroll-top-box');
